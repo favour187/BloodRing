@@ -10,7 +10,7 @@ on:
 jobs:
   verify-and-build-apk:
     name: Build Android 3D Battle Royale APK
-    runs-only: ubuntu-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       actions: write
