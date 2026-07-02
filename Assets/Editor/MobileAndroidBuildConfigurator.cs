@@ -60,6 +60,21 @@ public static class MobileAndroidBuildConfigurator
         PlayerSettings.MTRendering = true;
         PlayerSettings.SplashScreen.show = false;
 
+        // ── Set App Icon ─────────────────────────────────────────────────────
+        Texture2D appIcon = Resources.Load<Texture2D>("AppIcon");
+        if (appIcon != null)
+        {
+            int[] iconSizes = PlayerSettings.GetIconSizesForTargetGroup(BuildTargetGroup.Android);
+            Texture2D[] icons = new Texture2D[iconSizes.Length];
+            for (int i = 0; i < icons.Length; i++) icons[i] = appIcon;
+            PlayerSettings.SetIconsForTargetGroup(BuildTargetGroup.Android, icons);
+            Debug.Log("AppIcon assigned for all Android icon sizes (" + iconSizes.Length + " sizes).");
+        }
+        else
+        {
+            Debug.LogWarning("AppIcon not found in Resources — using default Unity icon.");
+        }
+
         QualitySettings.vSyncCount = 0;
         QualitySettings.lodBias = 0.75f;
         QualitySettings.shadowDistance = 45f;
