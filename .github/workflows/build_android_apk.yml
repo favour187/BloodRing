@@ -63,7 +63,7 @@ jobs:
           targetPlatform: Android
           buildName: BloodRing_ApexRoyale3D
           buildMethod: MobileAndroidBuildConfigurator.BuildMobile3DAndroidApk
-          androidAppBundle: false
+          androidExportType: androidPackage
           androidKeystoreName: user.keystore
           androidKeystorePass: ${{ secrets.KEYSTORE_PASS }}
           androidKeyaliasName: bloodring
