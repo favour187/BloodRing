@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "com.unity.ai.navigation": "1.1.5",
+    "com.unity.services.core": "1.12.5",
+    "com.unity.services.authentication": "2.7.2",
+    "com.unity.services.relay": "1.0.5",
     "com.unity.cinemachine": "2.9.7",
     "com.unity.netcode.gameobjects": "1.9.1",
     "com.unity.transport": "1.4.0",
