@@ -56,7 +56,7 @@ public static class MobileAndroidBuildConfigurator
         PlayerSettings.Android.bundleVersionCode = 1;
         PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
         PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android, ScriptingImplementation.IL2CPP);
-        PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.Android, ApiCompatibilityLevel.NET_Standard_2_1);
+        PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.Android, ApiCompatibilityLevel.NET_Standard);
         PlayerSettings.MTRendering = true;
         PlayerSettings.SplashScreen.show = false;
 
