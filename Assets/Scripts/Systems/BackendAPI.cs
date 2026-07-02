@@ -166,7 +166,7 @@ public class BackendAPI : MonoBehaviour
     {
         if (!IsLoggedIn) return false;
         string json = "{\"characterName\":\"" + charName + "\"}";
-        string resJson = await PutJsonAsync(baseUrl + "/profile/character", json, true, "{\"message\":\"Character updated successfully.\"}");
+        string resJson = await PutJsonAsync(baseUrl + "/profile/character", json, true);
         return resJson.Contains("successfully");
     }
 

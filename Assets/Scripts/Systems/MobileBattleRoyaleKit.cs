@@ -504,7 +504,7 @@ public class BR3DSceneDirector : MonoBehaviour
     {
         SetCameraPose(new Vector3(0f, 15f, -20f), new Vector3(0f, 0f, 0f));
         CreateHangarFloor(80f, 80f);
-        GameObject plane = CreateCrateRow(new Vector3(-10f, 8f, 0f), 5);
+        GameObject plane = CreateDropShip(new Vector3(-10f, 8f, 0f));
         plane.name = "DropPlane_Model";
         BuildPremiumPageCanvas("AIRCRAFT DROP", "Transport aircraft flying over 3D battle royale island terrain. Choose your trajectory and deploy parachute.", "FLY", matCyan, new string[] { "Eject Now", "Check Map", "Cabin View", "Lobby" }, new string[] { "GameScene", "GameScene", "WaitingIsland", "MainLobby" });
     }
@@ -887,7 +887,7 @@ public class BR3DSceneDirector : MonoBehaviour
         }
     }
 
-    private void CreateDropShip(Vector3 pos)
+    private GameObject CreateDropShip(Vector3 pos)
     {
         GameObject ship = new GameObject("3D Drop Ship");
         ship.transform.SetParent(root.transform);
@@ -905,6 +905,7 @@ public class BR3DSceneDirector : MonoBehaviour
             wing.GetComponent<Renderer>().sharedMaterial = matCyan;
         }
         ship.AddComponent<BRSpinAndFloat>().Setup(4f, 0.08f, 0.8f);
+        return ship;
     }
 
     private void CreateIslandEnvironment()

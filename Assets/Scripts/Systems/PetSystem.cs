@@ -267,13 +267,25 @@ public class PetSystem : MonoBehaviour
     public static PetSystem Instance;
     private void Awake() { Instance = this; }
 
+    private PetCompanion activePet;
+
     public PetCompanion SpawnPet(PetType type, Transform owner)
     {
         GameObject petGo = new GameObject("Pet_" + type);
         PetCompanion companion = petGo.AddComponent<PetCompanion>();
         PetData data = PetData.GetPet(type);
         companion.Initialize(data, owner);
+        activePet = companion;
         return companion;
+    }
+
+    /// <summary>True if a pet is currently active whose name/type matches or is contained in the given identifier.</summary>
+    public bool HasActivePet(string identifier)
+    {
+        if (activePet == null || activePet.petData == null || string.IsNullOrEmpty(identifier)) return false;
+        string petName = activePet.petData.petName ?? "";
+        string typeName = activePet.petData.type.ToString();
+        return identifier.Contains(petName) || identifier.Contains(typeName) || petName.Contains(identifier);
     }
 }
 
