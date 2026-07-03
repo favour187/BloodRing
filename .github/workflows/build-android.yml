@@ -39,14 +39,12 @@ jobs:
         with:
           targetPlatform: Android
           unityVersion: ${{ inputs.unity_version }}
-          buildMethod: BuildScript.BuildAndroid
+          buildName: BloodRingApex.apk
           buildsPath: build/Android
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: BloodRing-Android-${{ inputs.build_type }}-${{ github.sha }}
-          path: |
-            build/Android/**/*.apk
-            **/*.apk
+          path: '**/*.apk'
           retention-days: 30
