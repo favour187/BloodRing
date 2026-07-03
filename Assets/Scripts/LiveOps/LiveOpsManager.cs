@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// M3 — LiveOps Manager: Battle Pass, Seasonal Events, Store Rotation
 /// Connected to backend at https://academyroyalebackend.onrender.com
-/// Mirrors Free Fire's seasonal content cycle.
+/// Manages seasonal content cycles, battle pass, events, and store rotation.
 /// </summary>
 public class LiveOpsManager : MonoBehaviour
 {
@@ -203,7 +203,7 @@ public class LiveOpsManager : MonoBehaviour
         }
     }
 
-    // ── Store Rotation (Free Fire-style weekly featured + daily deals) ──
+    // ── Store Rotation (weekly featured + daily deals) ───────────────
 
     public void RefreshStoreRotation()
     {

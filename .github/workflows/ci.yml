@@ -170,11 +170,6 @@ jobs:
   backend-test:
     name: Backend API Tests
     runs-on: ubuntu-latest
-    services:
-      sqlite:
-        image: keinos/sqlite3:latest
-        ports:
-          - 5000:5000
     steps:
       - uses: actions/checkout@v4
 
@@ -201,47 +196,38 @@ jobs:
           sleep 3
           
           echo "=== Testing API endpoints ==="
+          PASS=0
+          FAIL=0
           
           # Test root
-          curl -sf http://localhost:5000/ | grep -q "Active" && echo "✅ Root" || echo "❌ Root"
+          if curl -sf http://localhost:5000/ | grep -q "Active"; then echo "✅ Root"; PASS=$((PASS+1)); else echo "❌ Root"; FAIL=$((FAIL+1)); fi
           
           # Test register
           REG=$(curl -sf -X POST http://localhost:5000/api/auth/register \
             -H "Content-Type: application/json" \
-            -d '{"username":"ci_test_'$RANDOM'","password":"Test1234!"}')
-          TOKEN=$(echo "$REG" | python3 -c "import sys,json; print(json.load(sys.stdin)['token'])" 2>/dev/null)
-          [ -n "$TOKEN" ] && echo "✅ Register" || echo "❌ Register"
+            -d '{"username":"ci_test_'$RANDOM'","password":"Test1234!"}' || echo '{}')
+          TOKEN=$(echo "$REG" | python3 -c "import sys,json; print(json.load(sys.stdin).get('token',''))" 2>/dev/null)
+          if [ -n "$TOKEN" ]; then echo "✅ Register"; PASS=$((PASS+1)); else echo "❌ Register"; FAIL=$((FAIL+1)); fi
           
-          # Test profile
-          curl -sf http://localhost:5000/api/profile \
-            -H "Authorization: Bearer $TOKEN" | grep -q "userId" && echo "✅ Profile" || echo "❌ Profile"
+          # Test protected endpoints
+          for endpoint in profile store store/missions; do
+            if curl -sf http://localhost:5000/api/$endpoint -H "Authorization: Bearer $TOKEN" > /dev/null 2>&1; then
+              echo "✅ $endpoint"; PASS=$((PASS+1));
+            else echo "❌ $endpoint"; FAIL=$((FAIL+1)); fi
+          done
           
-          # Test store
-          curl -sf http://localhost:5000/api/store \
-            -H "Authorization: Bearer $TOKEN" | grep -q "storeItems" && echo "✅ Store" || echo "❌ Store"
+          # Test public endpoints
+          if curl -sf http://localhost:5000/api/leaderboard > /dev/null 2>&1; then echo "✅ Leaderboard"; PASS=$((PASS+1)); else echo "❌ Leaderboard"; FAIL=$((FAIL+1)); fi
           
-          # Test leaderboard
-          curl -sf http://localhost:5000/api/leaderboard | grep -q "leaderboard" && echo "✅ Leaderboard" || echo "❌ Leaderboard"
+          # Test POST endpoints
+          if curl -sf -X POST http://localhost:5000/api/match/result -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"kills":3,"placement":5,"damageDealt":500,"matchDuration":180,"gameMode":"CLASSIC","isRanked":false}' > /dev/null 2>&1; then echo "✅ Match Result"; PASS=$((PASS+1)); else echo "❌ Match Result"; FAIL=$((FAIL+1)); fi
           
-          # Test match result
-          curl -sf -X POST http://localhost:5000/api/match/result \
-            -H "Authorization: Bearer $TOKEN" \
-            -H "Content-Type: application/json" \
-            -d '{"kills":3,"placement":5,"damageDealt":500,"matchDuration":180,"gameMode":"CLASSIC","isRanked":false}' \
-            | grep -q "earnedXP" && echo "✅ Match Result" || echo "❌ Match Result"
-          
-          # Test missions
-          curl -sf http://localhost:5000/api/store/missions \
-            -H "Authorization: Bearer $TOKEN" | grep -q "missions" && echo "✅ Missions" || echo "❌ Missions"
-          
-          # Test lucky spin
-          curl -sf -X POST http://localhost:5000/api/store/luckyspin \
-            -H "Authorization: Bearer $TOKEN" \
-            -H "Content-Type: application/json" \
-            -d '{}' | grep -q "reward" && echo "✅ Lucky Spin" || echo "❌ Lucky Spin"
+          if curl -sf -X POST http://localhost:5000/api/store/luckyspin -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{}' > /dev/null 2>&1; then echo "✅ Lucky Spin"; PASS=$((PASS+1)); else echo "❌ Lucky Spin"; FAIL=$((FAIL+1)); fi
           
           kill $SERVER_PID 2>/dev/null
-          echo "=== Backend tests complete ==="
+          echo ""
+          echo "=== Results: $PASS passed, $FAIL failed ==="
+          if [ $FAIL -gt 0 ]; then exit 1; fi
 
   # ── Job 4: Project Structure Validation ────────────────────────────
   structure-check:

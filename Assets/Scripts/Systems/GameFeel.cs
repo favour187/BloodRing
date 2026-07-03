@@ -97,7 +97,7 @@ public class GameFeel : MonoBehaviour
     {
         foreach (ParticleSystem ps in impactPool)
         {
-            if (!ps.gameObject.activeSelf && ps.main.startColor == new Color(0.8f, 0.8f, 0.7f, 0.5f))
+            if (!ps.gameObject.activeSelf && ps.main.startColor.color == new Color(0.8f, 0.8f, 0.7f, 0.5f))
             {
                 ps.transform.position = pos; ps.transform.rotation = Quaternion.identity;
                 ps.gameObject.SetActive(true); ps.Play(); StartCoroutine(DisableAfterTime(ps.gameObject, 0.5f)); break;

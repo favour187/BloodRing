@@ -122,7 +122,7 @@ public class PlayerController : NetworkBehaviour
                 Vector2 moveInput = TouchControls.Instance != null ? TouchControls.Instance.MoveInput : Vector2.zero;
                 Vector3 crawlDir = cameraPivot.forward * moveInput.y + cameraPivot.right * moveInput.x;
                 crawlDir.y = 0; crawlDir.Normalize();
-                transform.position += crawlDir * reviveHandler.crawlSpeed * Time.deltaTime;
+                transform.position += crawlDir * (ReviveSystem.Instance != null ? ReviveSystem.Instance.crawlSpeed : 1.5f) * Time.deltaTime;
                 if (crawlDir.magnitude > 0.1f) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(crawlDir), Time.deltaTime * 5f);
             }
             netPosition.Value = transform.position; netRotation.Value = transform.rotation;
@@ -241,14 +241,14 @@ public class PlayerController : NetworkBehaviour
                 if (bot != null) {
                     bot.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
                     if (AudioManager.Instance != null) AudioManager.Instance.PlayMeleeHitSound();
-                    if (GameFeel.Instance != null) GameFeel.Instance.TriggerMeleeImpact(col.closestPoint(transform.position), Vector3.zero);
+                    if (GameFeel.Instance != null) GameFeel.Instance.TriggerMeleeImpact(col.ClosestPoint(transform.position), Vector3.zero);
                 }
                 else if (hitPlayer != null && hitPlayer != this) {
                     hitPlayer.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
                     if (AudioManager.Instance != null) AudioManager.Instance.PlayMeleeHitSound();
-                    if (GameFeel.Instance != null) GameFeel.Instance.TriggerMeleeImpact(col.closestPoint(transform.position), Vector3.zero);
+                    if (GameFeel.Instance != null) GameFeel.Instance.TriggerMeleeImpact(col.ClosestPoint(transform.position), Vector3.zero);
                 }
-                if (GameFeel.Instance != null && (bot != null || hitPlayer != null)) GameFeel.Instance.SpawnImpact(col.closestPoint(transform.position), Vector3.zero, "Blood");
+                if (GameFeel.Instance != null && (bot != null || hitPlayer != null)) GameFeel.Instance.SpawnImpact(col.ClosestPoint(transform.position), Vector3.zero, "Blood");
             }
             return;
         }

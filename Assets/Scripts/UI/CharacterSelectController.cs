@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class CharacterSelectController : MonoBehaviour
 {

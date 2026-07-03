@@ -1,9 +1,10 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 /// <summary>
-/// Store Rotation Manager — manages the Free Fire-style shop rotation.
+/// Store Rotation Manager — manages the shop rotation with featured items and daily deals.
 /// Handles weekly featured items, daily deals, and lucky draw/elite pass items.
 /// Connected to backend store API at /api/store
 /// </summary>
@@ -91,7 +92,7 @@ public class StoreRotationManager : MonoBehaviour
                   $"Lucky Draw: '{currentLuckyDraw.drawName}'");
     }
 
-    // ── Lucky Draw System (Free Fire gold/diamond royale) ─────────────
+    // ── Lucky Draw System ────────────────────────────────────────────
 
     public LuckyDrawResult SpinLuckyDraw(bool useGems = true)
     {

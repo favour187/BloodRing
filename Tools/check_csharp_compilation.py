@@ -35,8 +35,8 @@ def check_using_statements(content, filepath):
     """Check for missing using statements based on usage patterns."""
     issues = []
     
-    # Check Unity.Netcode usage
-    if any(kw in content for kw in ['NetworkBehaviour', 'ServerRpc', 'ClientRpc', 'NetworkVariable']):
+    # Check Unity.Netcode usage (only flag if class extends NetworkBehaviour or uses attributes)
+    if 'NetworkBehaviour' in content or '[ServerRpc' in content or '[ClientRpc' in content or 'NetworkVariable' in content:
         if 'using Unity.Netcode' not in content:
             issues.append("  ⚠️  Uses Netcode types but missing 'using Unity.Netcode;'")
     

@@ -72,23 +72,22 @@ public class AudioManager : MonoBehaviour
         livelyLobbyBeat = Resources.Load<AudioClip>("Audio/Music/LivelyLobbyBeat");
         battleActionBeat = Resources.Load<AudioClip>("Audio/Music/BattleActionBeat");
 
-        // 2. Load high-end AI Voiceovers
-        voWelcomeClip = Resources.Load<AudioClip>("Audio/VO_Welcome") ?? LoadAssetAtPath("Assets/Audio/VO_Welcome.wav");
-        voVictoryClip = Resources.Load<AudioClip>("Audio/VO_Victory") ?? LoadAssetAtPath("Assets/Audio/VO_Victory.wav");
-        voZoneWarningClip = Resources.Load<AudioClip>("Audio/VO_ZoneWarning") ?? LoadAssetAtPath("Assets/Audio/VO_ZoneWarning.wav");
-        voCountdownClip = Resources.Load<AudioClip>("Audio/VO_Countdown") ?? LoadAssetAtPath("Assets/Audio/VO_Countdown.wav");
+        // 2. Load high-end AI Voiceovers (v2 AI-generated)
+        voWelcomeClip = LoadVO("VO_Welcome_v2") ?? LoadVO("VO_Welcome") ?? Resources.Load<AudioClip>("Audio/VO/VO_Welcome_RealAI");
+        voVictoryClip = LoadVO("VO_Victory_v2") ?? LoadVO("VO_Victory") ?? Resources.Load<AudioClip>("Audio/VO/VO_Victory_RealAI");
+        voZoneWarningClip = LoadVO("VO_ZoneWarning_v2") ?? LoadVO("VO_ZoneWarning") ?? Resources.Load<AudioClip>("Audio/VO/VO_ZoneWarning_RealAI");
+        voCountdownClip = LoadVO("VO_Countdown_v2") ?? LoadVO("VO_Countdown") ?? Resources.Load<AudioClip>("Audio/VO/VO_Countdown_RealAI");
 
-        // 3. Load real external SFX assets
-        pistolClip = Resources.Load<AudioClip>("Audio/Weapons/Pistol");
-        rifleClip = Resources.Load<AudioClip>("Audio/Weapons/Rifle");
-        shotgunClip = Resources.Load<AudioClip>("Audio/Weapons/Shotgun");
-        footstepGrassClip = Resources.Load<AudioClip>("Audio/SFX/FootGrass");
-        footstepWoodClip = Resources.Load<AudioClip>("Audio/SFX/FootWood");
-        zoneDamageClip = Resources.Load<AudioClip>("Audio/Environment/ZoneDamage");
-        uiClickClip = Resources.Load<AudioClip>("Audio/SFX/UIClick");
-        hitMarkerClip = Resources.Load<AudioClip>("Audio/SFX/HitMarker");
-        headshotClip = Resources.Load<AudioClip>("Audio/SFX/Headshot");
-        deathClip = Resources.Load<AudioClip>("Audio/SFX/DeathThud");
+        // 3. Load real external SFX assets from actual file locations
+        pistolClip = LoadAudioClip("Assets/Audio/RealProduction/Gun_Rifle.wav") ?? Resources.Load<AudioClip>("Audio/Weapons/Pistol");
+        rifleClip = LoadAudioClip("Assets/Audio/RealProduction/Gun_Rifle.wav") ?? Resources.Load<AudioClip>("Audio/Weapons/Rifle");
+        shotgunClip = LoadAudioClip("Assets/Audio/RealProduction/Gun_SMG.wav") ?? Resources.Load<AudioClip>("Audio/Weapons/Shotgun");
+        footstepGrassClip = LoadAudioClip("Assets/Audio/RealProduction/Footstep_Grass.wav") ?? Resources.Load<AudioClip>("Audio/SFX/FootGrass");
+        uiClickClip = LoadAudioClip("Assets/Audio/RealProduction/UI_Click.wav") ?? Resources.Load<AudioClip>("Audio/SFX/UIClick");
+        hitMarkerClip = LoadAudioClip("Assets/Audio/SFX/SFX_Explosion.wav");
+        winClip = LoadAudioClip("Assets/Audio/RealProduction/Victory_Stinger.wav");
+        loseClip = LoadAudioClip("Assets/Audio/RealProduction/Defeat_Stinger.wav");
+        zoneDamageClip = LoadAudioClip("Assets/Audio/RealProduction/Zone_Warning.wav") ?? Resources.Load<AudioClip>("Audio/Environment/ZoneDamage");
 
         int sampleRate = 44100;
         // 4. Generate Lively Procedural EDM Beat (128 BPM = 0.46875s per beat)
@@ -139,6 +138,25 @@ public class AudioManager : MonoBehaviour
         int loseSamples = (int)(sampleRate * 0.75f); float[] loseData = new float[loseSamples]; for (int i = 0; i < loseSamples; i++) { float t = (float)i / sampleRate; float freq = t < 0.25f ? 392.00f : (t < 0.5f ? 311.13f : 261.63f); loseData[i] = Mathf.Sin(2 * Mathf.PI * freq * t) * 0.6f; } loseClip = AudioClip.Create("LoseSound", loseSamples, 1, sampleRate, false); loseClip.SetData(loseData, 0);
     }
 
+    private AudioClip LoadVO(string name)
+    {
+        // Try loading from Audio/VO/ in Resources
+        var clip = Resources.Load<AudioClip>("Audio/VO/" + name);
+        if (clip != null) return clip;
+        // Try loading from top-level Audio/ in Resources
+        clip = Resources.Load<AudioClip>("Audio/" + name);
+        return clip;
+    }
+
+    private AudioClip LoadAudioClip(string relativePath)
+    {
+#if UNITY_EDITOR
+        return UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>(relativePath);
+#else
+        return null;
+#endif
+    }
+
     private AudioClip LoadAssetAtPath(string path)
     {
 #if UNITY_EDITOR
@@ -176,6 +194,32 @@ public class AudioManager : MonoBehaviour
     public void PlayVOVictory() { if (voSource != null && voVictoryClip != null) voSource.PlayOneShot(voVictoryClip); }
     public void PlayVOCountdown() { if (voSource != null && voCountdownClip != null) voSource.PlayOneShot(voCountdownClip); }
     public void PlayVOZoneWarning() { if (voSource != null && voZoneWarningClip != null && !playedZoneWarning) { voSource.PlayOneShot(voZoneWarningClip); playedZoneWarning = true; } }
+    public void PlayVOEnemySpotted() { PlayVO("VO_EnemySpotted_v2"); }
+    public void PlayVOReviving() { PlayVO("VO_Reviving_v2"); }
+    public void PlayVOLastManStanding() { PlayVO("VO_LastManStanding_v2"); }
+    public void PlayVONeedBackup() { PlayVO("VO_NeedBackup_v2"); }
+    public void PlayVOGoodGame() { PlayVO("VO_GoodGame_v2"); }
+    public void PlayVOFactionWarCry() { PlayVO("VO_FactionWarCry_v2"); }
+    public void PlayVOAreaSecure() { PlayVO("VO_AreaSecure_v2"); }
+    public void PlayVOSquadEliminated() { PlayVO("VO_SquadEliminated_v2"); }
+    public void PlayVOWeaponPickup() { PlayVO("VO_WeaponPickup_v2"); }
+    public void PlayVOHealingComplete() { PlayVO("VO_HealingComplete_v2"); }
+    public void PlayVOAirdropIncoming() { PlayVO("VO_AirdropIncoming_v2"); }
+    public void PlayVOBooyah() { PlayVO("VO_Booyah_v2"); }
+    public void PlayVODoubleKill() { PlayVO("VO_DoubleKill_v2"); }
+    public void PlayVOTripleKill() { PlayVO("VO_TripleKill_v2"); }
+    public void PlayVOSquadWipe() { PlayVO("VO_SquadWipe_v2"); }
+    public void PlayVONewSeason() { PlayVO("VO_NewSeason_v2"); }
+    public void PlayVOArmorBroken() { PlayVO("VO_ArmorBroken_v2"); }
+    public void PlayVOSupplyDropSecured() { PlayVO("VO_SupplyDropSecured_v2"); }
+    public void PlayVOHeadshot() { PlayVO("VO_Headshot_v2"); }
+    public void PlayVOLevelUp() { PlayVO("VO_LevelUp_v2"); }
+    public void PlayVORingShrinking() { PlayVO("VO_RingShrinking_v2"); }
+    public void PlayVOParachuteDeployed() { PlayVO("VO_ParachuteDeployed_v2"); }
+    public void PlayVOVehicleReady() { PlayVO("VO_VehicleReady_v2"); }
+    public void PlayVOGrenadeOut() { PlayVO("VO_GrenadeOut_v2"); }
+    public void PlayVOClutchPlay() { PlayVO("VO_ClutchPlay_v2"); }
+    public void PlayVODailyReward() { PlayVO("VO_DailyReward_v2"); }
 
     public void PlayWeaponSound(string weaponName)
     {

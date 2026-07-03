@@ -16,9 +16,9 @@ public class BRDropTrigger : NetworkBehaviour
 
     public void TriggerDropForLocalPlayer()
     {
-        if (PlayerController.LocalPlayer != null)
+        if (PlayerController.Instance != null)
         {
-            ParachuteIntegration.StartDropForPlayer(PlayerController.LocalPlayer.transform);
+            ParachuteIntegration.StartDropForPlayer(PlayerController.Instance.transform);
         }
     }
 

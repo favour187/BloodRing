@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// Battle Pass Data — Free Fire-style dual-track battle pass.
+/// Battle Pass Data — Dual-track battle pass with free and premium reward tiers.
 /// Free track: rewards every level. Premium track: exclusive rewards every 5 levels.
 /// 50 levels per season, 1000 XP per level.
 /// </summary>
@@ -24,7 +24,7 @@ public class BattlePassData : ScriptableObject
     public BattlePassReward[] freeRewards;
     public BattlePassReward[] premiumRewards;
 
-    // ── Default Reward Setup (Free Fire-style) ────────────────────────
+    // ── Default Reward Setup ────────────────────────────────────────
 
     public void InitializeDefaultRewards()
     {

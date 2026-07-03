@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// This is the "glue" that makes empty scene files functional at runtime.
 /// Runs automatically via [RuntimeInitializeOnLoadMethod].
 /// 
-/// Free Fire pattern: scenes are lightweight, systems bootstrap themselves.
+/// Pattern: scenes are lightweight, systems bootstrap themselves at runtime.
 /// </summary>
 public class SceneBootstrapper
 {

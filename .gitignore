@@ -47,4 +47,7 @@ Assets/StreamingAssets/AssetBundles/
 Packages/packages-lock.json
 node_modules/
 
-
+# Android signing keystore (NEVER commit this)
+*.keystore
+*.jks
+user.keystore

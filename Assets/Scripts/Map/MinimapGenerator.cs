@@ -82,14 +82,14 @@ public class MinimapGenerator : MonoBehaviour
         }
 
         // 3. Draw POI building footprints
-        if (mapData != null && mapData.poiLocations != null)
+        if (mapData != null && mapData.pointsOfInterest != null)
         {
-            foreach (var poi in mapData.poiLocations)
+            foreach (var poi in mapData.pointsOfInterest)
             {
                 // Map coordinates (-250..250) to texture coordinates (0..512)
                 int px = Mathf.Clamp((int)(halfRes + (poi.position.x / 250f) * mapRadius), 10, res - 10);
                 int py = Mathf.Clamp((int)(halfRes + (poi.position.z / 250f) * mapRadius), 10, res - 10);
-                int footprintSize = poi.type == POIType.Town || poi.type == POIType.Military ? 14 : 8;
+                int footprintSize = poi.poiType == POIType.Town || poi.poiType == POIType.Military ? 14 : 8;
 
                 for (int fy = -footprintSize; fy <= footprintSize; fy++)
                 {

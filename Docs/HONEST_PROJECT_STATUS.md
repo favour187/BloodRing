@@ -11,7 +11,7 @@
 
 This project has a **large code footprint** (77 C# scripts, 31 scenes, 348 OBJ models, 140 audio files, a full Node.js/Express backend) but the **majority of content is placeholder, duplicated, or structurally empty**. The code architecture is ambitious and well-organized, but the project **cannot produce a playable build** in its current state.
 
-**Overall honest readiness: ~45-50% toward a shippable MVP (updated after Batch 1-5 fixes).**
+**Overall honest readiness: ~55-60% toward a shippable MVP (updated after Batch 1-8 fixes).**
 
 ---
 
@@ -88,7 +88,7 @@ All 348 placeholder primitive OBJ files have been replaced with recognizable pro
 | Environment | 14 types × 2 locations | 8+ verts each | Proper proportions per object type |
 | Props | 10 types × 2 locations | 8 verts each | Realistic small-object sizes |
 
-**Note:** These are blocky/low-poly models. For Free Fire-level quality, replace with high-poly
+**Note:** These are blocky/low-poly models. For production quality, replace with high-poly
 modeled, textured, rigged assets from a 3D artist or asset store. The current models are
 structurally recognizable (humanoid has arms/legs, weapon has barrel/stock, vehicle has wheels).
 
@@ -176,7 +176,7 @@ Full integration test performed on 2026-07-03:
   + Weekly challenges (kill targets, match completion)
   + Daily login streak tracking with milestone rewards (7-day → 500 gems)
   + Season progress tracking and days remaining
-- `StoreRotationManager.cs` — Free Fire-style shop:
+- `StoreRotationManager.cs` — Shop rotation system:
   + 5 featured items (weekly rotation with deterministic seed-based selection)
   + 3 daily deals (refreshes at midnight)
   + Lucky Draw with weighted prizes and escalating costs
