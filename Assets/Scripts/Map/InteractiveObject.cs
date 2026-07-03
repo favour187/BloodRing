@@ -179,7 +179,7 @@ public class InteractiveObject : NetworkBehaviour
                 break;
 
             case InteractiveType.VendingMachine:
-                VendingPurchaseClientRpc(interactClientId);
+                VendingPurchaseServerRpc(interactClientId);
                 break;
 
             case InteractiveType.HealthStation:
@@ -224,7 +224,7 @@ public class InteractiveObject : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void VendingPurchaseClientRpc(ulong clientId)
+    private void VendingPurchaseServerRpc(ulong clientId)
     {
         // Vending machines give random consumable
         if (GameHUD.Instance != null) GameHUD.Instance.ShowToast("Vending Machine: Health Pack dispensed");
