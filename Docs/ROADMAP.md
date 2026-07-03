@@ -14,6 +14,10 @@ and gated by `Tools/validate_assets.py`.
 
 ### M1 — Core authored art (in progress)
 - [x] Terrain tiles: grass, sand, rock, snow, asphalt, mud, concrete, metal grate
+- [x] **Weapons: 60/60 hero-shot art COMPLETE** — all 62 catalog weapons have art
+      (60 hero shots + AWM_Sniper_3D legacy). All 1376x768 widescreen format.
+- [x] **Weapon Systems: AttachmentData (24 attachments), WeaponSkinData (5 tiers),
+      WeaponRarity, EvoWeaponSystem integration, rarity-weighted LootSpawner.**
 - [x] Weapons batch 1 (legacy): AK47, AK47 Evo skin, AWM — genuine hero-shot renders
 - [x] Weapons batch 2: M4A1, Groza, Vector, DesertEagle, Kar98k, M1887, UMP,
       SCAR, M82B, G18 — 10 hero-shot renders in the dark cyberpunk /
@@ -71,6 +75,36 @@ and gated by `Tools/validate_assets.py`.
       and WeaponSkin() convenience lookups.
 - [x] **WeaponData.cs expanded** — 62 weapons, GetWeaponsByCategory(),
       GetWeaponsByRarity(), IsMelee(), IsSpecial() utility methods.
+
+### NEW: World & Map Systems (completed this session)
+- [x] **MapData.cs** — ScriptableObject defining complete map layouts.
+      3 maps: IslaVerde (tropical), RedSands (desert), IronGorge (industrial).
+      Each has 8-12 named POIs, road networks, river systems, loot zones with
+      tier-based weapon bias, and configurable spawn counts.
+- [x] **POISystem.cs** — Points of Interest manager. 9 POI types (Town, Village,
+      Military, Research, Industrial, Coastal, Forest, Landmark, HotDrop).
+      Location name popups on entry, loot density multipliers, weapon bias per zone,
+      minimap markers with type-based colors, nearest POI queries.
+- [x] **RoadNetwork.cs** — Generates road meshes from MapData. 4 road types:
+      Highway (1.4x vehicle speed), Paved (1.25x), Dirt (1.1x), Bridge (1.2x).
+      Distance-to-segment detection, quad strip mesh generation.
+- [x] **RiverSystem.cs** — Generates river meshes with animated flowing water.
+      Player movement slowdown (0.4x-0.7x based on depth), vehicle blocking at
+      deep rivers, water depth queries, transparent animated material.
+- [x] **InteractiveObject.cs** — 10 interactive object types: Door (open/close),
+      Window (breakable), BreakableCover, LootCrate (spawns loot), ExplosiveBarrel
+      (chain explosions, area damage), VendingMachine, LaunchPad (vertical boost),
+      ZiplineAnchor, HealthStation (heals 25 HP), AmmoCrate. Network-synced
+      health, destruction, and interaction.
+- [x] **MapGenerator.cs enhanced** — Now uses MapData for all map generation.
+      Spawns POI markers with colored ground rings, calls RoadNetwork and RiverSystem,
+      adds interactive doors/windows to buildings, scatters explosive barrels (15),
+      loot crates (20), health stations (at Town/Military POIs), ammo crates (at
+      Military/Research POIs), launch pads (at Landmark/HotDrop POIs).
+- [x] **ZoneController.cs enhanced** — Dynamic shrinking zone with random final
+      circles. Uses MapData for map-specific zone sizes. 6 phases with smooth
+      interpolation. Zone center shifts randomly each phase, biased toward map center.
+      Smooth step easing for natural shrink feel.
 
 ### M2 — Systems vertical slice
 - Full match loop: aircraft → landing → gameplay → zone → results.
