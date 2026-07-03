@@ -1,7 +1,7 @@
 {
   "project": "Blood Ring Apex Royale 3D Enterprise",
   "description": "Comprehensive equalized art, audio, 3D model, and UI asset manifest. All entries are real shipped files.",
-  "assetCount": 1089,
+  "assetCount": 1114,
   "categories": {
     "art/3D": 52,
     "art/3D/Characters": 32,
@@ -18,8 +18,8 @@
     "art/UI/Buttons": 32,
     "art/UI/HUD": 32,
     "art/UI/Icons": 32,
-    "art/Vehicles": 32,
-    "art/Weapons": 43,
+    "art/Vehicles": 37,
+    "art/Weapons": 63,
     "audio/Music": 32,
     "audio_master": 4,
     "audio_master/RealProduction": 32,
@@ -4716,6 +4716,30 @@
       ]
     },
     {
+      "key": "ArmoredJeep_Hero",
+      "category": "art/Vehicles",
+      "path": "Assets/Resources/Art/Vehicles/ArmoredJeep_Hero.png",
+      "resourcePath": "Art/Vehicles/ArmoredJeep_Hero",
+      "bytes": 2633789,
+      "type": "png",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "key": "Buggy_Hero",
+      "category": "art/Vehicles",
+      "path": "Assets/Resources/Art/Vehicles/Buggy_Hero.png",
+      "resourcePath": "Art/Vehicles/Buggy_Hero",
+      "bytes": 2865171,
+      "type": "png",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
       "key": "CrimsonBuggy_3D",
       "category": "art/Vehicles",
       "path": "Assets/Resources/Art/Vehicles/CrimsonBuggy_3D.png",
@@ -4773,6 +4797,42 @@
       "dimensions": [
         512,
         512
+      ]
+    },
+    {
+      "key": "Helicopter_Hero",
+      "category": "art/Vehicles",
+      "path": "Assets/Resources/Art/Vehicles/Helicopter_Hero.png",
+      "resourcePath": "Art/Vehicles/Helicopter_Hero",
+      "bytes": 2323470,
+      "type": "png",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "key": "Motorbike_Hero",
+      "category": "art/Vehicles",
+      "path": "Assets/Resources/Art/Vehicles/Motorbike_Hero.png",
+      "resourcePath": "Art/Vehicles/Motorbike_Hero",
+      "bytes": 2600091,
+      "type": "png",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "key": "Truck_Hero",
+      "category": "art/Vehicles",
+      "path": "Assets/Resources/Art/Vehicles/Truck_Hero.png",
+      "resourcePath": "Art/Vehicles/Truck_Hero",
+      "bytes": 2682008,
+      "type": "png",
+      "dimensions": [
+        1536,
+        1024
       ]
     },
     {
@@ -5160,11 +5220,47 @@
       ]
     },
     {
+      "key": "ArcBlade_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/ArcBlade_Hero.png",
+      "resourcePath": "Art/Weapons/ArcBlade_Hero",
+      "bytes": 1262559,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Bat_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Bat_Hero.png",
+      "resourcePath": "Art/Weapons/Bat_Hero",
+      "bytes": 1209038,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "Bizon_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/Bizon_Hero.png",
       "resourcePath": "Art/Weapons/Bizon_Hero",
       "bytes": 2292549,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "BreachersSG_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/BreachersSG_Hero.png",
+      "resourcePath": "Art/Weapons/BreachersSG_Hero",
+      "bytes": 1122178,
       "type": "png",
       "dimensions": [
         1376,
@@ -5189,6 +5285,18 @@
       "path": "Assets/Resources/Art/Weapons/ChargeBuster_Hero.png",
       "resourcePath": "Art/Weapons/ChargeBuster_Hero",
       "bytes": 2317887,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Crossbow_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Crossbow_Hero.png",
+      "resourcePath": "Art/Weapons/Crossbow_Hero",
+      "bytes": 1542486,
       "type": "png",
       "dimensions": [
         1376,
@@ -5256,6 +5364,18 @@
       ]
     },
     {
+      "key": "Gatling_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Gatling_Hero.png",
+      "resourcePath": "Art/Weapons/Gatling_Hero",
+      "bytes": 1457026,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "Groza_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/Groza_Hero.png",
@@ -5268,11 +5388,35 @@
       ]
     },
     {
+      "key": "Havoc_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Havoc_Hero.png",
+      "resourcePath": "Art/Weapons/Havoc_Hero",
+      "bytes": 1393657,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "Kar98k_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/Kar98k_Hero.png",
       "resourcePath": "Art/Weapons/Kar98k_Hero",
       "bytes": 2353600,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Katana_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Katana_Hero.png",
+      "resourcePath": "Art/Weapons/Katana_Hero",
+      "bytes": 1260957,
       "type": "png",
       "dimensions": [
         1376,
@@ -5364,6 +5508,18 @@
       ]
     },
     {
+      "key": "M79_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/M79_Hero.png",
+      "resourcePath": "Art/Weapons/M79_Hero",
+      "bytes": 1322203,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "M82B_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/M82B_Hero.png",
@@ -5436,6 +5592,18 @@
       ]
     },
     {
+      "key": "Machete_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Machete_Hero.png",
+      "resourcePath": "Art/Weapons/Machete_Hero",
+      "bytes": 1339876,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "MiniUzi_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/MiniUzi_Hero.png",
@@ -5460,11 +5628,71 @@
       ]
     },
     {
+      "key": "Pan_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Pan_Hero.png",
+      "resourcePath": "Art/Weapons/Pan_Hero",
+      "bytes": 1515874,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "Parafal_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/Parafal_Hero.png",
       "resourcePath": "Art/Weapons/Parafal_Hero",
       "bytes": 2246964,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Phantom_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Phantom_Hero.png",
+      "resourcePath": "Art/Weapons/Phantom_Hero",
+      "bytes": 1141075,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "PulseRifle_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/PulseRifle_Hero.png",
+      "resourcePath": "Art/Weapons/PulseRifle_Hero",
+      "bytes": 1423401,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Python_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Python_Hero.png",
+      "resourcePath": "Art/Weapons/Python_Hero",
+      "bytes": 1437024,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Razorback_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Razorback_Hero.png",
+      "resourcePath": "Art/Weapons/Razorback_Hero",
+      "bytes": 1323476,
       "type": "png",
       "dimensions": [
         1376,
@@ -5508,6 +5736,30 @@
       ]
     },
     {
+      "key": "Spectre_AR_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Spectre_AR_Hero.png",
+      "resourcePath": "Art/Weapons/Spectre_AR_Hero",
+      "bytes": 1232675,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Stinger_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Stinger_Hero.png",
+      "resourcePath": "Art/Weapons/Stinger_Hero",
+      "bytes": 1271679,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "Striker12_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/Striker12_Hero.png",
@@ -5520,11 +5772,47 @@
       ]
     },
     {
+      "key": "Tempest_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Tempest_Hero.png",
+      "resourcePath": "Art/Weapons/Tempest_Hero",
+      "bytes": 1295189,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "Thompson_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/Thompson_Hero.png",
       "resourcePath": "Art/Weapons/Thompson_Hero",
       "bytes": 2256185,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Thunderbolt_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Thunderbolt_Hero.png",
+      "resourcePath": "Art/Weapons/Thunderbolt_Hero",
+      "bytes": 1442541,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "TreatmentGun_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/TreatmentGun_Hero.png",
+      "resourcePath": "Art/Weapons/TreatmentGun_Hero",
+      "bytes": 1394124,
       "type": "png",
       "dimensions": [
         1376,
@@ -5561,6 +5849,18 @@
       "path": "Assets/Resources/Art/Weapons/USP_Hero.png",
       "resourcePath": "Art/Weapons/USP_Hero",
       "bytes": 2229300,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Valkyrie_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Valkyrie_Hero.png",
+      "resourcePath": "Art/Weapons/Valkyrie_Hero",
+      "bytes": 1327293,
       "type": "png",
       "dimensions": [
         1376,
