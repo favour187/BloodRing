@@ -23,17 +23,24 @@ and gated by `Tools/validate_assets.py`.
       own "no procedural art" policy. Fixed `BloodRingArtLibrary.Weapon()` and
       `GameHUD` weapon icon lookup so each gun now resolves to its own art
       instead of silently falling back to the AK47 icon.
-- [x] Weapons batch 3 (this session): full SMG class completed — MP40, P90,
-      Mac10, Thompson, Bizon, MP5, CG15 (original in-house SMG design), MP9 —
-      plus two more assault rifles, FAMAS and XM8. **22 / 50 catalog weapons
-      now have real authored hero-shot art**
-      (`Assets/Resources/Art/Weapons/*_Hero.png`).
-- [ ] Weapons batch 4 (next session): remaining ARs (AN94, AUG, Parafal,
-      Kingfisher, G36, FAL), shotguns (M1014, SPAS12, MAG7, ChargeBuster, Trogon,
-      Striker12), snipers (M24, SVD, Woodpecker, AC80, M14), pistols (M500, USP,
-      MiniUzi, TreatmentGun), melee (Katana, Pan, Machete, Bat), specials
-      (Crossbow, M79, Gatling), plus throwables (frag/smoke/flash/molotov/sticky)
-      and weapon attachment/skin icon sets.
+- [x] Weapons batch 3: full SMG class completed — MP40, P90, Mac10, Thompson,
+      Bizon, MP5, CG15 (original in-house SMG design), MP9 — plus two more
+      assault rifles, FAMAS and XM8. 22 / 50 catalog weapons had real authored
+      hero-shot art at the end of this batch.
+- [x] Weapons batch 4 (this session): full Assault Rifle class completed —
+      AN94, AUG, Parafal (original in-house design), Kingfisher (original
+      in-house design), G36, FAL — plus 4 shotguns: M1014, SPAS12, MAG7, and
+      ChargeBuster (original in-house charge-up energy shotgun). **32 / 50
+      catalog weapons now have real authored hero-shot art**
+      (`Assets/Resources/Art/Weapons/*_Hero.png`). Every render is a genuine
+      AI-generated hero shot — no code-generated/procedural placeholder art
+      was used anywhere in this batch.
+- [ ] Weapons batch 5 (next session): remaining shotguns (Trogon, Striker12),
+      all snipers/DMRs (M24, SVD, Woodpecker, AC80, M14), remaining pistols
+      (M500, USP, MiniUzi, TreatmentGun), melee (Katana, Pan, Machete, Bat),
+      specials (Crossbow, M79, Gatling), plus throwables
+      (frag/smoke/flash/molotov/sticky) and weapon attachment/skin icon sets.
+
 - [ ] Vehicles: complete ground/air/water set + skins
 - [ ] Characters: hero roster portraits + outfits
 - [ ] UI: icon set, buttons, HUD, frames, backgrounds

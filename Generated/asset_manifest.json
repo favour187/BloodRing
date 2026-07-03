@@ -1,7 +1,7 @@
 {
   "project": "Blood Ring Apex Royale 3D Enterprise",
   "description": "Comprehensive equalized art, audio, 3D model, and UI asset manifest. All entries are real shipped files.",
-  "assetCount": 1069,
+  "assetCount": 1079,
   "categories": {
     "art/3D": 52,
     "art/3D/Characters": 32,
@@ -19,7 +19,7 @@
     "art/UI/HUD": 32,
     "art/UI/Icons": 32,
     "art/Vehicles": 32,
-    "art/Weapons": 23,
+    "art/Weapons": 33,
     "audio/Music": 32,
     "audio_master": 4,
     "audio_master/RealProduction": 32,
@@ -5112,6 +5112,30 @@
       ]
     },
     {
+      "key": "AN94_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/AN94_Hero.png",
+      "resourcePath": "Art/Weapons/AN94_Hero",
+      "bytes": 2505542,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "AUG_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/AUG_Hero.png",
+      "resourcePath": "Art/Weapons/AUG_Hero",
+      "bytes": 2260646,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "AWM_Sniper_3D",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/AWM_Sniper_3D.png",
@@ -5148,11 +5172,35 @@
       ]
     },
     {
+      "key": "ChargeBuster_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/ChargeBuster_Hero.png",
+      "resourcePath": "Art/Weapons/ChargeBuster_Hero",
+      "bytes": 2317887,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "DesertEagle_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/DesertEagle_Hero.png",
       "resourcePath": "Art/Weapons/DesertEagle_Hero",
       "bytes": 2434100,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "FAL_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/FAL_Hero.png",
+      "resourcePath": "Art/Weapons/FAL_Hero",
+      "bytes": 2423693,
       "type": "png",
       "dimensions": [
         1376,
@@ -5184,6 +5232,18 @@
       ]
     },
     {
+      "key": "G36_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/G36_Hero.png",
+      "resourcePath": "Art/Weapons/G36_Hero",
+      "bytes": 2293258,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "Groza_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/Groza_Hero.png",
@@ -5201,6 +5261,30 @@
       "path": "Assets/Resources/Art/Weapons/Kar98k_Hero.png",
       "resourcePath": "Art/Weapons/Kar98k_Hero",
       "bytes": 2353600,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Kingfisher_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Kingfisher_Hero.png",
+      "resourcePath": "Art/Weapons/Kingfisher_Hero",
+      "bytes": 2128395,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "M1014_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/M1014_Hero.png",
+      "resourcePath": "Art/Weapons/M1014_Hero",
+      "bytes": 2333683,
       "type": "png",
       "dimensions": [
         1376,
@@ -5237,6 +5321,18 @@
       "path": "Assets/Resources/Art/Weapons/M82B_Hero.png",
       "resourcePath": "Art/Weapons/M82B_Hero",
       "bytes": 2101383,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "MAG7_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/MAG7_Hero.png",
+      "resourcePath": "Art/Weapons/MAG7_Hero",
+      "bytes": 2431034,
       "type": "png",
       "dimensions": [
         1376,
@@ -5304,11 +5400,35 @@
       ]
     },
     {
+      "key": "Parafal_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Parafal_Hero.png",
+      "resourcePath": "Art/Weapons/Parafal_Hero",
+      "bytes": 2246964,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "SCAR_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/SCAR_Hero.png",
       "resourcePath": "Art/Weapons/SCAR_Hero",
       "bytes": 2523441,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "SPAS12_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/SPAS12_Hero.png",
+      "resourcePath": "Art/Weapons/SPAS12_Hero",
+      "bytes": 2497091,
       "type": "png",
       "dimensions": [
         1376,
