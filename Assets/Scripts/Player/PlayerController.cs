@@ -18,6 +18,11 @@ public class PlayerController : NetworkBehaviour
 
     private float walkSpeed = 5f; private float runSpeed = 9f; private float crouchSpeed = 2.5f; private float proneSpeed = 1.5f; private float swimSpeed = 3.5f; private float jumpForce = 6f; private float gravity = -15f; private float velocityY = 0f;
     private bool isCrouching = false; private bool isProne = false; private bool isSwimming = false; private bool isZiplining = false; private bool canDoubleJump = false; private bool hasDoubleJumped = false;
+    private bool isSliding = false;
+    private float slideTimer = 0f;
+    private float slideSpeed = 12f;
+    private PlayerReviveHandler reviveHandler;
+
     private float maxHP = 100f; private float maxArmor = 100f; public string playerName = "Player";
 
     private WeaponData[] weaponSlots = new WeaponData[2]; private int[] currentMagAmmo = new int[2]; private int activeWeaponSlot = 0; private bool isReloading = false; private float shotCooldown = 0f;
@@ -55,7 +60,11 @@ public class PlayerController : NetworkBehaviour
         playerName = NetworkController.Instance != null ? NetworkController.Instance.GetPlayerNickname(OwnerClientId) : ("Player_" + OwnerClientId);
         string charChoice = NetworkController.Instance != null ? NetworkController.Instance.GetPlayerCharacter(OwnerClientId) : "DJNeon";
 
+        reviveHandler = gameObject.GetComponent<PlayerReviveHandler>();
+        if (reviveHandler == null) reviveHandler = gameObject.AddComponent<PlayerReviveHandler>();
+
         CharacterData cData = CharacterData.GetCharacter(charChoice);
+
         if (charChoice == "DJNeon" || charChoice == "Bolt") { walkSpeed = 5.5f; runSpeed = 9.8f; } else if (charChoice == "Ronin") { maxArmor = 120f; if (IsServer) netArmor.Value = 100f; } else if (charChoice == "Mirage") { if (IsServer) netIsInvisible.Value = true; }
 
         controller = gameObject.GetComponent<CharacterController>(); if (controller == null) controller = gameObject.AddComponent<CharacterController>(); controller.height = 2f; controller.radius = 0.5f; controller.center = new Vector3(0, 1f, 0); controller.enabled = IsOwner;
@@ -102,7 +111,25 @@ public class PlayerController : NetworkBehaviour
 
     private void Update()
     {
+        if (reviveHandler != null && reviveHandler.IsDowned())
+        {
+            if (IsOwner)
+            {
+                controller.enabled = false;
+                if (animator != null) animator.SetBool("IsDowned", true);
+                // Basic crawling
+                Vector2 moveInput = TouchControls.Instance != null ? TouchControls.Instance.MoveInput : Vector2.zero;
+                Vector3 crawlDir = cameraPivot.forward * moveInput.y + cameraPivot.right * moveInput.x;
+                crawlDir.y = 0; crawlDir.Normalize();
+                transform.position += crawlDir * reviveHandler.crawlSpeed * Time.deltaTime;
+                if (crawlDir.magnitude > 0.1f) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(crawlDir), Time.deltaTime * 5f);
+            }
+            netPosition.Value = transform.position; netRotation.Value = transform.rotation;
+            return;
+        }
+
         if (netIsDead.Value) { if (!ragdollTriggered) TriggerRagdollDeath(); HandleSpectatorMode(); return; }
+
         if (!IsOwner)
         {
             // Smooth Remote Player Interpolation
@@ -139,18 +166,45 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) isProne = !isProne;
         isCrouching = TouchControls.Instance != null && TouchControls.Instance.IsCrouching;
         
-        float targetSpeed = walkSpeed; if (isProne) targetSpeed = proneSpeed; else if (isCrouching) targetSpeed = crouchSpeed; else if (isSwimming) targetSpeed = swimSpeed; else if (moveInput.magnitude > 0.7f || (TouchControls.Instance != null && TouchControls.Instance.SprintRequested)) targetSpeed = runSpeed * ((TouchControls.Instance != null && TouchControls.Instance.SprintRequested) ? 1.35f : 1.0f); if (activePowers.ContainsKey(PowerType.SpeedBoost)) targetSpeed *= 1.5f;
+        // Sliding Logic
+        if (IsOwner && isMoving && !isCrouching && !isProne && controller.isGrounded && (moveInput.magnitude > 0.7f || (TouchControls.Instance != null && TouchControls.Instance.SprintRequested)) && isCrouching)
+        {
+            if (!isSliding) { isSliding = true; slideTimer = 1.2f; if (animator != null) animator.SetTrigger("Slide"); }
+        }
+        if (isSliding)
+        {
+            slideTimer -= Time.deltaTime;
+            if (slideTimer <= 0 || !isMoving) isSliding = false;
+        }
+
+        float targetSpeed = walkSpeed; if (isProne) targetSpeed = proneSpeed; else if (isCrouching) targetSpeed = crouchSpeed; else if (isSwimming) targetSpeed = swimSpeed; else if (isSliding) targetSpeed = slideSpeed; else if (moveInput.magnitude > 0.7f || (TouchControls.Instance != null && TouchControls.Instance.SprintRequested)) targetSpeed = runSpeed * ((TouchControls.Instance != null && TouchControls.Instance.SprintRequested) ? 1.35f : 1.0f); if (activePowers.ContainsKey(PowerType.SpeedBoost)) targetSpeed *= 1.5f;
 
         Vector3 moveDir = cameraPivot.forward * moveInput.y + cameraPivot.right * moveInput.x; moveDir.y = 0; moveDir.Normalize();
-        if (controller.isGrounded || isSwimming) { velocityY = isSwimming ? 0f : -2f; hasDoubleJumped = false; if (TouchControls.Instance != null && TouchControls.Instance.JumpRequested) { TouchControls.Instance.JumpRequested = false; if (animator != null) animator.SetTrigger("Jump"); if (nearbyLedge != null) { transform.position += new Vector3(0, 2.5f, 0) + transform.forward * 1f; } else { velocityY = jumpForce; } } } else { if (canDoubleJump && !hasDoubleJumped && TouchControls.Instance != null && TouchControls.Instance.JumpRequested) { velocityY = jumpForce; hasDoubleJumped = true; TouchControls.Instance.JumpRequested = false; if (animator != null) animator.SetTrigger("Jump"); } velocityY += gravity * Time.deltaTime; }
+        if (controller.isGrounded || isSwimming) { velocityY = isSwimming ? 0f : -2f; hasDoubleJumped = false; if (TouchControls.Instance != null && TouchControls.Instance.JumpRequested) { TouchControls.Instance.JumpRequested = false; if (animator != null) animator.SetTrigger("Jump"); 
+            // Improved Vaulting/Mantling
+            RaycastHit vaultHit; if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out vaultHit, 1.2f)) { 
+                if (Physics.Raycast(vaultHit.point + Vector3.up * 1.5f, Vector3.down, out RaycastHit topHit, 1.0f)) { 
+                    StartCoroutine(VaultRoutine(topHit.point)); 
+                } 
+            } else if (nearbyLedge != null) { transform.position += new Vector3(0, 2.5f, 0) + transform.forward * 1f; } else { velocityY = jumpForce; } } } else { if (canDoubleJump && !hasDoubleJumped && TouchControls.Instance != null && TouchControls.Instance.JumpRequested) { velocityY = jumpForce; hasDoubleJumped = true; TouchControls.Instance.JumpRequested = false; if (animator != null) animator.SetTrigger("Jump"); } velocityY += gravity * Time.deltaTime; }
         Vector3 finalMove = moveDir * targetSpeed + Vector3.up * velocityY; controller.Move(finalMove * Time.deltaTime);
         if (moveDir.magnitude > 0.1f && (TouchControls.Instance == null || !TouchControls.Instance.IsAiming)) { transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), Time.deltaTime * 10f); }
         
         // Drive Animator Parameters
-        if (animator != null) { animator.SetFloat("Speed", isMoving ? (targetSpeed == runSpeed ? 1.0f : 0.5f) : 0f); animator.SetBool("IsCrouching", isCrouching); animator.SetBool("IsProne", isProne); animator.SetBool("IsSwimming", isSwimming); }
+        if (animator != null) { animator.SetFloat("Speed", isMoving ? (targetSpeed == runSpeed ? 1.0f : 0.5f) : 0f); animator.SetBool("IsCrouching", isCrouching); animator.SetBool("IsProne", isProne); animator.SetBool("IsSwimming", isSwimming); animator.SetBool("IsSliding", isSliding); }
 
         netPosition.Value = transform.position; netRotation.Value = transform.rotation;
     }
+
+    private IEnumerator VaultRoutine(Vector3 targetPos)
+    {
+        controller.enabled = false;
+        Vector3 startPos = transform.position;
+        float t = 0;
+        while (t < 1) { t += Time.deltaTime * 5f; transform.position = Vector3.Lerp(startPos, targetPos + Vector3.up * 0.1f, t); yield return null; }
+        controller.enabled = true;
+    }
+
 
     private void HandleProceduralAnimations()
     {
@@ -172,6 +226,20 @@ public class PlayerController : NetworkBehaviour
         recoilOffset = new Vector3(0, 0, -0.05f); recoilRot = Quaternion.Euler(-15f, Random.Range(-2f, 2f), 0);
         if (animator != null) animator.SetTrigger("Fire"); if (weaponAnimator != null) weaponAnimator.SetTrigger("Fire");
         muzzleFlash.Play(); if (AudioManager.Instance != null) AudioManager.Instance.PlayWeaponSound(weapon.weaponName); PlayMuzzleFlashServerRpc(weapon.weaponName);
+
+        if (weapon.IsMelee())
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 1.5f, 2f);
+            foreach (var col in hits)
+            {
+                AIBot bot = col.GetComponentInParent<AIBot>(); PlayerController hitPlayer = col.GetComponentInParent<PlayerController>();
+                if (bot != null) bot.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
+                else if (hitPlayer != null && hitPlayer != this) hitPlayer.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
+                if (GameFeel.Instance != null) GameFeel.Instance.SpawnImpact(col.closestPoint(transform.position), Vector3.zero, "Blood");
+            }
+            return;
+        }
+
         int pelletCount = weapon.pellets; float dmg = weapon.damage; if (activePowers.ContainsKey(PowerType.RageMode)) dmg *= 2f; bool isBoosted = activePowers.ContainsKey(PowerType.RageMode); float spr = weapon.spread; if (weapon.hasGrip) spr *= 0.5f;
 
         for (int i = 0; i < pelletCount; i++)
@@ -201,6 +269,7 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+
     [ServerRpc(RequireOwnership = false)] private void PlayMuzzleFlashServerRpc(string wName) { PlayMuzzleFlashClientRpc(wName); } [ClientRpc] private void PlayMuzzleFlashClientRpc(string wName) { if (IsOwner) return; muzzleFlash.Play(); if (AudioManager.Instance != null) AudioManager.Instance.PlayWeaponSound(wName); if (animator != null) animator.SetTrigger("Fire"); }
 
     [ServerRpc(RequireOwnership = false)]
@@ -212,7 +281,13 @@ public class PlayerController : NetworkBehaviour
         if (d > 220f) { Debug.LogWarning("Server Anti-Cheat: Shooter exceeded max ballistic range (" + d + "m). Discarding hit."); if (BackendAPI.Instance != null && BackendAPI.Instance.IsLoggedIn) { var _ = BackendAPI.Instance.LogAntiCheatViolationAsync("RangeExploit", "Shot from " + d + "m"); } return; }
 
         float curArmor = netArmor.Value; if (curArmor > 0) { float armorDmg = Mathf.Min(curArmor, dmg * 0.7f); netArmor.Value -= armorDmg; dmg -= armorDmg; } netHP.Value -= dmg; TakeDamageClientRpc();
-        if (netHP.Value <= 0) { netHP.Value = 0; netIsDead.Value = true; DieClientRpc(killerName); if (KillSystem.Instance != null) KillSystem.Instance.OnEntityKilled(playerName, killerName, true, false); }
+        if (netHP.Value <= 0) { netHP.Value = 0; 
+            if (ReviveSystem.Instance != null && ReviveSystem.Instance.ShouldEnterDBNO("CLASSIC", reviveHandler != null ? reviveHandler.knockCount.Value : 0)) {
+                if (reviveHandler != null) reviveHandler.EnterDownedStateServerRpc();
+            } else {
+                netIsDead.Value = true; DieClientRpc(killerName); if (KillSystem.Instance != null) KillSystem.Instance.OnEntityKilled(playerName, killerName, true, false);
+            }
+        }
     }
 
     [ClientRpc] private void TakeDamageClientRpc() { if (IsOwner && GameFeel.Instance != null) GameFeel.Instance.TriggerScreenShake(); }
