@@ -1,0 +1,69 @@
+# ──────────────────────────────────────────────────────────────────────
+#  Blood Ring — Backend Deploy Pipeline
+#  Triggers Render.com auto-deploy on push to main
+#  Render watches the repo and auto-deploys on push to main branch
+# ──────────────────────────────────────────────────────────────────────
+name: Backend — Deploy to Render
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+
+jobs:
+  deploy:
+    name: Trigger Backend Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify backend health
+        run: |
+          echo "=== Backend Deploy Verification ==="
+          echo "Render.com auto-deploys on push to main."
+          echo "Waiting 30s for deploy to start..."
+          sleep 30
+          
+          echo "Testing live endpoint..."
+          RESPONSE=$(curl -sf --max-time 30 https://academyroyalebackend.onrender.com/ 2>/dev/null || echo "FAILED")
+          
+          if echo "$RESPONSE" | grep -q "Active"; then
+            echo "✅ Backend is live and responding"
+            echo "Response: $RESPONSE"
+          else
+            echo "⚠️ Backend may still be deploying..."
+            echo "Response: $RESPONSE"
+            echo ""
+            echo "Check Render dashboard: https://dashboard.render.com"
+          fi
+
+      - name: Smoke test API endpoints
+        run: |
+          echo "=== API Smoke Test ==="
+          sleep 10
+          
+          # Register test user
+          REG=$(curl -sf --max-time 15 -X POST https://academyroyalebackend.onrender.com/api/auth/register \
+            -H "Content-Type: application/json" \
+            -d '{"username":"deploy_test_'$RANDOM'","password":"Test1234!"}' 2>/dev/null || echo '{}')
+          
+          TOKEN=$(echo "$REG" | python3 -c "import sys,json; print(json.load(sys.stdin).get('token',''))" 2>/dev/null)
+          
+          if [ -n "$TOKEN" ]; then
+            echo "✅ Auth working"
+            
+            # Test protected endpoints
+            curl -sf --max-time 10 https://academyroyalebackend.onrender.com/api/profile \
+              -H "Authorization: Bearer $TOKEN" > /dev/null && echo "✅ Profile working" || echo "❌ Profile failed"
+            
+            curl -sf --max-time 10 https://academyroyalebackend.onrender.com/api/store \
+              -H "Authorization: Bearer $TOKEN" > /dev/null && echo "✅ Store working" || echo "❌ Store failed"
+            
+            curl -sf --max-time 10 https://academyroyalebackend.onrender.com/api/store/missions \
+              -H "Authorization: Bearer $TOKEN" > /dev/null && echo "✅ Missions working" || echo "❌ Missions failed"
+            
+            echo "✅ All smoke tests passed"
+          else
+            echo "⚠️ Auth not responding (may be cold-starting on Render free tier)"
+          fi

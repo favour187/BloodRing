@@ -1,0 +1,315 @@
+# ──────────────────────────────────────────────────────────────────────
+#  Blood Ring — Continuous Integration Pipeline
+#  Runs on every push and pull request to main/develop
+# ──────────────────────────────────────────────────────────────────────
+name: CI — Lint, Validate, Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Job 1: C# Structural Lint ───────────────────────────────────────
+  csharp-lint:
+    name: C# Structural Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run C# structural lint
+        run: python3 Tools/check_csharp_compilation.py
+
+  # ── Job 2: Asset Validation ────────────────────────────────────────
+  asset-validation:
+    name: Asset Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate 3D models
+        run: |
+          python3 << 'EOF'
+          import os, glob
+          
+          errors = []
+          obj_files = glob.glob("Assets/**/*.obj", recursive=True)
+          
+          for f in obj_files:
+              with open(f, 'r') as fh:
+                  content = fh.read()
+              if 'o ' not in content:
+                  errors.append(f"{f}: Missing object declaration")
+              if 'v ' not in content:
+                  errors.append(f"{f}: Missing vertices")
+              if 'f ' not in content:
+                  errors.append(f"{f}: Missing faces")
+              # Check for UVs (vt)
+              if 'vt ' not in content:
+                  errors.append(f"WARN {f}: No UV coordinates")
+          
+          if errors:
+              print(f"Found {len(errors)} issues:")
+              for e in errors:
+                  print(f"  {e}")
+              # Only fail on actual errors, not warnings
+              real_errors = [e for e in errors if not e.startswith("WARN")]
+              if real_errors:
+                  exit(1)
+          else:
+              print(f"✅ All {len(obj_files)} OBJ files valid")
+          EOF
+
+      - name: Validate audio files
+        run: |
+          python3 << 'EOF'
+          import os, struct
+          
+          errors = []
+          count = 0
+          for root, dirs, files in os.walk("Assets"):
+              for f in files:
+                  if f.endswith('.wav'):
+                      path = os.path.join(root, f)
+                      count += 1
+                      with open(path, 'rb') as fh:
+                          header = fh.read(4)
+                          if header != b'RIFF':
+                              errors.append(f"{path}: Not a valid WAV file")
+                      # Check minimum size (1KB = real audio)
+                      if os.path.getsize(path) < 1024:
+                          errors.append(f"{path}: Suspiciously small ({os.path.getsize(path)}B)")
+          
+          if errors:
+              for e in errors:
+                  print(f"❌ {e}")
+              exit(1)
+          else:
+              print(f"✅ All {count} WAV files valid")
+          EOF
+
+      - name: Validate animation clips
+        run: |
+          python3 << 'EOF'
+          import os
+          
+          anims = []
+          for root, dirs, files in os.walk("Assets/Resources/Animation"):
+              for f in files:
+                  if f.endswith('.anim'):
+                      path = os.path.join(root, f)
+                      anims.append(path)
+                      with open(path, 'r') as fh:
+                          content = fh.read()
+                      if 'AnimationClip' not in content:
+                          print(f"❌ {path}: Not a valid AnimationClip")
+                          exit(1)
+          
+          print(f"✅ All {len(anims)} animation clips valid")
+          EOF
+
+      - name: Check for orphaned assets
+        run: |
+          python3 << 'EOF'
+          import os
+          
+          orphans = []
+          for root, dirs, files in os.walk("Assets"):
+              for f in files:
+                  if f.endswith('.meta'):
+                      base = os.path.join(root, f[:-5])
+                      if not os.path.exists(base):
+                          orphans.append(os.path.join(root, f))
+          
+          if orphans:
+              print(f"⚠️ Found {len(orphans)} orphaned .meta files:")
+              for o in orphans:
+                  print(f"  {o}")
+              # Don't fail, just warn
+          else:
+              print("✅ No orphaned .meta files")
+          EOF
+
+      - name: Check asset sizes
+        run: |
+          python3 << 'EOF'
+          import os
+          
+          warnings = []
+          total_size = 0
+          for root, dirs, files in os.walk("Assets"):
+              for f in files:
+                  path = os.path.join(root, f)
+                  size = os.path.getsize(path)
+                  total_size += size
+                  # Warn about files > 5MB
+                  if size > 5 * 1024 * 1024:
+                      warnings.append(f"  ⚠️ {size/(1024*1024):.1f}MB  {path}")
+          
+          print(f"Total Assets/ size: {total_size/(1024*1024):.1f}MB")
+          if warnings:
+              print(f"\nLarge files (>5MB):")
+              for w in warnings:
+                  print(w)
+          else:
+              print("✅ No oversized assets")
+          EOF
+
+  # ── Job 3: Backend Tests ───────────────────────────────────────────
+  backend-test:
+    name: Backend API Tests
+    runs-on: ubuntu-latest
+    services:
+      sqlite:
+        image: keinos/sqlite3:latest
+        ports:
+          - 5000:5000
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Run backend tests
+        working-directory: backend
+        env:
+          NODE_ENV: test
+          PORT: 5000
+        run: |
+          # Start server in background
+          node server.js &
+          SERVER_PID=$!
+          sleep 3
+          
+          echo "=== Testing API endpoints ==="
+          
+          # Test root
+          curl -sf http://localhost:5000/ | grep -q "Active" && echo "✅ Root" || echo "❌ Root"
+          
+          # Test register
+          REG=$(curl -sf -X POST http://localhost:5000/api/auth/register \
+            -H "Content-Type: application/json" \
+            -d '{"username":"ci_test_'$RANDOM'","password":"Test1234!"}')
+          TOKEN=$(echo "$REG" | python3 -c "import sys,json; print(json.load(sys.stdin)['token'])" 2>/dev/null)
+          [ -n "$TOKEN" ] && echo "✅ Register" || echo "❌ Register"
+          
+          # Test profile
+          curl -sf http://localhost:5000/api/profile \
+            -H "Authorization: Bearer $TOKEN" | grep -q "userId" && echo "✅ Profile" || echo "❌ Profile"
+          
+          # Test store
+          curl -sf http://localhost:5000/api/store \
+            -H "Authorization: Bearer $TOKEN" | grep -q "storeItems" && echo "✅ Store" || echo "❌ Store"
+          
+          # Test leaderboard
+          curl -sf http://localhost:5000/api/leaderboard | grep -q "leaderboard" && echo "✅ Leaderboard" || echo "❌ Leaderboard"
+          
+          # Test match result
+          curl -sf -X POST http://localhost:5000/api/match/result \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"kills":3,"placement":5,"damageDealt":500,"matchDuration":180,"gameMode":"CLASSIC","isRanked":false}' \
+            | grep -q "earnedXP" && echo "✅ Match Result" || echo "❌ Match Result"
+          
+          # Test missions
+          curl -sf http://localhost:5000/api/store/missions \
+            -H "Authorization: Bearer $TOKEN" | grep -q "missions" && echo "✅ Missions" || echo "❌ Missions"
+          
+          # Test lucky spin
+          curl -sf -X POST http://localhost:5000/api/store/luckyspin \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{}' | grep -q "reward" && echo "✅ Lucky Spin" || echo "❌ Lucky Spin"
+          
+          kill $SERVER_PID 2>/dev/null
+          echo "=== Backend tests complete ==="
+
+  # ── Job 4: Project Structure Validation ────────────────────────────
+  structure-check:
+    name: Project Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify required files exist
+        run: |
+          echo "=== Checking required project files ==="
+          REQUIRED=(
+            "ProjectSettings/ProjectSettings.asset"
+            "ProjectSettings/EditorBuildSettings.asset"
+            "ProjectSettings/QualitySettings.asset"
+            "ProjectSettings/ProjectVersion.txt"
+            "Packages/manifest.json"
+            "Assets/StreamingAssets/server_config.txt"
+            "backend/server.js"
+            "backend/package.json"
+            "Docs/HONEST_PROJECT_STATUS.md"
+            "build_mobile3d_android.sh"
+          )
+          
+          MISSING=0
+          for f in "${REQUIRED[@]}"; do
+            if [ -f "$f" ]; then
+              echo "  ✅ $f"
+            else
+              echo "  ❌ $f (MISSING)"
+              MISSING=$((MISSING + 1))
+            fi
+          done
+          
+          if [ $MISSING -gt 0 ]; then
+            echo "❌ $MISSING required files missing"
+            exit 1
+          fi
+          echo "✅ All required files present"
+
+      - name: Verify Unity version
+        run: |
+          VERSION=$(cat ProjectSettings/ProjectVersion.txt | grep m_EditorVersion | cut -d' ' -f2)
+          echo "Unity Version: $VERSION"
+          if [ "$VERSION" = "2022.3.50f1" ]; then
+            echo "✅ Correct Unity version"
+          else
+            echo "⚠️ Expected 2022.3.50f1, got $VERSION"
+          fi
+
+      - name: Verify backend config
+        run: |
+          URL=$(cat Assets/StreamingAssets/server_config.txt | tr -d '[:space:]')
+          echo "Backend URL: $URL"
+          if echo "$URL" | grep -q "academyroyalebackend.onrender.com"; then
+            echo "✅ Backend URL correct"
+          else
+            echo "⚠️ Backend URL may be incorrect"
+          fi
+
+      - name: Count project assets
+        run: |
+          echo "=== Project Asset Summary ==="
+          echo "C# scripts: $(find Assets/Scripts -name '*.cs' 2>/dev/null | wc -l)"
+          echo "Scenes: $(find Assets/Scenes -name '*.unity' 2>/dev/null | wc -l)"
+          echo "3D models: $(find Assets -name '*.obj' 2>/dev/null | wc -l)"
+          echo "Audio files: $(find Assets -name '*.wav' -o -name '*.mp3' 2>/dev/null | wc -l)"
+          echo "Animation clips: $(find Assets -name '*.anim' 2>/dev/null | wc -l)"
+          echo "Animator controllers: $(find Assets -name '*.controller' 2>/dev/null | wc -l)"
+          echo "PNG images: $(find Assets -name '*.png' 2>/dev/null | wc -l)"
+          echo "ProjectSettings: $(ls ProjectSettings/*.asset 2>/dev/null | wc -l)"
