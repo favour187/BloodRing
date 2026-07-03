@@ -1,7 +1,7 @@
 {
   "project": "Blood Ring Apex Royale 3D Enterprise",
   "description": "Comprehensive equalized art, audio, 3D model, and UI asset manifest. All entries are real shipped files.",
-  "assetCount": 1007,
+  "assetCount": 1011,
   "categories": {
     "art/3D": 52,
     "art/3D/Characters": 32,
@@ -33,7 +33,7 @@
     "models/Vehicles": 32,
     "models/Weapons": 32,
     "ui_system/Accessibility": 32,
-    "ui_system/Buttons": 34,
+    "ui_system/Buttons": 38,
     "ui_system/Icons": 37,
     "ui_system/Panels": 35,
     "ui_system/Transitions": 32
@@ -8016,6 +8016,30 @@
       ]
     },
     {
+      "key": "DangerBtn_Hero",
+      "category": "ui_system/Buttons",
+      "path": "UI/Buttons/DangerBtn_Hero.png",
+      "resourcePath": "UI/Buttons/DangerBtn_Hero",
+      "bytes": 1529505,
+      "type": "png",
+      "dimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "key": "InactiveBtn_Hero",
+      "category": "ui_system/Buttons",
+      "path": "UI/Buttons/InactiveBtn_Hero.png",
+      "resourcePath": "UI/Buttons/InactiveBtn_Hero",
+      "bytes": 1045709,
+      "type": "png",
+      "dimensions": [
+        1774,
+        887
+      ]
+    },
+    {
       "key": "PrimaryBtn_Hero",
       "category": "ui_system/Buttons",
       "path": "UI/Buttons/PrimaryBtn_Hero.png",
@@ -8033,6 +8057,30 @@
       "path": "UI/Buttons/SecondaryBtn_Hero.png",
       "resourcePath": "UI/Buttons/SecondaryBtn_Hero",
       "bytes": 1683648,
+      "type": "png",
+      "dimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "key": "SmallBtn_Hero",
+      "category": "ui_system/Buttons",
+      "path": "UI/Buttons/SmallBtn_Hero.png",
+      "resourcePath": "UI/Buttons/SmallBtn_Hero",
+      "bytes": 321556,
+      "type": "png",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "key": "SuccessBtn_Hero",
+      "category": "ui_system/Buttons",
+      "path": "UI/Buttons/SuccessBtn_Hero.png",
+      "resourcePath": "UI/Buttons/SuccessBtn_Hero",
+      "bytes": 1541994,
       "type": "png",
       "dimensions": [
         1774,
