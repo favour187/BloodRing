@@ -1,0 +1,38 @@
+{
+  "project": "BloodRing Audio Library",
+  "engine": "Unity Audio / URP Spatializer",
+  "channels": {
+    "Master": 1.0,
+    "SFX": 0.85,
+    "Music": 0.7,
+    "VO": 1.0,
+    "Ambience": 0.6
+  },
+  "mappings": [
+    {
+      "key": "Ambience_IslandWind",
+      "path": "Assets/Audio/RealProduction/Ambience_IslandWind.wav",
+      "category": "Ambience"
+    },
+    {
+      "key": "Explosion_Close",
+      "path": "Assets/Audio/RealProduction/Explosion_Close.wav",
+      "category": "SFX"
+    },
+    {
+      "key": "Gun_Rifle",
+      "path": "Assets/Audio/RealProduction/Gun_Rifle.wav",
+      "category": "SFX"
+    },
+    {
+      "key": "VO_Countdown",
+      "path": "Assets/Audio/VO/VO_Countdown.wav",
+      "category": "VO"
+    },
+    {
+      "key": "BattleActionBeat",
+      "path": "Assets/Resources/Audio/Music/BattleActionBeat.mp3",
+      "category": "Music"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "project": "BloodRing VFX Library",
+  "renderPipeline": "Universal Render Pipeline (URP) Mobile",
+  "particleBudgets": {
+    "maxActiveParticles": 500,
+    "softLimit": 300,
+    "cullDistance": 60.0
+  },
+  "effects": [
+    {
+      "id": "VFX_MuzzleFlash",
+      "prefab": "Assets/Resources/Effects/MuzzleFlash.prefab",
+      "duration": 0.1,
+      "lightIntensity": 2.5
+    },
+    {
+      "id": "VFX_Explosion",
+      "prefab": "Assets/Resources/Effects/Explosion.prefab",
+      "duration": 2.0,
+      "shakeMagnitude": 0.4
+    },
+    {
+      "id": "VFX_ShieldBurst",
+      "prefab": "Assets/Resources/Effects/ShieldBurst.prefab",
+      "duration": 1.5,
+      "color": "#00FFFF"
+    },
+    {
+      "id": "VFX_ZoneWall",
+      "prefab": "Assets/Resources/Effects/ZoneWall.prefab",
+      "shader": "BloodRing/URP/EnergyWall"
+    }
+  ]
+}

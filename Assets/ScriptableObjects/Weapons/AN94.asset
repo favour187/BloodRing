@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_Script: {fileID: 0}
+  m_Name: AN94
+  weaponName: AN94
+  damage: 31
+  maxAmmo: 30
+  isAutomatic: 1
+  fireRate: 0.125
+  spread: 0.048
+  reloadTime: 2.2
+
+

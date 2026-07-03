@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "2.0.0",
+  "events": {
+    "match_start": {
+      "fields": [
+        "match_id",
+        "user_id",
+        "game_mode",
+        "region",
+        "is_ranked",
+        "timestamp"
+      ]
+    },
+    "match_end": {
+      "fields": [
+        "match_id",
+        "user_id",
+        "placement",
+        "kills",
+        "damage_dealt",
+        "duration_sec",
+        "xp_earned",
+        "coins_earned"
+      ]
+    },
+    "combat_kill": {
+      "fields": [
+        "match_id",
+        "killer_id",
+        "victim_id",
+        "weapon_used",
+        "distance_meters",
+        "is_headshot"
+      ]
+    },
+    "power_activate": {
+      "fields": [
+        "match_id",
+        "user_id",
+        "power_type",
+        "location_x",
+        "location_z"
+      ]
+    },
+    "vehicle_enter": {
+      "fields": [
+        "match_id",
+        "user_id",
+        "vehicle_type",
+        "seat_index"
+      ]
+    }
+  }
+}

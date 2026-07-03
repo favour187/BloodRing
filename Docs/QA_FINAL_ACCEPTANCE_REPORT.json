@@ -1,0 +1,38 @@
+{
+  "project": "Blood Ring",
+  "reportType": "HONEST VERIFIED STATUS (supersedes prior self-reported 100% report)",
+  "generatedBy": "Milestone: Project Configuration & Honesty Pass",
+  "disclaimer": "Any 'PASS' below was independently verified this session. Items that cannot be verified without the Unity 2022.3.50f1 editor are explicitly marked UNVERIFIED. This report does NOT claim the game is shippable.",
+  "verified": {
+    "Backend API (Node/Express + SQLite)": {
+      "status": "PASS (independently tested end-to-end)",
+      "evidence": "Started server locally; register/login/guest, profile, store, leaderboard, match/result, store/missions all returned correct JSON. Client (BackendAPI.cs) endpoint paths match server routes exactly; matchmake correctly uses HOST/JOIN actions."
+    },
+    "Unity ProjectSettings authored": {
+      "status": "FIXED (were missing)",
+      "evidence": "Authored ProjectSettings.asset (bundle id com.bloodring.royale, landscape, minSdk 24, ARM64, IL2CPP, Linear color), EditorBuildSettings.asset (31 scenes ordered), TagManager, InputManager, TimeManager, QualitySettings, GraphicsSettings, DynamicsManager, Physics2DSettings, AudioManager, NavMeshAreas, EditorSettings, and others."
+    },
+    "Deterministic .meta files": {
+      "status": "FIXED (were entirely absent)",
+      "evidence": "Generated 760+ deterministic .meta files (GUID = md5 of path) so GUIDs are version-controlled and reproducible across machines/CI. Tools/generate_meta_files.py added."
+    },
+    "Animator Controllers": {
+      "status": "PARTIAL FIX",
+      "evidence": "Authored PlayerAnimator/AIAnimator/WeaponAnimator controllers with the exact parameters the code sets (Speed, IsCrouching, IsProne, IsSliding, IsSwimming, IsDead, IsDowned, Fire, Jump, Reload, Slide). Wired them into PlayerController/AIBot at runtime so Animator param calls resolve instead of being silent no-ops. NOTE: states have no motion clips yet (no rig), so nothing visually animates."
+    },
+    "C# structural lint": {
+      "status": "PASS (lint only)",
+      "evidence": "77 scripts pass brace/paren/bracket balance, type-declaration presence, and top-level duplicate-type checks. This is NOT a compiler."
+    }
+  },
+  "unverified_or_outstanding": {
+    "Real Unity compilation": "UNVERIFIED — no Unity editor in this environment. The only authoritative check is opening the project in Unity 2022.3.50f1 or running -batchmode -quit and reading Editor.log.",
+    "Scene component wiring": "UNVERIFIED / LIKELY BROKEN — the repo historically shipped with zero .meta files, so scene/prefab references to the original author's script GUIDs cannot be recovered. Components will need re-linking in the editor.",
+    "3D models": "PLACEHOLDER — meshes are primitive .obj boxes/spheres, not production-modeled/rigged content.",
+    "Animation clips": "MISSING — controllers exist but contain no .anim motion data.",
+    "Audio": "PRESENT but UNINTEGRATED — 140 .wav/.mp3 files exist on disk; they still need import settings + AudioSource/mixer wiring verified in-editor.",
+    "LiveOps store rotation": "STUB — StoreRotationManager still uses hardcoded sample rotations.",
+    "Automated gameplay tests": "MISSING — no real unit/integration/network latency/damage-math tests.",
+    "Store readiness": "OUTSTANDING — app icons, AndroidManifest permission review, signing keystore, and IARC/ESRB/PEGI content-rating submission."
+  }
+}

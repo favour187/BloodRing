@@ -1,0 +1,15 @@
+{
+  "targetKPIs": {
+    "D1_Retention": ">= 45.0%",
+    "D7_Retention": ">= 22.0%",
+    "D30_Retention": ">= 10.0%",
+    "Target_FPS": "60.0 FPS stable on mid-tier Android (Snapdragon 720G+)",
+    "Max_Memory_MB": "<= 850 MB",
+    "Load_Time_Sec": "<= 3.5 sec from Launch to Lobby"
+  },
+  "automatedAlerts": [
+    "FPS drop below 50 in 3+ consecutive sessions",
+    "Matchmaking queue time exceeding 15 sec",
+    "API rate limit violations spike > 5%"
+  ]
+}

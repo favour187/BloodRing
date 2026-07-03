@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartupInitialization.unity
+    guid: 086fdc3200df63b8cdc987db57db2dd9
+  - enabled: 1
+    path: Assets/Scenes/SplashScreen.unity
+    guid: 9d2d60a73bf7a7bcddb0a3c9773d2647
+  - enabled: 1
+    path: Assets/Scenes/SplashLogo.unity
+    guid: 4d4fad2c3b00eb41e1391a2b27911ba8
+  - enabled: 1
+    path: Assets/Scenes/Splash.unity
+    guid: 715cb6ead96bf79a8353620e6c84c5db
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 2cea5ca1f980406d0ac56f07cf0e9897
+  - enabled: 1
+    path: Assets/Scenes/LoginScene.unity
+    guid: 5fd622a8c9d80999edc9674e8fe6d7f6
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4c6dc3ac097dba08bc21b8cf9deafb2f
+  - enabled: 1
+    path: Assets/Scenes/MainLobby.unity
+    guid: 2d17727f3fc3129dd6de77662bdf55ba
+  - enabled: 1
+    path: Assets/Scenes/LobbyScene.unity
+    guid: fa77aa888325ae862d405c6bf928e57b
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelect.unity
+    guid: 9f7d511dda464f8ec6dd366588c41cce
+  - enabled: 1
+    path: Assets/Scenes/CharacterPage.unity
+    guid: 128548332218e0fe02175fb1aa030238
+  - enabled: 1
+    path: Assets/Scenes/StoreScene.unity
+    guid: 4efab3bdaea954ebd09287ff3a620e5e
+  - enabled: 1
+    path: Assets/Scenes/InventoryScene.unity
+    guid: 4e72f98f7c97369cf82b89d398ff51ab
+  - enabled: 1
+    path: Assets/Scenes/SettingsScene.unity
+    guid: 1287a695e3a7221d2b65e9970592cd3b
+  - enabled: 1
+    path: Assets/Scenes/ProfileScene.unity
+    guid: d7a2b8c4525d58cb87da7814a781b609
+  - enabled: 1
+    path: Assets/Scenes/RankingsScene.unity
+    guid: 05024085b6e24bbc2d82b9643f3954f2
+  - enabled: 1
+    path: Assets/Scenes/Rankings.unity
+    guid: 2fb24f19688a0ab52d497bb44ba79fb2
+  - enabled: 1
+    path: Assets/Scenes/ClanSocial.unity
+    guid: 1d556777824aee874b535011f2bb6993
+  - enabled: 1
+    path: Assets/Scenes/EventsPage.unity
+    guid: 18f6792fa763084b5acfec5a7be5b0e3
+  - enabled: 1
+    path: Assets/Scenes/MatchmakingScene.unity
+    guid: cf38ed4b6ae375ab9f258fed7c7a69b1
+  - enabled: 1
+    path: Assets/Scenes/WaitingIsland.unity
+    guid: 86e2321ae429245a1cf0287da6eb8b2a
+  - enabled: 1
+    path: Assets/Scenes/AircraftScene.unity
+    guid: 1cf17e19aef3936445bb5a45a4a93ca6
+  - enabled: 1
+    path: Assets/Scenes/Aircraft.unity
+    guid: f5acd0860e84810418fe95cb74333fe1
+  - enabled: 1
+    path: Assets/Scenes/MainBattleRoyaleMap.unity
+    guid: dad887be4d8286f128dd5b3e83b52bf0
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 6d421daf0e32428f81350d264d9c96e4
+  - enabled: 1
+    path: Assets/Scenes/Gameplay.unity
+    guid: 704f4a25b7ae6a941ab21022f1492a44
+  - enabled: 1
+    path: Assets/Scenes/TrainingGround.unity
+    guid: 898415697b5c92a708f42b23f118f4c9
+  - enabled: 1
+    path: Assets/Scenes/ResultVictoryScreen.unity
+    guid: 1008dd3626c70bbdb7148e4f8f08f928
+  - enabled: 1
+    path: Assets/Scenes/Results.unity
+    guid: c3ba3ae820caa9959e4a951e659f8741
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: ed5b3bbdf7300a65a9e1096ce02d5bc6
+  - enabled: 1
+    path: Assets/Scenes/ReconnectErrorScene.unity
+    guid: a07a5a88420b80fb1a8690951bad9240
+  m_configObjects: {}

@@ -1,0 +1,36 @@
+{
+  "appName": "Blood Ring Apex Royale 3D",
+  "bundleId": "com.bloodring.apexroyale3d",
+  "targetPlatforms": [
+    "Android",
+    "iOS",
+    "WebGL",
+    "Windows"
+  ],
+  "minimumApiLevel": "Android 8.0 (API 26)",
+  "targetApiLevel": "Android 14 (API 34)",
+  "rendering": {
+    "pipeline": "URP",
+    "colorSpace": "Linear",
+    "multithreadedRendering": true,
+    "staticBatching": true,
+    "dynamicBatching": true
+  },
+  "qualityTiers": {
+    "Low": {
+      "lodBias": 0.5,
+      "shadowDistance": 20.0,
+      "targetFPS": 30
+    },
+    "Medium": {
+      "lodBias": 0.75,
+      "shadowDistance": 45.0,
+      "targetFPS": 60
+    },
+    "High": {
+      "lodBias": 1.0,
+      "shadowDistance": 75.0,
+      "targetFPS": 60
+    }
+  }
+}

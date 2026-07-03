@@ -1,0 +1,12 @@
+{
+  "architecture": "Client-Server Authoritative with Client Prediction & Lag Compensation",
+  "framework": "Netcode for GameObjects (NGO) + Unity Transport (UTP)",
+  "protocol": "UDP (Replication) + HTTPS / WSS (Services & WebSockets)",
+  "replication": {
+    "playerTransform": "Interpolated 30Hz network transforms with 100ms smoothing buffer",
+    "combatHitscan": "Server-side raycast verification against historical lag-compensated hitboxes",
+    "projectiles": "Server-spawned network objects with client-side visual prediction",
+    "lootAndVehicles": "Server-owned state machines with RPC ownership transfer on interact"
+  },
+  "bandwidthTarget": "<= 15 KB/s per client during peak 50-player combat"
+}

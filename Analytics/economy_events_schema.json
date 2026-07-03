@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "2.0.0",
+  "events": {
+    "currency_flow": {
+      "fields": [
+        "user_id",
+        "currency_type",
+        "amount",
+        "flow_type",
+        "reason",
+        "balance_after"
+      ]
+    },
+    "store_purchase": {
+      "fields": [
+        "user_id",
+        "item_id",
+        "cost_amount",
+        "currency_type",
+        "timestamp"
+      ]
+    },
+    "lucky_spin": {
+      "fields": [
+        "user_id",
+        "cost_diamonds",
+        "prize_won",
+        "timestamp"
+      ]
+    }
+  }
+}

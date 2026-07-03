@@ -1,0 +1,26 @@
+{
+  "serviceName": "BloodRing Dedicated Server & Services Cluster",
+  "backendEngine": "Node.js v20+ Express + SQLite / PostgreSQL",
+  "authoritativeSim": "Unity Dedicated Server (Linux 64-bit Headless)",
+  "tickRate": 30,
+  "maxPlayersPerLobby": 50,
+  "scaling": {
+    "autoScaleThresholdPercent": 80,
+    "minInstances": 2,
+    "maxInstances": 100,
+    "regionPools": [
+      "US-East",
+      "US-West",
+      "EU-Central",
+      "AS-East",
+      "SA-Brazil",
+      "AF-Lagos"
+    ]
+  },
+  "cloudServices": {
+    "matchmaking": "Active",
+    "cloudSaves": "Active",
+    "antiCheat": "Active (Heuristic Speed/Damage Checks)",
+    "telemetry": "Active"
+  }
+}
