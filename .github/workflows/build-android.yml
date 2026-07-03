@@ -46,5 +46,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: BloodRing-Android-${{ inputs.build_type }}-${{ github.sha }}
-          path: build/Android/*.apk
+          path: build/Android/BloodRingApex.apk
           retention-days: 30
