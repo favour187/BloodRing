@@ -52,14 +52,13 @@ CORE_PNG_FILES = [
     "Assets/Resources/Art/Vehicles/HD_ArmoredJeep_Wolf.png",
     "Assets/Resources/Art/Vehicles/HD_Bike_Inferno.png",
     "Assets/Resources/Art/Vehicles/HD_Buggy_Crimson.png",
-    "Assets/Resources/Art/Vehicles/HD_Helicopter_Reaper.png",
-    "Assets/Resources/Art/Weapons/HD_AssaultRifle_Crimson.png",
-    "Assets/Resources/Art/Weapons/HD_Pistol_Sidewinder.png",
-    "Assets/Resources/Art/Weapons/HD_SMG_Vortex.png",
-    "Assets/Resources/Art/Weapons/HD_SMG_Wasp.png",
-    "Assets/Resources/Art/Weapons/HD_Shotgun_Gold.png",
-    "Assets/Resources/Art/Weapons/HD_Sniper_Phantom.png"
+    "Assets/Resources/Art/Vehicles/HD_Helicopter_Reaper.png"
 ]
+# NOTE: Weapon hero-shot art is intentionally excluded from this procedural-fallback
+# list. Every weapon render under Assets/Resources/Art/Weapons must be a genuine,
+# hand/AI-authored hero shot (see Docs/ROADMAP.md "Weapons art batch"), never a
+# code-generated placeholder. Add new weapons via the asset-generation workflow,
+# not this script.
 
 CORE_WAV_FILES = [
     "Assets/Audio/RealProduction/Ambience_IslandWind.wav",

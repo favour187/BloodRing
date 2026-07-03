@@ -34,7 +34,10 @@ physical_categories = {
     "Assets/Resources/Models/Props": ("obj", "Mod_Prp"),
     "Assets/Resources/Models/Primitives": ("obj", "Mod_Prm"),
     "Assets/Resources/Art/Characters": ("png", "Char_2D"),
-    "Assets/Resources/Art/Weapons": ("png", "Wpn_2D"),
+    # NOTE: "Assets/Resources/Art/Weapons" is intentionally NOT auto-equalized here.
+    # Weapon hero-shot art must be genuine authored/AI-generated renders (see
+    # Docs/ROADMAP.md), never procedurally-painted placeholder noise. New weapons
+    # get their art added by hand through the asset-generation workflow.
     "Assets/Resources/Art/Vehicles": ("png", "Veh_2D"),
     "Assets/Resources/Art/Terrain": ("png", "Ter_2D"),
     "Assets/Resources/Art/Loot": ("png", "Loot_2D"),

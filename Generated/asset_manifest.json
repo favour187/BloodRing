@@ -1,7 +1,7 @@
 {
   "project": "Blood Ring Apex Royale 3D Enterprise",
   "description": "Comprehensive equalized art, audio, 3D model, and UI asset manifest. All entries are real shipped files.",
-  "assetCount": 1078,
+  "assetCount": 1059,
   "categories": {
     "art/3D": 52,
     "art/3D/Characters": 32,
@@ -19,7 +19,7 @@
     "art/UI/HUD": 32,
     "art/UI/Icons": 32,
     "art/Vehicles": 32,
-    "art/Weapons": 32,
+    "art/Weapons": 13,
     "audio/Music": 32,
     "audio_master": 4,
     "audio_master/RealProduction": 32,
@@ -2760,6 +2760,390 @@
       ]
     },
     {
+      "key": "Scn_2D_Equalized_10",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_10.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_10",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_11",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_11.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_11",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_12",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_12.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_12",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_13",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_13.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_13",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_14",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_14.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_14",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_15",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_15.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_15",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_16",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_16.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_16",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_17",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_17.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_17",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_18",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_18.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_18",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_19",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_19.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_19",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_2",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_2.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_2",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_20",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_20.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_20",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_21",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_21.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_21",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_22",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_22.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_22",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_23",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_23.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_23",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_24",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_24.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_24",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_25",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_25.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_25",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_26",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_26.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_26",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_27",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_27.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_27",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_28",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_28.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_28",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_29",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_29.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_29",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_3",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_3.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_3",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_30",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_30.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_30",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_31",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_31.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_31",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_32",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_32.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_32",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_4",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_4.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_4",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_5",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_5.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_5",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_6",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_6.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_6",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_7",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_7.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_7",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_8",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_8.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_8",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Scn_2D_Equalized_9",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_9.png",
+      "resourcePath": "Art/Scenes/Scn_2D_Equalized_9",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Splash_KeyArt",
+      "category": "art/Scenes",
+      "path": "Assets/Resources/Art/Scenes/Splash_KeyArt.png",
+      "resourcePath": "Art/Scenes/Splash_KeyArt",
+      "bytes": 2788808,
+      "type": "png",
+      "dimensions": [
+        1408,
+        768
+      ]
+    },
+    {
       "key": "Cryo_GlooWall_3D",
       "category": "art/Terrain",
       "path": "Assets/Resources/Art/Terrain/Cryo_GlooWall_3D.png",
@@ -3552,390 +3936,6 @@
       ]
     },
     {
-      "key": "Cyber_Icons_3D",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/Cyber_Icons_3D.png",
-      "resourcePath": "Art/UI/Icons/Cyber_Icons_3D",
-      "bytes": 2272771,
-      "type": "png",
-      "dimensions": [
-        1408,
-        768
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_1",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_1.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_1",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_10",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_10.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_10",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_11",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_11.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_11",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_12",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_12.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_12",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_13",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_13.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_13",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_14",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_14.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_14",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_15",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_15.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_15",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_16",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_16.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_16",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_17",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_17.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_17",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_18",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_18.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_18",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_19",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_19.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_19",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_2",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_2.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_2",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_20",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_20.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_20",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_21",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_21.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_21",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_22",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_22.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_22",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_23",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_23.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_23",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_24",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_24.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_24",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_25",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_25.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_25",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_26",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_26.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_26",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_27",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_27.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_27",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_28",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_28.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_28",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_29",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_29.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_29",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_3",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_3.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_3",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_30",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_30.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_30",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_32",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_32.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_32",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_4",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_4.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_4",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_5",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_5.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_5",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_6",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_6.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_6",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_7",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_7.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_7",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_8",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_8.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_8",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "UI_Icn_Equalized_9",
-      "category": "art/UI/Icons",
-      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_9.png",
-      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_9",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
       "key": "UI_Hud_Equalized_1",
       "category": "art/UI/HUD",
       "path": "Assets/Resources/Art/UI/HUD/UI_Hud_Equalized_1.png",
@@ -4312,6 +4312,390 @@
       "category": "art/UI/HUD",
       "path": "Assets/Resources/Art/UI/HUD/UI_Hud_Equalized_9.png",
       "resourcePath": "Art/UI/HUD/UI_Hud_Equalized_9",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "Cyber_Icons_3D",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/Cyber_Icons_3D.png",
+      "resourcePath": "Art/UI/Icons/Cyber_Icons_3D",
+      "bytes": 2272771,
+      "type": "png",
+      "dimensions": [
+        1408,
+        768
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_1",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_1.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_1",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_10",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_10.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_10",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_11",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_11.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_11",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_12",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_12.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_12",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_13",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_13.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_13",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_14",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_14.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_14",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_15",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_15.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_15",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_16",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_16.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_16",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_17",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_17.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_17",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_18",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_18.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_18",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_19",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_19.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_19",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_2",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_2.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_2",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_20",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_20.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_20",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_21",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_21.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_21",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_22",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_22.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_22",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_23",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_23.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_23",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_24",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_24.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_24",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_25",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_25.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_25",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_26",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_26.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_26",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_27",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_27.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_27",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_28",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_28.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_28",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_29",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_29.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_29",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_3",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_3.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_3",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_30",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_30.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_30",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_32",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_32.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_32",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_4",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_4.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_4",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_5",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_5.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_5",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_6",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_6.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_6",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_7",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_7.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_7",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_8",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_8.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_8",
+      "bytes": 46024,
+      "type": "png",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "key": "UI_Icn_Equalized_9",
+      "category": "art/UI/Icons",
+      "path": "Assets/Resources/Art/UI/Icons/UI_Icn_Equalized_9.png",
+      "resourcePath": "Art/UI/Icons/UI_Icn_Equalized_9",
       "bytes": 46024,
       "type": "png",
       "dimensions": [
@@ -4740,734 +5124,122 @@
       ]
     },
     {
-      "key": "HD_AssaultRifle_Crimson",
+      "key": "DesertEagle_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/HD_AssaultRifle_Crimson.png",
-      "resourcePath": "Art/Weapons/HD_AssaultRifle_Crimson",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/DesertEagle_Hero.png",
+      "resourcePath": "Art/Weapons/DesertEagle_Hero",
+      "bytes": 2434100,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "HD_Pistol_Sidewinder",
+      "key": "G18_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/HD_Pistol_Sidewinder.png",
-      "resourcePath": "Art/Weapons/HD_Pistol_Sidewinder",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/G18_Hero.png",
+      "resourcePath": "Art/Weapons/G18_Hero",
+      "bytes": 2179809,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "HD_SMG_Vortex",
+      "key": "Groza_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/HD_SMG_Vortex.png",
-      "resourcePath": "Art/Weapons/HD_SMG_Vortex",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/Groza_Hero.png",
+      "resourcePath": "Art/Weapons/Groza_Hero",
+      "bytes": 2468310,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "HD_SMG_Wasp",
+      "key": "Kar98k_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/HD_SMG_Wasp.png",
-      "resourcePath": "Art/Weapons/HD_SMG_Wasp",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/Kar98k_Hero.png",
+      "resourcePath": "Art/Weapons/Kar98k_Hero",
+      "bytes": 2353600,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "HD_Shotgun_Gold",
+      "key": "M1887_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/HD_Shotgun_Gold.png",
-      "resourcePath": "Art/Weapons/HD_Shotgun_Gold",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/M1887_Hero.png",
+      "resourcePath": "Art/Weapons/M1887_Hero",
+      "bytes": 2491976,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "HD_Sniper_Phantom",
+      "key": "M4A1_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/HD_Sniper_Phantom.png",
-      "resourcePath": "Art/Weapons/HD_Sniper_Phantom",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/M4A1_Hero.png",
+      "resourcePath": "Art/Weapons/M4A1_Hero",
+      "bytes": 2252303,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "Wpn_2D_Equalized_10",
+      "key": "M82B_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_10.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_10",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/M82B_Hero.png",
+      "resourcePath": "Art/Weapons/M82B_Hero",
+      "bytes": 2101383,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "Wpn_2D_Equalized_11",
+      "key": "SCAR_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_11.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_11",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/SCAR_Hero.png",
+      "resourcePath": "Art/Weapons/SCAR_Hero",
+      "bytes": 2523441,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "Wpn_2D_Equalized_12",
+      "key": "UMP_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_12.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_12",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/UMP_Hero.png",
+      "resourcePath": "Art/Weapons/UMP_Hero",
+      "bytes": 2508111,
       "type": "png",
       "dimensions": [
-        512,
-        512
+        1376,
+        768
       ]
     },
     {
-      "key": "Wpn_2D_Equalized_13",
+      "key": "Vector_Hero",
       "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_13.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_13",
-      "bytes": 46024,
+      "path": "Assets/Resources/Art/Weapons/Vector_Hero.png",
+      "resourcePath": "Art/Weapons/Vector_Hero",
+      "bytes": 2196607,
       "type": "png",
       "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_14",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_14.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_14",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_15",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_15.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_15",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_16",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_16.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_16",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_17",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_17.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_17",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_18",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_18.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_18",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_19",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_19.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_19",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_20",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_20.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_20",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_21",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_21.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_21",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_22",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_22.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_22",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_23",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_23.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_23",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_24",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_24.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_24",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_25",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_25.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_25",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_27",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_27.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_27",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_28",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_28.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_28",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_29",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_29.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_29",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_30",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_30.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_30",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_31",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_31.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_31",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_32",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_32.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_32",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Wpn_2D_Equalized_9",
-      "category": "art/Weapons",
-      "path": "Assets/Resources/Art/Weapons/Wpn_2D_Equalized_9.png",
-      "resourcePath": "Art/Weapons/Wpn_2D_Equalized_9",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_10",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_10.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_10",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_11",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_11.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_11",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_12",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_12.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_12",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_13",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_13.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_13",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_14",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_14.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_14",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_15",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_15.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_15",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_16",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_16.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_16",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_17",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_17.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_17",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_18",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_18.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_18",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_19",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_19.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_19",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_2",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_2.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_2",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_20",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_20.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_20",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_21",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_21.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_21",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_22",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_22.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_22",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_23",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_23.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_23",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_24",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_24.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_24",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_25",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_25.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_25",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_26",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_26.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_26",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_27",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_27.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_27",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_28",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_28.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_28",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_29",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_29.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_29",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_3",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_3.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_3",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_30",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_30.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_30",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_31",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_31.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_31",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_32",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_32.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_32",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_4",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_4.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_4",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_5",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_5.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_5",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_6",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_6.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_6",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_7",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_7.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_7",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_8",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_8.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_8",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Scn_2D_Equalized_9",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Scn_2D_Equalized_9.png",
-      "resourcePath": "Art/Scenes/Scn_2D_Equalized_9",
-      "bytes": 46024,
-      "type": "png",
-      "dimensions": [
-        512,
-        512
-      ]
-    },
-    {
-      "key": "Splash_KeyArt",
-      "category": "art/Scenes",
-      "path": "Assets/Resources/Art/Scenes/Splash_KeyArt.png",
-      "resourcePath": "Art/Scenes/Splash_KeyArt",
-      "bytes": 2788808,
-      "type": "png",
-      "dimensions": [
-        1408,
+        1376,
         768
       ]
     },

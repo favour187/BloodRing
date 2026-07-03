@@ -63,7 +63,9 @@ namespace BloodRing.Art
         // --- Convenience category helpers (Prioritizing Genuine AI-Generated Art) ---
 
         public static Texture2D Character(string heroName) => LoadTexture("Characters/" + heroName) ?? LoadTexture("Characters/" + heroName + "_3D") ?? LoadTexture("Characters/Hero_Rosa_3D");
-        public static Sprite Weapon(string weaponName) => LoadSprite("Weapons/" + weaponName) ?? LoadSprite("Weapons/" + weaponName + "_3D") ?? LoadSprite("Weapons/AK47_3D");
+        // Weapon hero-shot art is authored per catalog entry. Resolution order:
+        // exact key -> "<name>_Hero" (new hero-render batch) -> "<name>_3D" (legacy batch) -> generic fallback.
+        public static Sprite Weapon(string weaponName) => LoadSprite("Weapons/" + weaponName) ?? LoadSprite("Weapons/" + weaponName + "_Hero") ?? LoadSprite("Weapons/" + weaponName + "_3D") ?? LoadSprite("Weapons/AK47_3D");
         public static Sprite Vehicle(string vehicleName) => LoadSprite("Vehicles/" + vehicleName) ?? LoadSprite("Vehicles/" + vehicleName + "_3D") ?? LoadSprite("Vehicles/ArmoredJeep_3D");
         public static Texture2D Terrain(string terrainName) => LoadTexture("Terrain/" + terrainName) ?? LoadTexture("Terrain/Cryo_GlooWall_3D");
         public static Sprite Icon(string iconName) => LoadSprite("UI/Icons/" + iconName) ?? LoadSprite("UI/HUD/HUD_Preview");

@@ -223,7 +223,9 @@ public class GameHUD : MonoBehaviour
     {
         weaponNameText.text = wName.ToUpper();
         ammoCountText.text = curAmmo + " / " + maxAmmo;
-        weaponIconImage.color = iconColor;
+        Sprite artSprite = BloodRing.Art.BloodRingArtLibrary.Weapon(wName);
+        if (artSprite != null) { weaponIconImage.sprite = artSprite; weaponIconImage.color = Color.white; }
+        else { weaponIconImage.sprite = null; weaponIconImage.color = iconColor; }
     }
 
     public void UpdateAliveCount(int alive) { aliveCountText.text = alive.ToString(); }

@@ -14,8 +14,24 @@ and gated by `Tools/validate_assets.py`.
 
 ### M1 — Core authored art (in progress)
 - [x] Terrain tiles: grass, sand, rock, snow, asphalt, mud, concrete, metal grate
-- [x] Weapons: assault rifle, SMG, shotgun, sniper (HD) + new pistol, SMG variants
-- [ ] Weapons: AR, LMG, DMR, pistol family, throwables (continue next batch)
+- [x] Weapons batch 1 (legacy): AK47, AK47 Evo skin, AWM — genuine hero-shot renders
+- [x] Weapons batch 2 (this session): M4A1, Groza, Vector, DesertEagle, Kar98k,
+      M1887, UMP, SCAR, M82B, G18 — 10 new hero-shot renders in the dark
+      cyberpunk / crimson-cyan house style. **12 / 50 catalog weapons now have
+      real authored art** (`Assets/Resources/Art/Weapons/*_Hero.png`).
+      Removed all fake noise-placeholder weapon PNGs (`HD_*`, `Wpn_2D_Equalized_*`)
+      that were padded past the validator's size threshold but contained no real
+      artwork — these violated the project's own "no procedural art" policy.
+      Fixed `BloodRingArtLibrary.Weapon()` and `GameHUD` weapon icon lookup so
+      each gun now resolves to its own art instead of silently falling back to
+      the AK47 icon.
+- [ ] Weapons batch 3 (next session): remaining SMGs (MP40, P90, Mac10, Thompson,
+      Bizon, MP5, CG15, MP9), remaining ARs (FAMAS, XM8, AN94, AUG, Parafal,
+      Kingfisher, G36, FAL), shotguns (M1014, SPAS12, MAG7, ChargeBuster, Trogon,
+      Striker12), snipers (M24, SVD, Woodpecker, AC80, M14), pistols (M500, USP,
+      MiniUzi, TreatmentGun), melee (Katana, Pan, Machete, Bat), specials
+      (Crossbow, M79, Gatling), plus throwables (frag/smoke/flash/molotov/sticky)
+      and weapon attachment/skin icon sets.
 - [ ] Vehicles: complete ground/air/water set + skins
 - [ ] Characters: hero roster portraits + outfits
 - [ ] UI: icon set, buttons, HUD, frames, backgrounds
