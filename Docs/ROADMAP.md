@@ -15,18 +15,20 @@ and gated by `Tools/validate_assets.py`.
 ### M1 — Core authored art (in progress)
 - [x] Terrain tiles: grass, sand, rock, snow, asphalt, mud, concrete, metal grate
 - [x] Weapons batch 1 (legacy): AK47, AK47 Evo skin, AWM — genuine hero-shot renders
-- [x] Weapons batch 2 (this session): M4A1, Groza, Vector, DesertEagle, Kar98k,
-      M1887, UMP, SCAR, M82B, G18 — 10 new hero-shot renders in the dark
-      cyberpunk / crimson-cyan house style. **12 / 50 catalog weapons now have
-      real authored art** (`Assets/Resources/Art/Weapons/*_Hero.png`).
-      Removed all fake noise-placeholder weapon PNGs (`HD_*`, `Wpn_2D_Equalized_*`)
-      that were padded past the validator's size threshold but contained no real
-      artwork — these violated the project's own "no procedural art" policy.
-      Fixed `BloodRingArtLibrary.Weapon()` and `GameHUD` weapon icon lookup so
-      each gun now resolves to its own art instead of silently falling back to
-      the AK47 icon.
-- [ ] Weapons batch 3 (next session): remaining SMGs (MP40, P90, Mac10, Thompson,
-      Bizon, MP5, CG15, MP9), remaining ARs (FAMAS, XM8, AN94, AUG, Parafal,
+- [x] Weapons batch 2: M4A1, Groza, Vector, DesertEagle, Kar98k, M1887, UMP,
+      SCAR, M82B, G18 — 10 hero-shot renders in the dark cyberpunk /
+      crimson-cyan house style. Removed all fake noise-placeholder weapon PNGs
+      (`HD_*`, `Wpn_2D_Equalized_*`) that were padded past the validator's size
+      threshold but contained no real artwork — these violated the project's
+      own "no procedural art" policy. Fixed `BloodRingArtLibrary.Weapon()` and
+      `GameHUD` weapon icon lookup so each gun now resolves to its own art
+      instead of silently falling back to the AK47 icon.
+- [x] Weapons batch 3 (this session): full SMG class completed — MP40, P90,
+      Mac10, Thompson, Bizon, MP5, CG15 (original in-house SMG design), MP9 —
+      plus two more assault rifles, FAMAS and XM8. **22 / 50 catalog weapons
+      now have real authored hero-shot art**
+      (`Assets/Resources/Art/Weapons/*_Hero.png`).
+- [ ] Weapons batch 4 (next session): remaining ARs (AN94, AUG, Parafal,
       Kingfisher, G36, FAL), shotguns (M1014, SPAS12, MAG7, ChargeBuster, Trogon,
       Striker12), snipers (M24, SVD, Woodpecker, AC80, M14), pistols (M500, USP,
       MiniUzi, TreatmentGun), melee (Katana, Pan, Machete, Bat), specials

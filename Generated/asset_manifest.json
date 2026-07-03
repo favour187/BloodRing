@@ -1,7 +1,7 @@
 {
   "project": "Blood Ring Apex Royale 3D Enterprise",
   "description": "Comprehensive equalized art, audio, 3D model, and UI asset manifest. All entries are real shipped files.",
-  "assetCount": 1059,
+  "assetCount": 1069,
   "categories": {
     "art/3D": 52,
     "art/3D/Characters": 32,
@@ -19,7 +19,7 @@
     "art/UI/HUD": 32,
     "art/UI/Icons": 32,
     "art/Vehicles": 32,
-    "art/Weapons": 13,
+    "art/Weapons": 23,
     "audio/Music": 32,
     "audio_master": 4,
     "audio_master/RealProduction": 32,
@@ -5124,11 +5124,47 @@
       ]
     },
     {
+      "key": "Bizon_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Bizon_Hero.png",
+      "resourcePath": "Art/Weapons/Bizon_Hero",
+      "bytes": 2292549,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "CG15_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/CG15_Hero.png",
+      "resourcePath": "Art/Weapons/CG15_Hero",
+      "bytes": 2292275,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "DesertEagle_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/DesertEagle_Hero.png",
       "resourcePath": "Art/Weapons/DesertEagle_Hero",
       "bytes": 2434100,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "FAMAS_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/FAMAS_Hero.png",
+      "resourcePath": "Art/Weapons/FAMAS_Hero",
+      "bytes": 2223606,
       "type": "png",
       "dimensions": [
         1376,
@@ -5208,11 +5244,83 @@
       ]
     },
     {
+      "key": "MP40_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/MP40_Hero.png",
+      "resourcePath": "Art/Weapons/MP40_Hero",
+      "bytes": 2410417,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "MP5_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/MP5_Hero.png",
+      "resourcePath": "Art/Weapons/MP5_Hero",
+      "bytes": 2408893,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "MP9_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/MP9_Hero.png",
+      "resourcePath": "Art/Weapons/MP9_Hero",
+      "bytes": 2539287,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Mac10_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Mac10_Hero.png",
+      "resourcePath": "Art/Weapons/Mac10_Hero",
+      "bytes": 2264254,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "P90_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/P90_Hero.png",
+      "resourcePath": "Art/Weapons/P90_Hero",
+      "bytes": 2453080,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
       "key": "SCAR_Hero",
       "category": "art/Weapons",
       "path": "Assets/Resources/Art/Weapons/SCAR_Hero.png",
       "resourcePath": "Art/Weapons/SCAR_Hero",
       "bytes": 2523441,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "Thompson_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/Thompson_Hero.png",
+      "resourcePath": "Art/Weapons/Thompson_Hero",
+      "bytes": 2256185,
       "type": "png",
       "dimensions": [
         1376,
@@ -5237,6 +5345,18 @@
       "path": "Assets/Resources/Art/Weapons/Vector_Hero.png",
       "resourcePath": "Art/Weapons/Vector_Hero",
       "bytes": 2196607,
+      "type": "png",
+      "dimensions": [
+        1376,
+        768
+      ]
+    },
+    {
+      "key": "XM8_Hero",
+      "category": "art/Weapons",
+      "path": "Assets/Resources/Art/Weapons/XM8_Hero.png",
+      "resourcePath": "Art/Weapons/XM8_Hero",
+      "bytes": 2348541,
       "type": "png",
       "dimensions": [
         1376,
