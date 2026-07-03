@@ -1,7 +1,7 @@
 {
   "project": "Blood Ring Apex Royale 3D Enterprise",
   "description": "Comprehensive equalized art, audio, 3D model, and UI asset manifest. All entries are real shipped files.",
-  "assetCount": 997,
+  "assetCount": 1007,
   "categories": {
     "art/3D": 52,
     "art/3D/Characters": 32,
@@ -33,9 +33,9 @@
     "models/Vehicles": 32,
     "models/Weapons": 32,
     "ui_system/Accessibility": 32,
-    "ui_system/Buttons": 32,
-    "ui_system/Icons": 32,
-    "ui_system/Panels": 32,
+    "ui_system/Buttons": 34,
+    "ui_system/Icons": 37,
+    "ui_system/Panels": 35,
     "ui_system/Transitions": 32
   },
   "assets": [
@@ -8016,6 +8016,30 @@
       ]
     },
     {
+      "key": "PrimaryBtn_Hero",
+      "category": "ui_system/Buttons",
+      "path": "UI/Buttons/PrimaryBtn_Hero.png",
+      "resourcePath": "UI/Buttons/PrimaryBtn_Hero",
+      "bytes": 1675997,
+      "type": "png",
+      "dimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "key": "SecondaryBtn_Hero",
+      "category": "ui_system/Buttons",
+      "path": "UI/Buttons/SecondaryBtn_Hero.png",
+      "resourcePath": "UI/Buttons/SecondaryBtn_Hero",
+      "bytes": 1683648,
+      "type": "png",
+      "dimensions": [
+        1774,
+        887
+      ]
+    },
+    {
       "key": "Sys_Btn_Equalized_10",
       "category": "ui_system/Buttons",
       "path": "UI/Buttons/Sys_Btn_Equalized_10.png",
@@ -8340,6 +8364,42 @@
       ]
     },
     {
+      "key": "Icon_Armor_Hero",
+      "category": "ui_system/Icons",
+      "path": "UI/Icons/Icon_Armor_Hero.png",
+      "resourcePath": "UI/Icons/Icon_Armor_Hero",
+      "bytes": 2100220,
+      "type": "png",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "key": "Icon_Health_Hero",
+      "category": "ui_system/Icons",
+      "path": "UI/Icons/Icon_Health_Hero.png",
+      "resourcePath": "UI/Icons/Icon_Health_Hero",
+      "bytes": 1974253,
+      "type": "png",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "key": "Icon_Profile_Hero",
+      "category": "ui_system/Icons",
+      "path": "UI/Icons/Icon_Profile_Hero.png",
+      "resourcePath": "UI/Icons/Icon_Profile_Hero",
+      "bytes": 1655508,
+      "type": "png",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
       "key": "Icon_Sample_1",
       "category": "ui_system/Icons",
       "path": "UI/Icons/Icon_Sample_1.png",
@@ -8397,6 +8457,30 @@
       "dimensions": [
         512,
         512
+      ]
+    },
+    {
+      "key": "Icon_Settings_Hero",
+      "category": "ui_system/Icons",
+      "path": "UI/Icons/Icon_Settings_Hero.png",
+      "resourcePath": "UI/Icons/Icon_Settings_Hero",
+      "bytes": 1892261,
+      "type": "png",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "key": "Icon_Weapon_Hero",
+      "category": "ui_system/Icons",
+      "path": "UI/Icons/Icon_Weapon_Hero.png",
+      "resourcePath": "UI/Icons/Icon_Weapon_Hero",
+      "bytes": 1726903,
+      "type": "png",
+      "dimensions": [
+        1254,
+        1254
       ]
     },
     {
@@ -8721,6 +8805,42 @@
       "dimensions": [
         512,
         512
+      ]
+    },
+    {
+      "key": "HUD_Frame_Hero",
+      "category": "ui_system/Panels",
+      "path": "UI/Panels/HUD_Frame_Hero.png",
+      "resourcePath": "UI/Panels/HUD_Frame_Hero",
+      "bytes": 1562876,
+      "type": "png",
+      "dimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "key": "InventorySlot_Hero",
+      "category": "ui_system/Panels",
+      "path": "UI/Panels/InventorySlot_Hero.png",
+      "resourcePath": "UI/Panels/InventorySlot_Hero",
+      "bytes": 1256324,
+      "type": "png",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "key": "MainMenuView_Hero",
+      "category": "ui_system/Panels",
+      "path": "UI/Panels/MainMenuView_Hero.png",
+      "resourcePath": "UI/Panels/MainMenuView_Hero",
+      "bytes": 2997323,
+      "type": "png",
+      "dimensions": [
+        1536,
+        1024
       ]
     },
     {
