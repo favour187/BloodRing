@@ -7,7 +7,7 @@ public enum AmmoType { PistolAmmo, RifleAmmo, ShotgunAmmo, SniperAmmo, SMGAmmo, 
 /// WeaponData — Blood Ring weapon catalog.
 /// 62 weapons total across 8 categories: SMGs (12), ARs (14), Shotguns (9),
 /// Snipers/DMRs (10), Pistols/Sidearms (8), Melee (4), Specials (5), Energy (2).
-/// All stats are tuned for mobile TPS battle-royale feel (Free Fire / COD Mobile quality).
+/// All stats are tuned for responsive mobile TPS battle-royale gameplay.
 /// </summary>
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "BloodRing/WeaponData")]
 public class WeaponData : ScriptableObject
