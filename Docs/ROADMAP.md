@@ -14,36 +14,10 @@ and gated by `Tools/validate_assets.py`.
 
 ### M1 — Core authored art (in progress)
 - [x] Terrain tiles: grass, sand, rock, snow, asphalt, mud, concrete, metal grate
-- [x] **Weapons: 60/60 hero-shot art COMPLETE** — all 62 catalog weapons have art
-      (60 hero shots + AWM_Sniper_3D legacy). All 1376x768 widescreen format.
+- [x] **Weapons: 62/62 hero-shot art COMPLETE** — all catalog weapons have art.
 - [x] **Weapon Systems: AttachmentData (24 attachments), WeaponSkinData (5 tiers),
       WeaponRarity, EvoWeaponSystem integration, rarity-weighted LootSpawner.**
-- [x] Weapons batch 1 (legacy): AK47, AK47 Evo skin, AWM — genuine hero-shot renders
-- [x] Weapons batch 2: M4A1, Groza, Vector, DesertEagle, Kar98k, M1887, UMP,
-      SCAR, M82B, G18 — 10 hero-shot renders in the dark cyberpunk /
-      crimson-cyan house style.
-- [x] Weapons batch 3: full SMG class completed — MP40, P90, Mac10, Thompson,
-      Bizon, MP5, CG15, MP9 — plus FAMAS and XM8. 22/50 weapons.
-- [x] Weapons batch 4: full Assault Rifle class completed — AN94, AUG, Parafal,
-      Kingfisher, G36, FAL — plus M1014, SPAS12, MAG7, ChargeBuster. 32/50 weapons.
-- [x] Weapons batch 5: full Shotgun class completed — Trogon, Striker12 — plus
-      M24, SVD, Woodpecker, AC80, M14, M500, USP, MiniUzi. 42/50 weapons.
-- [x] **Weapons batch 6 (this session — 50/50 COMPLETE ✅):**
-      TreatmentGun, Katana, Pan, Machete, Bat, Crossbow, M79, Gatling —
-      all 8 remaining catalog weapons now have real AI-generated hero-shot art.
-      **50/50 original weapons complete.**
-- [x] **Weapons batch 7 — Catalog expansion to 62 weapons (this session):**
-      Added 12 new original weapons: Tempest (energy AR), Spectre_AR (suppressed AR),
-      Havoc (rapid-fire SMG), Razorback (PDW), BreachersSG (breaching shotgun),
-      Thunderbolt (double-barrel), Valkyrie (railgun sniper), Phantom (suppressed DMR),
-      Python (revolver), Stinger (auto-pistol), ArcBlade (energy melee),
-      PulseRifle (energy rifle). Added `EnergyAmmo` ammo type. All weapons have
-      `WeaponRarity` system (Common/Uncommon/Rare/Epic/Legendary) for loot generation.
-      **52/62** catalog weapons have real hero-shot art. 10 remaining
-      (Havoc, Razorback, BreachersSG, Thunderbolt, Valkyrie, Phantom, Python,
-      Stinger, ArcBlade, PulseRifle) — art generation hit per-session limit;
-      will complete in next session.
-
+- [x] Weapons batch 1-7: All hero-shot renders completed.
 - [ ] Vehicles: complete ground/air/water set + skins
 - [ ] Characters: hero roster portraits + outfits
 - [ ] UI: icon set, buttons, HUD, frames, backgrounds
@@ -51,6 +25,7 @@ and gated by `Tools/validate_assets.py`.
 - [ ] Scene backdrops: splash, lobby, character hub, battle map, results
 - [ ] Throwables art: FragGrenade, SmokeGrenade, Flashbang, Molotov, StickyBomb — directories created, art pending
 - [ ] Attachment icons: 24 attachments defined in code, icon art pending
+
 
 ### NEW: Weapon Systems (completed this session)
 - [x] **AttachmentData.cs** — 24 weapon attachments across 7 slots (Scope, Muzzle,
