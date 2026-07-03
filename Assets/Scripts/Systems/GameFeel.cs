@@ -50,7 +50,12 @@ public class GameFeel : MonoBehaviour
         GameObject impactHolder = new GameObject("ImpactPool"); DontDestroyOnLoad(impactHolder);
         Material impMat = new Material(ProceduralArt.GetSafeShader("Sprites/Default"));
         for (int i = 0; i < 15; i++) { GameObject impGo = new GameObject("Impact_" + i); impGo.transform.SetParent(impactHolder.transform); ParticleSystem ps = impGo.AddComponent<ParticleSystem>(); ParticleSystemRenderer pr = impGo.GetComponent<ParticleSystemRenderer>(); pr.material = impMat; var main = ps.main; main.duration = 0.2f; main.loop = false; main.startSize = 0.2f; main.startSpeed = 6f; main.startLifetime = 0.3f; var em = ps.emission; em.rateOverTime = 0; em.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(0f, 15) }); var shape = ps.shape; shape.shapeType = ParticleSystemShapeType.Cone; shape.angle = 25f; impGo.SetActive(false); impactPool.Add(ps); }
+
+        // Dust Clouds
+        GameObject dustHolder = new GameObject("DustPool"); DontDestroyOnLoad(dustHolder);
+        for (int i = 0; i < 10; i++) { GameObject dustGo = new GameObject("Dust_" + i); dustGo.transform.SetParent(dustHolder.transform); ParticleSystem ps = dustGo.AddComponent<ParticleSystem>(); ParticleSystemRenderer pr = dustGo.GetComponent<ParticleSystemRenderer>(); pr.material = new Material(ProceduralArt.GetSafeShader("Sprites/Default")); var main = ps.main; main.duration = 0.5f; main.loop = false; main.startColor = new Color(0.8f, 0.8f, 0.7f, 0.5f); main.startSize = 1f; main.startSpeed = 2f; main.startLifetime = 0.5f; var em = ps.emission; em.rateOverTime = 0; em.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(0f, 20) }); var shape = ps.shape; shape.shapeType = ParticleSystemShapeType.Circle; shape.radius = 0.5f; dustGo.SetActive(false); impactPool.Add(ps); }
     }
+
 
     #region Screen Shake & Hit Stop
     public void TriggerScreenShake(float duration = 0.3f, float magnitude = 0.2f) { if (Camera.main == null) return; if (shakeCoroutine != null) StopCoroutine(shakeCoroutine); shakeCoroutine = StartCoroutine(ScreenShakeCoroutine(Camera.main.transform, duration, magnitude)); }
@@ -87,6 +92,26 @@ public class GameFeel : MonoBehaviour
             }
         }
     }
+
+    public void SpawnDustCloud(Vector3 pos)
+    {
+        foreach (ParticleSystem ps in impactPool)
+        {
+            if (!ps.gameObject.activeSelf && ps.main.startColor == new Color(0.8f, 0.8f, 0.7f, 0.5f))
+            {
+                ps.transform.position = pos; ps.transform.rotation = Quaternion.identity;
+                ps.gameObject.SetActive(true); ps.Play(); StartCoroutine(DisableAfterTime(ps.gameObject, 0.5f)); break;
+            }
+        }
+    }
+
+    public void TriggerMeleeImpact(Vector3 pos, Vector3 normal)
+    {
+        TriggerScreenShake(0.1f, 0.1f);
+        TriggerHitStop(0.2f, 0.03f);
+        SpawnImpact(pos, normal, "Blood");
+    }
+
 
     public void SpawnDamageNumber(Vector3 pos, float damage, bool isCritical, bool isBoosted)
     {

@@ -169,12 +169,13 @@ public class PlayerController : NetworkBehaviour
         // Sliding Logic
         if (IsOwner && isMoving && !isCrouching && !isProne && controller.isGrounded && (moveInput.magnitude > 0.7f || (TouchControls.Instance != null && TouchControls.Instance.SprintRequested)) && isCrouching)
         {
-            if (!isSliding) { isSliding = true; slideTimer = 1.2f; if (animator != null) animator.SetTrigger("Slide"); }
+            if (!isSliding) { isSliding = true; slideTimer = 1.2f; if (animator != null) animator.SetTrigger("Slide"); if (AudioManager.Instance != null) AudioManager.Instance.PlaySlideSound(); }
         }
         if (isSliding)
         {
             slideTimer -= Time.deltaTime;
             if (slideTimer <= 0 || !isMoving) isSliding = false;
+            if (Time.frameCount % 10 == 0 && GameFeel.Instance != null) GameFeel.Instance.SpawnDustCloud(transform.position);
         }
 
         float targetSpeed = walkSpeed; if (isProne) targetSpeed = proneSpeed; else if (isCrouching) targetSpeed = crouchSpeed; else if (isSwimming) targetSpeed = swimSpeed; else if (isSliding) targetSpeed = slideSpeed; else if (moveInput.magnitude > 0.7f || (TouchControls.Instance != null && TouchControls.Instance.SprintRequested)) targetSpeed = runSpeed * ((TouchControls.Instance != null && TouchControls.Instance.SprintRequested) ? 1.35f : 1.0f); if (activePowers.ContainsKey(PowerType.SpeedBoost)) targetSpeed *= 1.5f;
@@ -184,6 +185,7 @@ public class PlayerController : NetworkBehaviour
             // Improved Vaulting/Mantling
             RaycastHit vaultHit; if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out vaultHit, 1.2f)) { 
                 if (Physics.Raycast(vaultHit.point + Vector3.up * 1.5f, Vector3.down, out RaycastHit topHit, 1.0f)) { 
+                    if (AudioManager.Instance != null) AudioManager.Instance.PlayVaultSound();
                     StartCoroutine(VaultRoutine(topHit.point)); 
                 } 
             } else if (nearbyLedge != null) { transform.position += new Vector3(0, 2.5f, 0) + transform.forward * 1f; } else { velocityY = jumpForce; } } } else { if (canDoubleJump && !hasDoubleJumped && TouchControls.Instance != null && TouchControls.Instance.JumpRequested) { velocityY = jumpForce; hasDoubleJumped = true; TouchControls.Instance.JumpRequested = false; if (animator != null) animator.SetTrigger("Jump"); } velocityY += gravity * Time.deltaTime; }
@@ -195,6 +197,7 @@ public class PlayerController : NetworkBehaviour
 
         netPosition.Value = transform.position; netRotation.Value = transform.rotation;
     }
+
 
     private IEnumerator VaultRoutine(Vector3 targetPos)
     {
@@ -229,13 +232,22 @@ public class PlayerController : NetworkBehaviour
 
         if (weapon.IsMelee())
         {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlayMeleeSwingSound();
             Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 1.5f, 2f);
             foreach (var col in hits)
             {
                 AIBot bot = col.GetComponentInParent<AIBot>(); PlayerController hitPlayer = col.GetComponentInParent<PlayerController>();
-                if (bot != null) bot.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
-                else if (hitPlayer != null && hitPlayer != this) hitPlayer.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
-                if (GameFeel.Instance != null) GameFeel.Instance.SpawnImpact(col.closestPoint(transform.position), Vector3.zero, "Blood");
+                if (bot != null) {
+                    bot.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
+                    if (AudioManager.Instance != null) AudioManager.Instance.PlayMeleeHitSound();
+                    if (GameFeel.Instance != null) GameFeel.Instance.TriggerMeleeImpact(col.closestPoint(transform.position), Vector3.zero);
+                }
+                else if (hitPlayer != null && hitPlayer != this) {
+                    hitPlayer.RequestTakeDamageServerRpc(weapon.damage, playerName, transform.position);
+                    if (AudioManager.Instance != null) AudioManager.Instance.PlayMeleeHitSound();
+                    if (GameFeel.Instance != null) GameFeel.Instance.TriggerMeleeImpact(col.closestPoint(transform.position), Vector3.zero);
+                }
+                if (GameFeel.Instance != null && (bot != null || hitPlayer != null)) GameFeel.Instance.SpawnImpact(col.closestPoint(transform.position), Vector3.zero, "Blood");
             }
             return;
         }
@@ -268,6 +280,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
+
 
 
     [ServerRpc(RequireOwnership = false)] private void PlayMuzzleFlashServerRpc(string wName) { PlayMuzzleFlashClientRpc(wName); } [ClientRpc] private void PlayMuzzleFlashClientRpc(string wName) { if (IsOwner) return; muzzleFlash.Play(); if (AudioManager.Instance != null) AudioManager.Instance.PlayWeaponSound(wName); if (animator != null) animator.SetTrigger("Fire"); }

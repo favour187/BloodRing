@@ -219,6 +219,11 @@ public class AudioManager : MonoBehaviour
         if (clip != null) voSource.PlayOneShot(clip);
     }
 
+    public void PlaySlideSound() { PlaySFX("SFX_WindGust"); }
+    public void PlayVaultSound() { PlaySFX("SFX_ZiplineSlide"); }
+    public void PlayMeleeSwingSound() { PlaySFX("SFX_GlassBreak"); }
+    public void PlayMeleeHitSound() { PlaySFX("SFX_MetalImpact"); }
+
     public void SetZoneDamageActive(bool active, float shrinkProgress = 0f)
     {
         if (zoneDamageSource == null) return;
