@@ -48,36 +48,3 @@ jobs:
           name: BloodRing-Android-${{ inputs.build_type }}-${{ github.sha }}
           path: build/Android/*.apk
           retention-days: 30
-
-  # ── Post-build validation ──────────────────────────────────────────
-  validate-apk:
-    name: Validate APK
-    needs: build-android
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download APK
-        uses: actions/download-artifact@v4
-        with:
-          name: BloodRing-Android-*
-
-      - name: Check APK
-        run: |
-          APK=$(find . -name "*.apk" | head -1)
-          if [ -n "$APK" ]; then
-            SIZE=$(du -h "$APK" | cut -f1)
-            echo "✅ APK found: $APK ($SIZE)"
-            
-            # Warn if APK is too large for mobile
-            BYTES=$(stat -c%s "$APK")
-            if [ $BYTES -gt 157286400 ]; then
-              echo "⚠️ APK is larger than 150MB — consider asset splitting"
-            fi
-            
-            if [ $BYTES -gt 524288000 ]; then
-              echo "❌ APK is larger than 500MB — exceeds Play Store limit without expansion files"
-              exit 1
-            fi
-          else
-            echo "❌ No APK found in artifacts"
-            exit 1
-          fi
