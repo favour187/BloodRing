@@ -27,19 +27,24 @@ and gated by `Tools/validate_assets.py`.
       Bizon, MP5, CG15 (original in-house SMG design), MP9 — plus two more
       assault rifles, FAMAS and XM8. 22 / 50 catalog weapons had real authored
       hero-shot art at the end of this batch.
-- [x] Weapons batch 4 (this session): full Assault Rifle class completed —
-      AN94, AUG, Parafal (original in-house design), Kingfisher (original
-      in-house design), G36, FAL — plus 4 shotguns: M1014, SPAS12, MAG7, and
-      ChargeBuster (original in-house charge-up energy shotgun). **32 / 50
-      catalog weapons now have real authored hero-shot art**
+- [x] Weapons batch 4: full Assault Rifle class completed — AN94, AUG, Parafal
+      (original in-house design), Kingfisher (original in-house design), G36,
+      FAL — plus 4 shotguns: M1014, SPAS12, MAG7, and ChargeBuster (original
+      in-house charge-up energy shotgun). 32 / 50 catalog weapons had real
+      authored hero-shot art at the end of this batch.
+- [x] Weapons batch 5 (this session): full Shotgun class completed — Trogon
+      and Striker12 (both original in-house designs) — plus the full
+      Sniper/DMR class: M24, SVD, Woodpecker (original in-house design), AC80
+      (original in-house design), M14 — plus 3 pistols: M500, USP, MiniUzi.
+      **42 / 50 catalog weapons now have real authored hero-shot art**
       (`Assets/Resources/Art/Weapons/*_Hero.png`). Every render is a genuine
-      AI-generated hero shot — no code-generated/procedural placeholder art
-      was used anywhere in this batch.
-- [ ] Weapons batch 5 (next session): remaining shotguns (Trogon, Striker12),
-      all snipers/DMRs (M24, SVD, Woodpecker, AC80, M14), remaining pistols
-      (M500, USP, MiniUzi, TreatmentGun), melee (Katana, Pan, Machete, Bat),
-      specials (Crossbow, M79, Gatling), plus throwables
-      (frag/smoke/flash/molotov/sticky) and weapon attachment/skin icon sets.
+      AI-generated hero shot — zero code-generated/procedural placeholder art
+      used anywhere in this batch.
+- [ ] Weapons batch 6 (next session, final weapons batch): 1 remaining pistol
+      (TreatmentGun), all 4 melee weapons (Katana, Pan, Machete, Bat), and all
+      3 specials (Crossbow, M79, Gatling) — this will complete 50/50 weapon
+      art coverage. Then: throwables (frag/smoke/flash/molotov/sticky) and
+      weapon attachment/skin icon sets.
 
 - [ ] Vehicles: complete ground/air/water set + skins
 - [ ] Characters: hero roster portraits + outfits
