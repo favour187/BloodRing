@@ -40,13 +40,13 @@ jobs:
           targetPlatform: Android
           unityVersion: ${{ inputs.unity_version }}
           buildMethod: BuildScript.BuildAndroid
-          buildsPath: Build/Android
+          buildsPath: build/Android
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: BloodRing-Android-${{ inputs.build_type }}-${{ github.sha }}
-          path: Build/Android/*.apk
+          path: build/Android/*.apk
           retention-days: 30
 
   # ── Post-build validation ──────────────────────────────────────────
