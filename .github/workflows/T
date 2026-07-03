@@ -1,0 +1,24 @@
+name: Generate Keystore
+on: workflow_dispatch
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate keystore
+        run: |
+          keytool -genkey -v \
+            -keystore user.keystore \
+            -alias bloodring \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass "fvour@11" \
+            -keypass "fvour@11" \
+            -dname "CN=Blood Ring Studio, OU=GameDev, O=Blood Ring Studio, L=Lagos, ST=FC, C=NG"
+      - name: Upload keystore
+        uses: actions/upload-artifact@v4
+        with:
+          name: user-keystore
+          path: user.keystore
