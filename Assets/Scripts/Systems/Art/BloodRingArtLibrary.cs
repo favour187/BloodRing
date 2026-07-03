@@ -66,6 +66,15 @@ namespace BloodRing.Art
         // Weapon hero-shot art is authored per catalog entry. Resolution order:
         // exact key -> "<name>_Hero" (new hero-render batch) -> "<name>_3D" (legacy batch) -> generic fallback.
         public static Sprite Weapon(string weaponName) => LoadSprite("Weapons/" + weaponName) ?? LoadSprite("Weapons/" + weaponName + "_Hero") ?? LoadSprite("Weapons/" + weaponName + "_3D") ?? LoadSprite("Weapons/AK47_3D");
+
+        /// <summary>Throwable/throwable icon art. Resolution: exact key -> "<name>_Hero" -> "<name>_3D" -> FragGrenade fallback.</summary>
+        public static Sprite Throwable(string throwableName) => LoadSprite("Weapons/Throwables/" + throwableName) ?? LoadSprite("Weapons/Throwables/" + throwableName + "_Hero") ?? LoadSprite("Weapons/Throwables/" + throwableName + "_3D") ?? LoadSprite("Weapons/Throwables/FragGrenade_Hero");
+
+        /// <summary>Weapon attachment icon art. Resolution: exact key -> generic attachment fallback.</summary>
+        public static Sprite Attachment(string attachmentName) => LoadSprite("Weapons/Attachments/" + attachmentName) ?? LoadSprite("Weapons/Attachments/" + attachmentName + "_Icon") ?? LoadSprite("Weapons/Attachments/Scope_Default_Icon");
+
+        /// <summary>Weapon skin preview art. Resolution: "<weapon>_<skinName>" -> default hero fallback.</summary>
+        public static Sprite WeaponSkin(string weaponName, string skinName) => LoadSprite("Weapons/Skins/" + weaponName + "_" + skinName) ?? Weapon(weaponName);
         public static Sprite Vehicle(string vehicleName) => LoadSprite("Vehicles/" + vehicleName) ?? LoadSprite("Vehicles/" + vehicleName + "_3D") ?? LoadSprite("Vehicles/ArmoredJeep_3D");
         public static Texture2D Terrain(string terrainName) => LoadTexture("Terrain/" + terrainName) ?? LoadTexture("Terrain/Cryo_GlooWall_3D");
         public static Sprite Icon(string iconName) => LoadSprite("UI/Icons/" + iconName) ?? LoadSprite("UI/HUD/HUD_Preview");

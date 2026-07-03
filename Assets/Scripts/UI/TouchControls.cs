@@ -205,6 +205,46 @@ public class TouchControls : MonoBehaviour
     public void SetLootButtonActive(bool a, string l = "LOOT") { if (lootBtnGo != null) lootBtnGo.SetActive(a); if (a && lootBtnText != null) lootBtnText.text = "LOOT " + l; }
     public void SetPowerButtonActive(bool a, string p = "") { if (powerBtnGo != null) powerBtnGo.SetActive(a); if (a && powerBtnText != null) powerBtnText.text = "USE " + p.ToUpper(); }
 
+    // ── Throwable Inventory ─────────────────────────────────────────────────
+    private Dictionary<ThrowableType, int> throwableInventory = new Dictionary<ThrowableType, int>();
+
+    /// <summary>Add throwables to the player's grenade inventory.</summary>
+    public void AddThrowableToInventory(ThrowableType type, int count)
+    {
+        if (!throwableInventory.ContainsKey(type)) throwableInventory[type] = 0;
+        throwableInventory[type] += count;
+    }
+
+    /// <summary>Get count of a specific throwable type.</summary>
+    public int GetThrowableCount(ThrowableType type)
+    {
+        return throwableInventory.ContainsKey(type) ? throwableInventory[type] : 0;
+    }
+
+    /// <summary>Consume one throwable of the selected type. Returns false if none left.</summary>
+    public bool ConsumeThrowable(ThrowableType type)
+    {
+        if (!throwableInventory.ContainsKey(type) || throwableInventory[type] <= 0) return false;
+        throwableInventory[type]--;
+        return true;
+    }
+
+    /// <summary>Cycle to the next throwable type that the player has in inventory.</summary>
+    public void CycleThrowable()
+    {
+        ThrowableType[] types = (ThrowableType[])System.Enum.GetValues(typeof(ThrowableType));
+        int idx = System.Array.IndexOf(types, SelectedThrowable);
+        for (int i = 1; i <= types.Length; i++)
+        {
+            int nextIdx = (idx + i) % types.Length;
+            if (GetThrowableCount(types[nextIdx]) > 0)
+            {
+                SelectedThrowable = types[nextIdx];
+                return;
+            }
+        }
+    }
+
     // ── Joystick math ────────────────────────────────────────────────────────
     private void JoyDrag(PointerEventData d)
     {

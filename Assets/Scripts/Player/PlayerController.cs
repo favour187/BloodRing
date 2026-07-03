@@ -234,7 +234,68 @@ public class PlayerController : NetworkBehaviour
     private void HandleZone() { if (ZoneController.Instance == null) return; bool outside = ZoneController.Instance.IsOutsideZone(transform.position); if (zoneVignetteGo != null) zoneVignetteGo.SetActive(outside); if (AudioManager.Instance != null && IsOwner) AudioManager.Instance.SetZoneDamageActive(outside, ZoneController.Instance.GetShrinkProgress()); if (GameFeel.Instance != null && IsOwner) GameFeel.Instance.SetZoneVignetteActive(outside); if (outside && IsServer) { zoneDamageTimer += Time.deltaTime; if (zoneDamageTimer >= 1f) { zoneDamageTimer = 0f; RequestTakeDamageServerRpc(1f, "The Zone", transform.position); } } else { zoneDamageTimer = 0f; } }
 
     private void HandleLootAndInteractions() { if (TouchControls.Instance == null) return; if (TouchControls.Instance.SwapWeaponRequested) { TouchControls.Instance.SwapWeaponRequested = false; activeWeaponSlot = (activeWeaponSlot + 1) % 2; isReloading = false; EquipGunModel(weaponSlots[activeWeaponSlot]?.weaponName ?? "Pistol"); UpdateHUD(); } if (TouchControls.Instance.LootRequested) { TouchControls.Instance.LootRequested = false; if (nearbyVehicle != null) { currentVehicle = nearbyVehicle; controller.enabled = false; currentVehicle.RequestEnterServerRpc(OwnerClientId); } else if (nearbyZipline != null) { isZiplining = true; controller.enabled = false; } else if (nearbyPickup != null) { Pickup(nearbyPickup); nearbyPickup = null; TouchControls.Instance.SetLootButtonActive(false); } } }
-    private void Pickup(PickupItem p) { if (p.pickupType == PickupType.Weapon) { WeaponData newW = Resources.Load<WeaponData>("Weapons/" + p.weaponName); if (newW == null) newW = WeaponData.GetDefaultWeapon(p.weaponName); if (weaponSlots[1] == null && weaponSlots[0] != null) { weaponSlots[1] = newW; currentMagAmmo[1] = newW.maxAmmo; activeWeaponSlot = 1; } else { if (weaponSlots[activeWeaponSlot] != null && LootSpawner.Instance != null && IsServer) { LootSpawner.Instance.SpawnWeaponPickup(weaponSlots[activeWeaponSlot].weaponName, transform.position); } weaponSlots[activeWeaponSlot] = newW; currentMagAmmo[activeWeaponSlot] = newW.maxAmmo; } EquipGunModel(newW.weaponName); } else if (p.pickupType == PickupType.Ammo) { if (!ammoInventory.ContainsKey(p.ammoType)) ammoInventory[p.ammoType] = 0; ammoInventory[p.ammoType] += p.amount; } else if (p.pickupType == PickupType.HealthPack) { consumableCount++; } else if (p.pickupType == PickupType.ArmorPack) { if (IsServer) netArmor.Value = Mathf.Min(maxArmor, netArmor.Value + p.amount); else RequestArmorServerRpc(p.amount); } if (AudioManager.Instance != null) AudioManager.Instance.PlayPowerPickupSound(); if (IsServer) Destroy(p.gameObject); else RequestDestroyPickupServerRpc(p.GetComponent<NetworkObject>()?.NetworkObjectId ?? 0); UpdateHUD(); }
+    private void Pickup(PickupItem p)
+    {
+        if (p.pickupType == PickupType.Weapon)
+        {
+            WeaponData newW = Resources.Load<WeaponData>("Weapons/" + p.weaponName);
+            if (newW == null) newW = WeaponData.GetDefaultWeapon(p.weaponName);
+            if (weaponSlots[1] == null && weaponSlots[0] != null)
+            {
+                weaponSlots[1] = newW; currentMagAmmo[1] = newW.maxAmmo; activeWeaponSlot = 1;
+            }
+            else
+            {
+                if (weaponSlots[activeWeaponSlot] != null && LootSpawner.Instance != null && IsServer)
+                    LootSpawner.Instance.SpawnWeaponPickup(weaponSlots[activeWeaponSlot].weaponName, transform.position);
+                weaponSlots[activeWeaponSlot] = newW; currentMagAmmo[activeWeaponSlot] = newW.maxAmmo;
+            }
+            EquipGunModel(newW.weaponName);
+        }
+        else if (p.pickupType == PickupType.Ammo)
+        {
+            if (!ammoInventory.ContainsKey(p.ammoType)) ammoInventory[p.ammoType] = 0;
+            ammoInventory[p.ammoType] += p.amount;
+            // EnergyAmmo support
+            if (p.ammoType == AmmoType.EnergyAmmo && !ammoInventory.ContainsKey(AmmoType.EnergyAmmo))
+                ammoInventory[AmmoType.EnergyAmmo] = 0;
+        }
+        else if (p.pickupType == PickupType.HealthPack) { consumableCount++; }
+        else if (p.pickupType == PickupType.ArmorPack)
+        {
+            if (IsServer) netArmor.Value = Mathf.Min(maxArmor, netArmor.Value + p.amount);
+            else RequestArmorServerRpc(p.amount);
+        }
+        else if (p.pickupType == PickupType.Attachment)
+        {
+            // Auto-equip attachment to current weapon if compatible
+            if (weaponSlots[activeWeaponSlot] != null && EvoWeaponSystem.Instance != null)
+            {
+                string wId = weaponSlots[activeWeaponSlot].weaponName;
+                bool equipped = EvoWeaponSystem.Instance.EquipAttachment(wId, p.attachmentName);
+                if (!equipped)
+                {
+                    // Store in inventory for later
+                    EvoWeaponSystem.Instance.AddAttachmentToInventory(playerName, p.attachmentName);
+                }
+            }
+            else
+            {
+                if (EvoWeaponSystem.Instance != null)
+                    EvoWeaponSystem.Instance.AddAttachmentToInventory(playerName, p.attachmentName);
+            }
+        }
+        else if (p.pickupType == PickupType.Throwable)
+        {
+            // Throwable pickups go to grenade inventory (handled by TouchControls)
+            if (TouchControls.Instance != null)
+                TouchControls.Instance.AddThrowableToInventory(p.throwableType, 1);
+        }
+        if (AudioManager.Instance != null) AudioManager.Instance.PlayPowerPickupSound();
+        if (IsServer) Destroy(p.gameObject);
+        else RequestDestroyPickupServerRpc(p.GetComponent<NetworkObject>()?.NetworkObjectId ?? 0);
+        UpdateHUD();
+    }
 
     private void OnTriggerEnter(Collider other) { if (!IsOwner) return; if (other.gameObject.name.Contains("WaterPlane")) isSwimming = true; Vehicle v = other.GetComponentInParent<Vehicle>(); if (v != null) { nearbyVehicle = v; if (TouchControls.Instance != null) TouchControls.Instance.SetLootButtonActive(true, "DRIVE " + v.vType); return; } Zipline z = other.GetComponentInParent<Zipline>(); if (z != null) { nearbyZipline = z; if (TouchControls.Instance != null) TouchControls.Instance.SetLootButtonActive(true, "ZIPLINE"); return; } LedgeClimb l = other.GetComponentInParent<LedgeClimb>(); if (l != null) nearbyLedge = l; PickupItem p = other.GetComponent<PickupItem>(); if (p != null) { if (p.pickupType == PickupType.PowerUp) { nearbyPowerUp = p; if (TouchControls.Instance != null) TouchControls.Instance.SetPowerButtonActive(true, p.powerType.ToString()); } else { nearbyPickup = p; string label = p.pickupType == PickupType.Weapon ? p.weaponName : p.pickupType.ToString(); if (TouchControls.Instance != null) TouchControls.Instance.SetLootButtonActive(true, label); } } }
     private void OnTriggerExit(Collider other) { if (!IsOwner) return; if (other.gameObject.name.Contains("WaterPlane")) isSwimming = false; Vehicle v = other.GetComponentInParent<Vehicle>(); if (v != null && v == nearbyVehicle) { nearbyVehicle = null; if (TouchControls.Instance != null) TouchControls.Instance.SetLootButtonActive(false); return; } Zipline z = other.GetComponentInParent<Zipline>(); if (z != null && z == nearbyZipline) { nearbyZipline = null; if (TouchControls.Instance != null) TouchControls.Instance.SetLootButtonActive(false); return; } LedgeClimb l = other.GetComponentInParent<LedgeClimb>(); if (l != null && l == nearbyLedge) nearbyLedge = null; PickupItem p = other.GetComponent<PickupItem>(); if (p != null) { if (p == nearbyPowerUp) { nearbyPowerUp = null; if (TouchControls.Instance != null) TouchControls.Instance.SetPowerButtonActive(false); } else if (p == nearbyPickup) { nearbyPickup = null; if (TouchControls.Instance != null) TouchControls.Instance.SetLootButtonActive(false); } } }

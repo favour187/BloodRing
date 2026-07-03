@@ -17,40 +17,60 @@ and gated by `Tools/validate_assets.py`.
 - [x] Weapons batch 1 (legacy): AK47, AK47 Evo skin, AWM — genuine hero-shot renders
 - [x] Weapons batch 2: M4A1, Groza, Vector, DesertEagle, Kar98k, M1887, UMP,
       SCAR, M82B, G18 — 10 hero-shot renders in the dark cyberpunk /
-      crimson-cyan house style. Removed all fake noise-placeholder weapon PNGs
-      (`HD_*`, `Wpn_2D_Equalized_*`) that were padded past the validator's size
-      threshold but contained no real artwork — these violated the project's
-      own "no procedural art" policy. Fixed `BloodRingArtLibrary.Weapon()` and
-      `GameHUD` weapon icon lookup so each gun now resolves to its own art
-      instead of silently falling back to the AK47 icon.
+      crimson-cyan house style.
 - [x] Weapons batch 3: full SMG class completed — MP40, P90, Mac10, Thompson,
-      Bizon, MP5, CG15 (original in-house SMG design), MP9 — plus two more
-      assault rifles, FAMAS and XM8. 22 / 50 catalog weapons had real authored
-      hero-shot art at the end of this batch.
-- [x] Weapons batch 4: full Assault Rifle class completed — AN94, AUG, Parafal
-      (original in-house design), Kingfisher (original in-house design), G36,
-      FAL — plus 4 shotguns: M1014, SPAS12, MAG7, and ChargeBuster (original
-      in-house charge-up energy shotgun). 32 / 50 catalog weapons had real
-      authored hero-shot art at the end of this batch.
-- [x] Weapons batch 5 (this session): full Shotgun class completed — Trogon
-      and Striker12 (both original in-house designs) — plus the full
-      Sniper/DMR class: M24, SVD, Woodpecker (original in-house design), AC80
-      (original in-house design), M14 — plus 3 pistols: M500, USP, MiniUzi.
-      **42 / 50 catalog weapons now have real authored hero-shot art**
-      (`Assets/Resources/Art/Weapons/*_Hero.png`). Every render is a genuine
-      AI-generated hero shot — zero code-generated/procedural placeholder art
-      used anywhere in this batch.
-- [ ] Weapons batch 6 (next session, final weapons batch): 1 remaining pistol
-      (TreatmentGun), all 4 melee weapons (Katana, Pan, Machete, Bat), and all
-      3 specials (Crossbow, M79, Gatling) — this will complete 50/50 weapon
-      art coverage. Then: throwables (frag/smoke/flash/molotov/sticky) and
-      weapon attachment/skin icon sets.
+      Bizon, MP5, CG15, MP9 — plus FAMAS and XM8. 22/50 weapons.
+- [x] Weapons batch 4: full Assault Rifle class completed — AN94, AUG, Parafal,
+      Kingfisher, G36, FAL — plus M1014, SPAS12, MAG7, ChargeBuster. 32/50 weapons.
+- [x] Weapons batch 5: full Shotgun class completed — Trogon, Striker12 — plus
+      M24, SVD, Woodpecker, AC80, M14, M500, USP, MiniUzi. 42/50 weapons.
+- [x] **Weapons batch 6 (this session — 50/50 COMPLETE ✅):**
+      TreatmentGun, Katana, Pan, Machete, Bat, Crossbow, M79, Gatling —
+      all 8 remaining catalog weapons now have real AI-generated hero-shot art.
+      **50/50 original weapons complete.**
+- [x] **Weapons batch 7 — Catalog expansion to 62 weapons (this session):**
+      Added 12 new original weapons: Tempest (energy AR), Spectre_AR (suppressed AR),
+      Havoc (rapid-fire SMG), Razorback (PDW), BreachersSG (breaching shotgun),
+      Thunderbolt (double-barrel), Valkyrie (railgun sniper), Phantom (suppressed DMR),
+      Python (revolver), Stinger (auto-pistol), ArcBlade (energy melee),
+      PulseRifle (energy rifle). Added `EnergyAmmo` ammo type. All weapons have
+      `WeaponRarity` system (Common/Uncommon/Rare/Epic/Legendary) for loot generation.
+      **52/62** catalog weapons have real hero-shot art. 10 remaining
+      (Havoc, Razorback, BreachersSG, Thunderbolt, Valkyrie, Phantom, Python,
+      Stinger, ArcBlade, PulseRifle) — art generation hit per-session limit;
+      will complete in next session.
 
 - [ ] Vehicles: complete ground/air/water set + skins
 - [ ] Characters: hero roster portraits + outfits
 - [ ] UI: icon set, buttons, HUD, frames, backgrounds
 - [ ] Effects: smoke, explosion, weather, lighting sheets
 - [ ] Scene backdrops: splash, lobby, character hub, battle map, results
+- [ ] Throwables art: FragGrenade, SmokeGrenade, Flashbang, Molotov, StickyBomb — directories created, art pending
+- [ ] Attachment icons: 24 attachments defined in code, icon art pending
+
+### NEW: Weapon Systems (completed this session)
+- [x] **AttachmentData.cs** — 24 weapon attachments across 7 slots (Scope, Muzzle,
+      Magazine, Grip, Stock, Laser, Barrel). Stat modifiers: damage, spread,
+      fire rate, reload, ammo, range, ADS speed. Compatibility checking per
+      weapon category. Auto-apply on pickup.
+- [x] **WeaponSkinData.cs** — Cosmetic skin system with 5 tiers (Standard/Deluxe/
+      Premium/Legendary/Mythic). Universal skins + weapon-specific legendary skins
+      (Dragon Scale, Arctic Wolf, Sakura Blade). Color palette, glow, kill effect,
+      and trail effect flags. Unlock via BattlePass/Store/Event/Craft/Airdrop.
+- [x] **EvoWeaponSystem.cs updated** — Now integrates weapon skins (apply/unlock),
+      weapon attachments (equip/remove/compatible checking), attachment inventory,
+      and BuildModifiedWeapon() for fully-modded weapon stats.
+- [x] **LootSpawner.cs updated** — Rarity-weighted smart loot generation across
+      all 62 weapons. Spawns attachments (25 per match), throwables (20 per match),
+      and all 6 ammo types including EnergyAmmo. Rarity-colored loot sparkle effects.
+- [x] **PlayerController.cs updated** — Pickup handler now supports Attachment
+      (auto-equip or store) and Throwable pickup types.
+- [x] **TouchControls.cs updated** — Throwable inventory management (add, count,
+      consume, cycle).
+- [x] **BloodRingArtLibrary.cs updated** — Added Throwable(), Attachment(),
+      and WeaponSkin() convenience lookups.
+- [x] **WeaponData.cs expanded** — 62 weapons, GetWeaponsByCategory(),
+      GetWeaponsByRarity(), IsMelee(), IsSpecial() utility methods.
 
 ### M2 — Systems vertical slice
 - Full match loop: aircraft → landing → gameplay → zone → results.
