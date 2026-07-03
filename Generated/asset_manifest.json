@@ -1,7 +1,7 @@
 {
   "project": "Blood Ring Apex Royale 3D Enterprise",
   "description": "Comprehensive equalized art, audio, 3D model, and UI asset manifest. All entries are real shipped files.",
-  "assetCount": 1114,
+  "assetCount": 1124,
   "categories": {
     "art/3D": 52,
     "art/3D/Characters": 32,
@@ -10,7 +10,7 @@
     "art/3D/Props": 32,
     "art/3D/Vehicles": 32,
     "art/3D/Weapons": 32,
-    "art/Characters": 32,
+    "art/Characters": 42,
     "art/Loot": 32,
     "art/Scenes": 32,
     "art/Terrain": 33,
@@ -1992,6 +1992,30 @@
       "type": "obj"
     },
     {
+      "key": "Axiom_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Axiom_Hero.png",
+      "resourcePath": "Art/Characters/Axiom_Hero",
+      "bytes": 2336975,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "key": "Bolt_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Bolt_Hero.png",
+      "resourcePath": "Art/Characters/Bolt_Hero",
+      "bytes": 2582167,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
       "key": "Char_2D_Equalized_10",
       "category": "art/Characters",
       "path": "Assets/Resources/Art/Characters/Char_2D_Equalized_10.png",
@@ -2292,6 +2316,42 @@
       ]
     },
     {
+      "key": "Cypher_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Cypher_Hero.png",
+      "resourcePath": "Art/Characters/Cypher_Hero",
+      "bytes": 2489870,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "key": "DJNeon_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/DJNeon_Hero.png",
+      "resourcePath": "Art/Characters/DJNeon_Hero",
+      "bytes": 3020468,
+      "type": "png",
+      "dimensions": [
+        1122,
+        1402
+      ]
+    },
+    {
+      "key": "Echo_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Echo_Hero.png",
+      "resourcePath": "Art/Characters/Echo_Hero",
+      "bytes": 2256496,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
       "key": "Hero_Rosa",
       "category": "art/Characters",
       "path": "Assets/Resources/Art/Characters/Hero_Rosa.png",
@@ -2373,6 +2433,66 @@
       "dimensions": [
         1408,
         768
+      ]
+    },
+    {
+      "key": "Lynx_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Lynx_Hero.png",
+      "resourcePath": "Art/Characters/Lynx_Hero",
+      "bytes": 2423831,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "key": "Mirage_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Mirage_Hero.png",
+      "resourcePath": "Art/Characters/Mirage_Hero",
+      "bytes": 2657793,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "key": "Pulse_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Pulse_Hero.png",
+      "resourcePath": "Art/Characters/Pulse_Hero",
+      "bytes": 2518731,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "key": "Ronin_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Ronin_Hero.png",
+      "resourcePath": "Art/Characters/Ronin_Hero",
+      "bytes": 2549133,
+      "type": "png",
+      "dimensions": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "key": "Shadow_Hero",
+      "category": "art/Characters",
+      "path": "Assets/Resources/Art/Characters/Shadow_Hero.png",
+      "resourcePath": "Art/Characters/Shadow_Hero",
+      "bytes": 2611406,
+      "type": "png",
+      "dimensions": [
+        1086,
+        1448
       ]
     },
     {
