@@ -178,12 +178,13 @@ public class MainMenuController : MonoBehaviour
         // ── Big START button (BloodRing orange gradient) ─────────────────────
         UIBuilder.CreateStartButton(leftPanel.transform, "▶  START", new Vector2(180, -75), async () =>
         {
-            PlayerPrefs.SetString("PlayerNickname", nicknameInput.text); PlayerPrefs.Save();
-            bool success = await NetworkController.Instance.StartOnlineHost();
+            PlayerPrefs.SetString("PlayerNickname", nicknameInput != null ? nicknameInput.text : "Player"); PlayerPrefs.Save();
+            bool success = true;
+            if (NetworkController.Instance != null) success = await NetworkController.Instance.StartOnlineHost();
             if (success)
             {
-                if (BackendAPI.Instance.IsLoggedIn)
-                    await BackendAPI.Instance.RequestHostMatchmakeAsync(NetworkController.Instance.joinCode, selMode, selRegion, selRanked);
+                if (BackendAPI.Instance != null && BackendAPI.Instance.IsLoggedIn)
+                    await BackendAPI.Instance.RequestHostMatchmakeAsync(NetworkController.Instance != null ? NetworkController.Instance.joinCode : "SOLO", selMode, selRegion, selRanked);
                 GameManager.Instance.ChangeState(GameState.Lobby);
             }
         });
@@ -192,8 +193,10 @@ public class MainMenuController : MonoBehaviour
         UIBuilder.CreateButton(leftPanel.transform, "JoinBtn", "JOIN ONLINE", new Vector2(100, -145),
             new Color(0.12f, 0.35f, 0.55f, 0.9f), UIBuilder.COL_CYAN, async () =>
         {
-            PlayerPrefs.SetString("PlayerNickname", nicknameInput.text); PlayerPrefs.Save();
-            if (BackendAPI.Instance.IsLoggedIn) { MatchmakeResponse m = await BackendAPI.Instance.RequestJoinMatchmakeAsync(selMode, selRegion, selRanked); if (m != null && string.IsNullOrEmpty(m.error)) { bool ok = await NetworkController.Instance.StartOnlineClient(m.joinCode); if (ok) GameManager.Instance.ChangeState(GameState.Lobby); } }
+            PlayerPrefs.SetString("PlayerNickname", nicknameInput != null ? nicknameInput.text : "Player"); PlayerPrefs.Save();
+            if (BackendAPI.Instance != null && BackendAPI.Instance.IsLoggedIn) { MatchmakeResponse m = await BackendAPI.Instance.RequestJoinMatchmakeAsync(selMode, selRegion, selRanked); if (m != null && string.IsNullOrEmpty(m.error)) { bool ok = await NetworkController.Instance.StartOnlineClient(m.joinCode); if (ok) GameManager.Instance.ChangeState(GameState.Lobby); } }
+            else if (NetworkController.Instance != null) { bool ok = await NetworkController.Instance.StartOnlineClient("SOLO_MATCH"); if (ok) GameManager.Instance.ChangeState(GameState.Lobby); }
+            else { GameManager.Instance.ChangeState(GameState.Lobby); }
         });
         RectTransform joinR = leftPanel.transform.Find("JoinBtn")?.GetComponent<RectTransform>();
         if (joinR) joinR.sizeDelta = new Vector2(180, 48);
@@ -287,6 +290,9 @@ public class MainMenuController : MonoBehaviour
         t.fontSize = size; t.fontStyle = style; t.color = color; t.alignment = align;
         t.horizontalOverflow = HorizontalWrapMode.Overflow;
         RectTransform r = go.GetComponent<RectTransform>();
+        if (align == TextAnchor.MiddleLeft || align == TextAnchor.UpperLeft || align == TextAnchor.LowerLeft) r.pivot = new Vector2(0, 0.5f);
+        else if (align == TextAnchor.MiddleRight || align == TextAnchor.UpperRight || align == TextAnchor.LowerRight) r.pivot = new Vector2(1, 0.5f);
+        else r.pivot = new Vector2(0.5f, 0.5f);
         r.anchorMin = anchorMin; r.anchorMax = anchorMax; r.anchoredPosition = pos; r.sizeDelta = sizeDelta;
         return t;
     }

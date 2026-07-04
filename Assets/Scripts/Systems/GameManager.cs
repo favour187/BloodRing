@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
     Splash,
+    Login,
     MainMenu,
     CharacterSelect,
     Lobby,
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.Splash: sceneName = "SplashScreen"; break;
+            case GameState.Login: sceneName = "LoginScene"; break;
             case GameState.MainMenu: sceneName = "MainMenu"; break;
             case GameState.CharacterSelect: sceneName = "CharacterSelect"; break;
             case GameState.Lobby: sceneName = "LobbyScene"; break;

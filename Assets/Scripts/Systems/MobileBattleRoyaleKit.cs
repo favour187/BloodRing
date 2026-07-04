@@ -173,9 +173,9 @@ public class BR3DSceneDirector : MonoBehaviour
 
     private void BuildForScene(string sceneName)
     {
-        if (sceneName == "SplashScreen" || sceneName == "SplashLogo" || sceneName == "Splash") BuildSplashScene();
+        if (sceneName == "SplashScreen" || sceneName == "SplashLogo" || sceneName == "Splash") return; // Let SplashController & Splash KeyArt handle splash without 3D interference
         else if (sceneName == "StartupInitialization") BuildStartupInitializationScene();
-        else if (sceneName == "LoginScene" || sceneName == "Login") BuildLoginScene();
+        else if (sceneName == "LoginScene" || sceneName == "Login") return; // Let SceneBootstrapper handle clean 2D Login UI without 3D interference
         else if (sceneName == "LoadingScene" || sceneName == "Loading") BuildPremiumLoadingScene();
         else if (sceneName == "MainMenu" || sceneName == "MainLobby" || sceneName == "Lobby") BuildMainLobbyPremiumScene();
         else if (sceneName == "EventsPage" || sceneName == "Events") BuildEventsScene();
@@ -245,6 +245,8 @@ public class BR3DSceneDirector : MonoBehaviour
         CreateWeaponStand(new Vector3(-2.9f, 0.15f, 0.5f), "AK47");
         CreateWeaponStand(new Vector3(-1.9f, 0.15f, 1.15f), "SCAR");
 
+        // MainMenuController handles all 2D screen space UI overlay cleanly without 3D interference.
+        /*
         CreateWorldCanvas("MainMenu3DCanvas", new Vector3(-2.55f, 1.55f, 1.2f), Quaternion.Euler(0f, 22f, 0f), delegate(Canvas c)
         {
             CreateHeader(c.transform, "BLOOD RING APEX", "Mobile 3D Battle Royale");
@@ -254,6 +256,7 @@ public class BR3DSceneDirector : MonoBehaviour
             CreateWorldButton(c.transform, "ShopBtn", "SHOP", new Vector2(156f, -76f), new Vector2(145f, 52f), delegate { TogglePresentation("BR_ShopPresentation", false); });
             CreateWorldButton(c.transform, "SettingsBtn", "SETTINGS", new Vector2(0f, -140f), new Vector2(300f, 48f), delegate { ToggleSettingsPanel(); });
         });
+        */
 
         BuildInventoryAndShopPresentations();
     }
@@ -378,6 +381,8 @@ public class BR3DSceneDirector : MonoBehaviour
     private void BuildMainLobbyPremiumScene()
     {
         BuildMainMenuScene();
+        // MainMenuController handles all lobby navigation cleanly without overlapping 3D canvas buttons.
+        /*
         CreateWorldCanvas("PremiumLobbyNavCanvas", new Vector3(2.6f, 2.1f, 2.0f), Quaternion.Euler(8f, -24f, 0f), delegate(Canvas c)
         {
             CreateHeader(c.transform, "MAIN LOBBY", "Premium 3D mobile command hub");
@@ -392,6 +397,7 @@ public class BR3DSceneDirector : MonoBehaviour
             }
             CreateWorldButton(c.transform, "TrainingBtn", "TRAINING", new Vector2(0f, -180f), new Vector2(260f, 44f), delegate { LoadPremiumScene("TrainingGround"); });
         });
+        */
     }
 
     private void BuildEventsScene()

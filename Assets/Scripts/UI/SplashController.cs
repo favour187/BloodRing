@@ -23,8 +23,13 @@ public class SplashController : MonoBehaviour
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1280, 720);
         canvasGo.AddComponent<GraphicRaycaster>();
 
-        // ── Full-screen black background ─────────────────────────────────────
-        CreateFullscreenImage(canvasGo.transform, "Background", Color.black);
+        // ── Full-screen background (authored Splash KeyArt) ──────────────────
+        GameObject bgGo = new GameObject("Background"); bgGo.transform.SetParent(canvasGo.transform, false);
+        Image bgImg = bgGo.AddComponent<Image>();
+        Sprite splashSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("Scenes/Splash_KeyArt") ?? BloodRing.Art.BloodRingArtLibrary.LoadSprite("Scenes/Splash");
+        if (splashSprite != null) { bgImg.sprite = splashSprite; bgImg.color = Color.white; }
+        else { bgImg.color = Color.black; }
+        RectTransform bgR = bgGo.GetComponent<RectTransform>(); bgR.anchorMin = Vector2.zero; bgR.anchorMax = Vector2.one; bgR.sizeDelta = Vector2.zero;
 
         // ── Publisher logo phase (like BloodRing Studio splash) ────────────────────────
         GameObject publisherGo = new GameObject("PublisherContainer");
@@ -59,9 +64,16 @@ public class SplashController : MonoBehaviour
         dripImage.sprite = BloodRing.Art.BloodRingArtLibrary.Icon("BloodDrip") ?? Sprite.Create(Texture2D.whiteTexture, new Rect(0, 0, 4, 4), Vector2.one * 0.5f);
         dripImage.color = new Color(0.7f, 0.1f, 0.1f, 0.85f);
 
-        // Game title
-        CreateText(logoContainer.transform, "TitleBig", "BLOODRING", new Vector2(0, 60), 110, FontStyle.Bold, new Color(0.85f, 0.1f, 0.05f), TextAnchor.MiddleCenter, new Vector2(800, 140));
-        CreateText(logoContainer.transform, "TitleSub", "APEX  ROYALE", new Vector2(0, -30), 40, FontStyle.Bold, new Color(1f, 0.75f, 0.1f), TextAnchor.MiddleCenter, new Vector2(500, 50));
+        // Game title (Only show if key art is missing, to prevent overlapping text over authored key art)
+        if (splashSprite == null)
+        {
+            CreateText(logoContainer.transform, "TitleBig", "BLOODRING", new Vector2(0, 60), 110, FontStyle.Bold, new Color(0.85f, 0.1f, 0.05f), TextAnchor.MiddleCenter, new Vector2(800, 140));
+            CreateText(logoContainer.transform, "TitleSub", "APEX  ROYALE", new Vector2(0, -30), 40, FontStyle.Bold, new Color(1f, 0.75f, 0.1f), TextAnchor.MiddleCenter, new Vector2(500, 50));
+        }
+        else
+        {
+            logoContainer.SetActive(false);
+        }
 
         // Fire ember particles behind logo
         SpawnEmberParticles(cam.transform);
@@ -111,7 +123,7 @@ public class SplashController : MonoBehaviour
             yield return null;
         }
 
-        GameManager.Instance.ChangeState(GameState.MainMenu);
+        GameManager.Instance.ChangeState(GameState.Login);
     }
 
     private void SpawnEmberParticles(Transform camTransform)

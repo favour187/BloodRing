@@ -234,10 +234,8 @@ public class SceneBootstrapper
 
     private static void SetupSplashUI(string sceneName)
     {
-        Canvas canvas = CreateCanvas("SplashCanvas");
-        CreateText(canvas.transform, "Title", "BLOOD RING", 72, new Color(0.85f, 0.1f, 0.05f), new Vector2(0, 100), new Vector2(600, 100));
-        CreateText(canvas.transform, "Subtitle", "APEX ROYALE", 36, new Color(1f, 0.75f, 0.1f), new Vector2(0, 30), new Vector2(400, 50));
-        CreateText(canvas.transform, "Version", "v5.0.0", 18, Color.gray, new Vector2(0, -200), new Vector2(200, 30));
+        // SplashController builds the clean authored key art splash UI.
+        // We do not overlay duplicate procedural title text here.
     }
 
     private static void SetupLoadingUI()
@@ -273,9 +271,17 @@ public class SceneBootstrapper
         CreateText(canvas.transform, "Title", "BLOOD RING", 64, new Color(0.85f, 0.1f, 0.05f), new Vector2(0, 200), new Vector2(600, 80));
         CreateText(canvas.transform, "Subtitle", "APEX ROYALE", 28, new Color(1f, 0.75f, 0.1f), new Vector2(0, 150), new Vector2(400, 40));
 
-        CreateButton(canvas.transform, "LoginBtn", "LOGIN", new Vector2(-120, -50), new Vector2(200, 60), new Color(0.9f, 0.15f, 0.1f));
-        CreateButton(canvas.transform, "RegisterBtn", "REGISTER", new Vector2(120, -50), new Vector2(200, 60), new Color(0.15f, 0.5f, 0.9f));
-        CreateButton(canvas.transform, "GuestBtn", "PLAY AS GUEST", new Vector2(0, -130), new Vector2(300, 50), new Color(0.3f, 0.3f, 0.3f));
+        Button loginBtn = CreateButton(canvas.transform, "LoginBtn", "LOGIN", new Vector2(-120, -50), new Vector2(200, 60), new Color(0.9f, 0.15f, 0.1f));
+        loginBtn.onClick.AddListener(() => { GameManager.Instance.ChangeState(GameState.MainMenu); });
+
+        Button regBtn = CreateButton(canvas.transform, "RegisterBtn", "REGISTER", new Vector2(120, -50), new Vector2(200, 60), new Color(0.15f, 0.5f, 0.9f));
+        regBtn.onClick.AddListener(() => { GameManager.Instance.ChangeState(GameState.MainMenu); });
+
+        Button guestBtn = CreateButton(canvas.transform, "GuestBtn", "PLAY AS GUEST", new Vector2(0, -130), new Vector2(300, 50), new Color(0.3f, 0.3f, 0.3f));
+        guestBtn.onClick.AddListener(() => {
+            if (BackendAPI.Instance != null) { var _ = BackendAPI.Instance.GuestLoginAsync(); }
+            GameManager.Instance.ChangeState(GameState.MainMenu);
+        });
     }
 
     // ── Store / Inventory ─────────────────────────────────────────────

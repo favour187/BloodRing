@@ -102,11 +102,13 @@ public class NetworkController : MonoBehaviour
         };
 
         // Minimal player prefab required by NGO
-        GameObject dummyPrefab = new GameObject("DummyNetworkPrefab");
-        dummyPrefab.AddComponent<NetworkObject>();
-        dummyPrefab.SetActive(false);
-        DontDestroyOnLoad(dummyPrefab);
-        netManager.NetworkConfig.PlayerPrefab = dummyPrefab;
+        // Note: Assigning a runtime-created GameObject to PlayerPrefab causes StartHost to fail in NGO.
+        // We comment this out so NetworkManager doesn't throw on start when offline or without baked asset IDs.
+        // GameObject dummyPrefab = new GameObject("DummyNetworkPrefab");
+        // dummyPrefab.AddComponent<NetworkObject>();
+        // dummyPrefab.SetActive(false);
+        // DontDestroyOnLoad(dummyPrefab);
+        // netManager.NetworkConfig.PlayerPrefab = dummyPrefab;
 
         netManager.OnClientConnectedCallback  += OnClientConnected;
         netManager.OnClientDisconnectCallback += OnClientDisconnect;
@@ -160,12 +162,26 @@ public class NetworkController : MonoBehaviour
         }
 
         // LAN fallback
-        joinCode = "LAN_" + Random.Range(1000, 9999);
-        transport.SetConnectionData("0.0.0.0", 7777);
-        bool success = netManager.StartHost();
-        isConnected = success;
-        if (success) RegisterLocalPlayerData();
-        return success;
+        try
+        {
+            joinCode = "LAN_" + Random.Range(1000, 9999);
+            transport.SetConnectionData("0.0.0.0", 7777);
+            bool success = netManager.StartHost();
+            isConnected = success;
+            if (success) RegisterLocalPlayerData();
+            if (success) return true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("[NetworkController] StartHost threw exception: " + ex.Message);
+        }
+
+        // Offline / Singleplayer (Bots) fallback
+        Debug.Log("[NetworkController] Falling back to offline singleplayer mode with AI bots.");
+        isOnlineMode = false;
+        isConnected = true;
+        joinCode = "SOLO_MATCH";
+        return true;
     }
 
     // ── Client ────────────────────────────────────────────────────────────────
@@ -207,12 +223,26 @@ public class NetworkController : MonoBehaviour
         }
 
         // LAN fallback – code is an IP or LAN_ token
-        string ip = code.StartsWith("LAN_") ? "127.0.0.1" : (code.Contains(".") ? code : "127.0.0.1");
-        transport.SetConnectionData(ip, 7777);
-        bool success = netManager.StartClient();
-        isConnected = success;
-        if (success) StartCoroutine(SendLocalDataWhenConnected());
-        return success;
+        try
+        {
+            string ip = code.StartsWith("LAN_") ? "127.0.0.1" : (code.Contains(".") ? code : "127.0.0.1");
+            transport.SetConnectionData(ip, 7777);
+            bool success = netManager.StartClient();
+            isConnected = success;
+            if (success) StartCoroutine(SendLocalDataWhenConnected());
+            if (success) return true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("[NetworkController] StartClient threw exception: " + ex.Message);
+        }
+
+        // Offline fallback
+        Debug.Log("[NetworkController] Client join failed; entering offline solo mode.");
+        isOnlineMode = false;
+        isConnected = true;
+        joinCode = "SOLO_MATCH";
+        return true;
     }
 
     // ── Callbacks ─────────────────────────────────────────────────────────────
