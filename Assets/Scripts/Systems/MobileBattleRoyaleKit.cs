@@ -268,12 +268,15 @@ public class BR3DSceneDirector : MonoBehaviour
         CreateCharacterModel("Agent_Axiom", new Vector3(-2.5f, 0f, 0.2f), Quaternion.Euler(0f, 18f, 0f), 0.92f);
         CreateCharacterModel("Agent_Pulse", new Vector3(0f, 0f, 0f), Quaternion.identity, 1.08f);
         CreateCharacterModel("Agent_Viper", new Vector3(2.5f, 0f, 0.2f), Quaternion.Euler(0f, -18f, 0f), 0.92f);
+        // CharacterSelectController handles the 2D UI cards cleanly without 3D canvas interference.
+        /*
         CreateWorldCanvas("Character3DCanvas", new Vector3(0f, 2.55f, 1.45f), Quaternion.Euler(15f, 0f, 0f), delegate(Canvas c)
         {
             CreateHeader(c.transform, "CHOOSE AGENT", "Swipe/tap a character, then deploy");
             CreateWorldButton(c.transform, "DeployBtn", "DEPLOY", new Vector2(0f, -82f), new Vector2(280f, 58f), delegate { GameManager.Instance.ChangeState(GameState.Lobby); });
             CreateWorldButton(c.transform, "BackBtn", "BACK", new Vector2(-210f, -82f), new Vector2(130f, 48f), delegate { GameManager.Instance.ChangeState(GameState.MainMenu); });
         });
+        */
     }
 
     private void BuildLobbyScene()
@@ -286,23 +289,29 @@ public class BR3DSceneDirector : MonoBehaviour
             float x = -3.5f + i;
             CreateCharacterModel("LobbySlot" + i, new Vector3(x, 0f, -0.4f + Mathf.Abs(i - 3.5f) * 0.12f), Quaternion.Euler(0f, -8f + i * 2f, 0f), 0.68f);
         }
+        // LobbyController handles the UI overlay cleanly without 3D canvas interference.
+        /*
         CreateWorldCanvas("Lobby3DCanvas", new Vector3(0f, 2.4f, 1.2f), Quaternion.Euler(13f, 0f, 0f), delegate(Canvas c)
         {
             CreateHeader(c.transform, "MATCHMAKING", "Filling squad with players and bots");
             CreateWorldButton(c.transform, "StartNowBtn", "START NOW", new Vector2(0f, -82f), new Vector2(280f, 58f), delegate { GameManager.Instance.ChangeState(GameState.Game); });
             CreateWorldButton(c.transform, "CancelBtn", "CANCEL", new Vector2(-225f, -82f), new Vector2(150f, 48f), delegate { GameManager.Instance.ChangeState(GameState.MainMenu); });
         });
+        */
     }
 
     private void BuildGameEnvironmentScene()
     {
         SetCameraPose(new Vector3(0f, 18f, -24f), new Vector3(0f, 0f, 0f));
         CreateIslandEnvironment();
+        // TouchControls & GameHUD handle gameplay UI cleanly without 3D canvas interference.
+        /*
         CreateWorldCanvas("InGame3DStartCanvas", new Vector3(0f, 3.6f, -4.2f), Quaternion.Euler(22f, 0f, 0f), delegate(Canvas c)
         {
             CreateHeader(c.transform, "BATTLEFIELD READY", "Mobile controls are active");
             CreateWorldButton(c.transform, "ReturnLobbyBtn", "RETURN LOBBY", new Vector2(0f, -88f), new Vector2(260f, 52f), delegate { GameManager.Instance.ChangeState(GameState.MainMenu); });
         });
+        */
 
         BRMobileControlOverlay.Ensure();
         CreateRuntimePools();
@@ -313,12 +322,15 @@ public class BR3DSceneDirector : MonoBehaviour
         SetCameraPose(new Vector3(0f, 2.3f, -7.2f), new Vector3(0f, 1.25f, 0f));
         CreateHangarFloor(26f, 14f);
         CreateCharacterModel("Winner", new Vector3(0f, 0f, 0f), Quaternion.identity, 1.15f);
+        // GameOverController handles the 2D results screen cleanly without 3D canvas interference.
+        /*
         CreateWorldCanvas("GameOver3DCanvas", new Vector3(0f, 2.3f, 1.3f), Quaternion.Euler(15f, 0f, 0f), delegate(Canvas c)
         {
             CreateHeader(c.transform, "MATCH COMPLETE", "Rewards calculated locally and synced when online");
             CreateWorldButton(c.transform, "AgainBtn", "PLAY AGAIN", new Vector2(-150f, -82f), new Vector2(190f, 52f), delegate { GameManager.Instance.ChangeState(GameState.Lobby); });
             CreateWorldButton(c.transform, "HomeBtn", "HOME", new Vector2(150f, -82f), new Vector2(190f, 52f), delegate { GameManager.Instance.ChangeState(GameState.MainMenu); });
         });
+        */
     }
 
 
@@ -434,6 +446,8 @@ public class BR3DSceneDirector : MonoBehaviour
         CreateHangarFloor(34f, 20f);
         CreateDropShip(new Vector3(1.6f, 1.1f, 2.2f));
         CreateServerCore(new Vector3(-2.2f, 1.05f, 0.7f), matOrange, "QUEUE");
+        // Matchmaking UI is cleanly handled without 3D canvas interference.
+        /*
         CreateWorldCanvas("Matchmaking3DCanvas", new Vector3(-0.6f, 2.2f, 1.55f), Quaternion.Euler(9f, 10f, 0f), delegate(Canvas c)
         {
             CreateHeader(c.transform, "MATCHMAKING", "Select your battlefield map and enter session");
@@ -444,17 +458,21 @@ public class BR3DSceneDirector : MonoBehaviour
             CreateWorldButton(c.transform, "StartQueue", "ENTER WAITING ISLAND", new Vector2(0f, -154f), new Vector2(330f, 52f), delegate { LoadPremiumScene("WaitingIsland"); });
             CreateWorldButton(c.transform, "CancelQueue", "CANCEL", new Vector2(-245f, -154f), new Vector2(130f, 46f), delegate { LoadPremiumScene("MainLobby"); });
         });
+        */
     }
 
     private void BuildWaitingIslandPremiumScene()
     {
         BuildLobbyScene();
+        // WaitingIsland UI is cleanly handled without 3D canvas interference.
+        /*
         CreateWorldCanvas("WaitingIsland3DExtraCanvas", new Vector3(2.9f, 2.2f, 1.5f), Quaternion.Euler(10f, -24f, 0f), delegate(Canvas c)
         {
             string curMap = PlayerPrefs.GetString("SelectedMap", "IslaVerde");
             CreateHeader(c.transform, "WAITING ISLAND (" + curMap.ToUpper() + ")", "Warm up while players join session");
             CreateWorldButton(c.transform, "LaunchBR", "LAUNCH BATTLE (" + curMap.ToUpper() + ")", new Vector2(0f, -84f), new Vector2(280f, 54f), delegate { LoadPremiumScene("MainBattleRoyaleMap"); });
         });
+        */
     }
 
     private void BuildTrainingGroundScene()
