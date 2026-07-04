@@ -1,0 +1,80 @@
+# ──────────────────────────────────────────────────────────────────────
+#  Blood Ring — Android APK Build Pipeline
+# ──────────────────────────────────────────────────────────────────────
+name: Build — Android APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build type'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - debug
+          - release
+      unity_version:
+        description: 'Unity version'
+        required: true
+        default: '2022.3.50f1'
+        type: string
+
+jobs:
+  build-android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Free disk space
+        run: |
+          echo "Disk space before cleanup:"
+          df -h /
+
+          # Remove large preinstalled toolchains the runner ships with
+          # that this job never uses (dotnet, Haskell, Android extras
+          # bundled in the base image, CodeQL, Swift, etc.)
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo rm -rf /usr/local/.ghcup
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
+          # Clear any preloaded Docker images the runner starts with
+          docker system prune -af --volumes || true
+
+          echo "Disk space after cleanup:"
+          df -h /
+
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Build with Unity
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: Android
+          unityVersion: ${{ inputs.unity_version }}
+          buildName: BloodRingApex.apk
+          buildsPath: build/Android
+
+          androidKeystoreName: user.keystore
+          androidKeystoreBase64: ${{ secrets.UNITY_KEYSTORE_BASE64 }}
+          androidKeystorePass: ${{ secrets.UNITY_KEYSTORE_PASS }}
+          androidKeyaliasName: ${{ secrets.UNITY_KEY_ALIAS }}
+          androidKeyaliasPass: ${{ secrets.UNITY_KEY_PASS }}
+
+      - name: Upload APK artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: BloodRing-Android-${{ inputs.build_type }}-${{ github.sha }}
+          path: build/Android/**/*.apk
+          if-no-files-found: error
+          retention-days: 30
