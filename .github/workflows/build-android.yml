@@ -39,7 +39,7 @@ jobs:
         with:
           targetPlatform: Android
           unityVersion: ${{ inputs.unity_version }}
-          buildName: BloodRingApex.apk
+          buildName: BloodRingApex
           buildsPath: build/Android
 
           androidKeystoreName: user.keystore
