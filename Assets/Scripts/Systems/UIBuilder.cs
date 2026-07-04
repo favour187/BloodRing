@@ -130,6 +130,12 @@ public static class UIBuilder
         UnityEngine.Events.UnityAction action)
     {
         GameObject btn = CreateButton(parent, "StartBtn", text, pos, COL_ORANGE, COL_GOLD, action);
+        Sprite startSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_Play_Large") ?? BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_Play_Main");
+        if (startSprite != null)
+        {
+            Transform face = btn.transform.Find("Face");
+            if (face != null) { Image img = face.GetComponent<Image>(); if (img != null) { img.sprite = startSprite; img.color = Color.white; } }
+        }
         RectTransform r = btn.GetComponent<RectTransform>();
         r.sizeDelta = new Vector2(380, 75);
         // Make text larger and bolder
@@ -202,11 +208,20 @@ public static class UIBuilder
         GameObject go = new GameObject(name); go.transform.SetParent(parent, false);
         RectTransform rect = go.AddComponent<RectTransform>(); rect.anchoredPosition = pos; rect.sizeDelta = new Vector2(90, 75);
 
-        // Circular gradient icon
+        // Circular gradient icon (or real authored icon sprite if available)
         Texture2D circTex = ProceduralArt.GenerateCircleButtonTexture(iconColor, 64);
         GameObject iconGo = new GameObject("Icon"); iconGo.transform.SetParent(go.transform, false);
         Image icon = iconGo.AddComponent<Image>();
-        icon.sprite = Sprite.Create(circTex, new Rect(0, 0, circTex.width, circTex.height), Vector2.one * 0.5f);
+        Sprite authoredSprite = null;
+        if (label.Contains("Store") || label.Contains("Shop")) authoredSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_Store_Main");
+        else if (label.Contains("Armory") || label.Contains("Backpack") || label.Contains("Weapon")) authoredSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Icon_Weapon_Main");
+        else if (label.Contains("Character") || label.Contains("Friends") || label.Contains("Profile")) authoredSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Icon_Profile_Main");
+        else if (label.Contains("Luck") || label.Contains("Ranking") || label.Contains("Pass")) authoredSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_BattlePass_Main");
+        else if (label.Contains("Settings")) authoredSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_Settings_Main");
+        else authoredSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Cyber_Icons_3D");
+
+        if (authoredSprite != null) { icon.sprite = authoredSprite; icon.color = Color.white; }
+        else { icon.sprite = Sprite.Create(circTex, new Rect(0, 0, circTex.width, circTex.height), Vector2.one * 0.5f); }
         RectTransform iRect = iconGo.GetComponent<RectTransform>(); iRect.anchoredPosition = new Vector2(0, 10); iRect.sizeDelta = new Vector2(40, 40);
 
         // Label text

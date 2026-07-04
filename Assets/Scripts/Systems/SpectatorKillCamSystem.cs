@@ -28,7 +28,10 @@ public class SpectatorKillCamSystem : MonoBehaviour
         Canvas c = recapCanvasGo.AddComponent<Canvas>();
         c.renderMode = RenderMode.ScreenSpaceOverlay;
         c.sortingOrder = 99999;
-        recapCanvasGo.AddComponent<CanvasScaler>();
+        CanvasScaler scaler = recapCanvasGo.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1280, 720);
+        scaler.matchWidthOrHeight = 0.5f;
         recapCanvasGo.AddComponent<GraphicRaycaster>();
 
         GameObject bg = new GameObject("RecapBG");

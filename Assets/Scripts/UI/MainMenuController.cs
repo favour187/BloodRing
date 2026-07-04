@@ -97,6 +97,7 @@ public class MainMenuController : MonoBehaviour
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1280, 720);
+        scaler.matchWidthOrHeight = 0.5f;
         canvasGo.AddComponent<GraphicRaycaster>();
         Transform ct = canvasGo.transform; // shorthand
 
@@ -150,16 +151,6 @@ public class MainMenuController : MonoBehaviour
         MakeText(leftPanel.transform, "Subtitle", "APEX ROYALE — ULTIMATE EDITION", 16, FontStyle.Normal, UIBuilder.COL_GOLD, TextAnchor.MiddleLeft,
             new Vector2(0, 1), new Vector2(0, 1), new Vector2(12, -60), new Vector2(400, 22));
 
-        // Mode selector row
-        modeLabel = MakeText(leftPanel.transform, "ModeLabel", "MODE: CLASSIC  ▼", 22, FontStyle.Bold, Color.white, TextAnchor.MiddleLeft,
-            new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(10, 60), new Vector2(350, 35));
-        Button modeLabelBtn = modeLabel.gameObject.AddComponent<Button>();
-        modeLabelBtn.onClick.AddListener(() => { CycleMode(); });
-
-        // Map selector row
-        mapLabel = MakeText(leftPanel.transform, "MapLabel", "MAP: ISLA VERDE  ▼", 20, FontStyle.Normal, UIBuilder.COL_TEXT_DIM, TextAnchor.MiddleLeft,
-            new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(10, 30), new Vector2(350, 30));
-
         // Nickname input
         GameObject nickBG = new GameObject("NickBG"); nickBG.transform.SetParent(leftPanel.transform, false);
         Image nickBGImg = nickBG.AddComponent<Image>(); nickBGImg.color = new Color(0.12f, 0.12f, 0.16f, 0.9f);
@@ -175,8 +166,26 @@ public class MainMenuController : MonoBehaviour
         nicknameInput.text = nick;
         nicknameInput.onEndEdit.AddListener(v => { PlayerPrefs.SetString("PlayerNickname", v); PlayerPrefs.Save(); });
 
-        // ── Big START button (BloodRing orange gradient) ─────────────────────
-        UIBuilder.CreateStartButton(leftPanel.transform, "▶  START", new Vector2(180, -75), async () =>
+        // ==================================================================
+        //  RIGHT MATCHMAKING CLUSTER (Free Fire style bottom-right layout)
+        // ==================================================================
+        GameObject rightPanel = new GameObject("RightPanel"); rightPanel.transform.SetParent(ct, false);
+        RectTransform rpR = rightPanel.AddComponent<RectTransform>();
+        rpR.anchorMin = new Vector2(1, 0); rpR.anchorMax = new Vector2(1, 0);
+        rpR.anchoredPosition = new Vector2(-220, 160); rpR.sizeDelta = new Vector2(400, 180);
+
+        // Mode selector row
+        modeLabel = MakeText(rightPanel.transform, "ModeLabel", "MODE: CLASSIC  ▼", 22, FontStyle.Bold, Color.white, TextAnchor.MiddleRight,
+            new Vector2(1, 1), new Vector2(1, 1), new Vector2(-10, -20), new Vector2(350, 35));
+        Button modeLabelBtn = modeLabel.gameObject.AddComponent<Button>();
+        modeLabelBtn.onClick.AddListener(() => { CycleMode(); });
+
+        // Map selector row
+        mapLabel = MakeText(rightPanel.transform, "MapLabel", "MAP: ISLA VERDE  ▼", 18, FontStyle.Normal, UIBuilder.COL_TEXT_DIM, TextAnchor.MiddleRight,
+            new Vector2(1, 1), new Vector2(1, 1), new Vector2(-10, -50), new Vector2(350, 25));
+
+        // ── Big START button (Free Fire glowing bottom-right style) ──────────
+        UIBuilder.CreateStartButton(rightPanel.transform, "▶  START", new Vector2(-10, -110), async () =>
         {
             PlayerPrefs.SetString("PlayerNickname", nicknameInput != null ? nicknameInput.text : "Player"); PlayerPrefs.Save();
             bool success = true;
@@ -188,9 +197,11 @@ public class MainMenuController : MonoBehaviour
                 GameManager.Instance.ChangeState(GameState.Lobby);
             }
         });
+        RectTransform startR = rightPanel.transform.Find("StartBtn")?.GetComponent<RectTransform>();
+        if (startR) { startR.anchorMin = new Vector2(1, 1); startR.anchorMax = new Vector2(1, 1); startR.anchoredPosition = new Vector2(-10, -110); }
 
-        // Secondary buttons row
-        UIBuilder.CreateButton(leftPanel.transform, "JoinBtn", "JOIN ONLINE", new Vector2(100, -145),
+        // Secondary buttons row (Join & Solo)
+        UIBuilder.CreateButton(rightPanel.transform, "JoinBtn", "JOIN ONLINE", new Vector2(-210, -170),
             new Color(0.12f, 0.35f, 0.55f, 0.9f), UIBuilder.COL_CYAN, async () =>
         {
             PlayerPrefs.SetString("PlayerNickname", nicknameInput != null ? nicknameInput.text : "Player"); PlayerPrefs.Save();
@@ -198,17 +209,17 @@ public class MainMenuController : MonoBehaviour
             else if (NetworkController.Instance != null) { bool ok = await NetworkController.Instance.StartOnlineClient("SOLO_MATCH"); if (ok) GameManager.Instance.ChangeState(GameState.Lobby); }
             else { GameManager.Instance.ChangeState(GameState.Lobby); }
         });
-        RectTransform joinR = leftPanel.transform.Find("JoinBtn")?.GetComponent<RectTransform>();
-        if (joinR) joinR.sizeDelta = new Vector2(180, 48);
+        RectTransform joinR = rightPanel.transform.Find("JoinBtn")?.GetComponent<RectTransform>();
+        if (joinR) { joinR.anchorMin = new Vector2(1, 1); joinR.anchorMax = new Vector2(1, 1); joinR.anchoredPosition = new Vector2(-210, -170); joinR.sizeDelta = new Vector2(180, 44); }
 
-        UIBuilder.CreateButton(leftPanel.transform, "SoloBtn", "SOLO (BOTS)", new Vector2(300, -145),
+        UIBuilder.CreateButton(rightPanel.transform, "SoloBtn", "SOLO (BOTS)", new Vector2(-20, -170),
             new Color(0.25f, 0.25f, 0.3f, 0.9f), Color.gray, () =>
         {
-            PlayerPrefs.SetString("PlayerNickname", nicknameInput.text); PlayerPrefs.Save();
+            PlayerPrefs.SetString("PlayerNickname", nicknameInput != null ? nicknameInput.text : "Player"); PlayerPrefs.Save();
             GameManager.Instance.ChangeState(GameState.CharacterSelect);
         });
-        RectTransform soloR = leftPanel.transform.Find("SoloBtn")?.GetComponent<RectTransform>();
-        if (soloR) soloR.sizeDelta = new Vector2(180, 48);
+        RectTransform soloR = rightPanel.transform.Find("SoloBtn")?.GetComponent<RectTransform>();
+        if (soloR) { soloR.anchorMin = new Vector2(1, 1); soloR.anchorMax = new Vector2(1, 1); soloR.anchoredPosition = new Vector2(-20, -170); soloR.sizeDelta = new Vector2(180, 44); }
 
         // ==================================================================
         //  BOTTOM NAVIGATION BAR  (BloodRing icon strip)

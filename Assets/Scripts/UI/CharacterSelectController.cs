@@ -32,7 +32,7 @@ public class CharacterSelectController : MonoBehaviour
             characterModels.Add(model);
         }
 
-        GameObject canvasGo = new GameObject("CharSelectCanvas"); Canvas canvas = canvasGo.AddComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1280, 720); canvasGo.AddComponent<GraphicRaycaster>();
+        GameObject canvasGo = new GameObject("CharSelectCanvas"); Canvas canvas = canvasGo.AddComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1280, 720); scaler.matchWidthOrHeight = 0.5f; canvasGo.AddComponent<GraphicRaycaster>();
 
         GameObject titleGo = new GameObject("TitleText"); titleGo.transform.SetParent(canvasGo.transform, false); Text titleText = titleGo.AddComponent<Text>(); titleText.text = "SELECT YOUR AGENT"; titleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); titleText.fontSize = 50; titleText.fontStyle = FontStyle.Bold; titleText.color = Color.white; titleText.alignment = TextAnchor.UpperCenter; RectTransform titleRect = titleGo.GetComponent<RectTransform>(); titleRect.anchorMin = new Vector2(0.5f, 1); titleRect.anchorMax = new Vector2(0.5f, 1); titleRect.anchoredPosition = new Vector2(0, -50); titleRect.sizeDelta = new Vector2(600, 60);
 

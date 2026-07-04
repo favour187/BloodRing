@@ -107,6 +107,7 @@ public class ReplaySystem : MonoBehaviour
         CanvasScaler scaler = replayUI.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1280, 720);
+        scaler.matchWidthOrHeight = 0.5f;
 
         // "KILL CAM" header
         GameObject headerGo = new GameObject("Header"); headerGo.transform.SetParent(replayUI.transform, false);

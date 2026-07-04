@@ -17,7 +17,7 @@ public class LobbyController : MonoBehaviour
     {
         Camera cam = Camera.main; if (cam == null) { GameObject camGo = new GameObject("Main Camera"); cam = camGo.AddComponent<Camera>(); cam.tag = "MainCamera"; } cam.backgroundColor = new Color(0.1f, 0.15f, 0.2f, 1f); cam.clearFlags = CameraClearFlags.SolidColor;
 
-        GameObject canvasGo = new GameObject("LobbyCanvas"); Canvas canvas = canvasGo.AddComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1280, 720); canvasGo.AddComponent<GraphicRaycaster>();
+        GameObject canvasGo = new GameObject("LobbyCanvas"); Canvas canvas = canvasGo.AddComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1280, 720); scaler.matchWidthOrHeight = 0.5f; canvasGo.AddComponent<GraphicRaycaster>();
 
         GameObject mapGo = new GameObject("MapNameText"); mapGo.transform.SetParent(canvasGo.transform, false); Text mapText = mapGo.AddComponent<Text>(); mapText.text = "MAP: BLOODRING ISLAND"; mapText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); mapText.fontSize = 32; mapText.fontStyle = FontStyle.Bold; mapText.color = Color.yellow; mapText.alignment = TextAnchor.UpperLeft; RectTransform mapRect = mapGo.GetComponent<RectTransform>(); mapRect.anchorMin = new Vector2(0, 1); mapRect.anchorMax = new Vector2(0, 1); mapRect.anchoredPosition = new Vector2(220, -40); mapRect.sizeDelta = new Vector2(400, 40);
 

@@ -27,7 +27,7 @@ public class SceneLoader : MonoBehaviour
         if (loadingCanvasGo != null) return;
         loadingCanvasGo = new GameObject("LoadingCanvas"); DontDestroyOnLoad(loadingCanvasGo);
         loadingCanvas = loadingCanvasGo.AddComponent<Canvas>(); loadingCanvas.renderMode = RenderMode.ScreenSpaceOverlay; loadingCanvas.sortingOrder = 9999;
-        CanvasScaler scaler = loadingCanvasGo.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1280, 720); loadingCanvasGo.AddComponent<GraphicRaycaster>();
+        CanvasScaler scaler = loadingCanvasGo.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1280, 720); scaler.matchWidthOrHeight = 0.5f; loadingCanvasGo.AddComponent<GraphicRaycaster>();
 
         GameObject bgGo = new GameObject("Background"); bgGo.transform.SetParent(loadingCanvasGo.transform, false); Image bg = bgGo.AddComponent<Image>(); bg.color = new Color(0.05f, 0.05f, 0.05f, 1f); RectTransform bgRect = bgGo.GetComponent<RectTransform>(); bgRect.anchorMin = Vector2.zero; bgRect.anchorMax = Vector2.one; bgRect.sizeDelta = Vector2.zero;
 

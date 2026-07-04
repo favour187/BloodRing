@@ -757,6 +757,7 @@ public class BR3DSceneDirector : MonoBehaviour
         CanvasScaler scaler = go.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1280f, 720f);
+        scaler.matchWidthOrHeight = 0.5f;
         go.AddComponent<GraphicRaycaster>();
         RectTransform r = go.GetComponent<RectTransform>();
         r.sizeDelta = new Vector2(720f, 420f);
@@ -1264,6 +1265,7 @@ public class BRMobileControlOverlay : MonoBehaviour
         CanvasScaler scaler = gameObject.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1280f, 720f);
+        scaler.matchWidthOrHeight = 0.5f;
         gameObject.AddComponent<GraphicRaycaster>();
 
         CreatePad("MoveStick", new Vector2(135f, 135f), new Vector2(170f, 170f), new Color(1f, 1f, 1f, 0.12f));

@@ -255,13 +255,19 @@ public class TouchControls : MonoBehaviour
         MoveInput = lp / joystickRadius;
     }
 
-    // ── Factory: circular gradient button (right-anchored) ───────────────────
+    // ── Factory: circular gradient button (right-anchored, with Free Fire icon support) ─
     private GameObject MakeCircleBtn(Transform p, string n, string label, Color col, Vector2 pos, Vector2 sz)
     {
         GameObject go = new GameObject(n); go.transform.SetParent(p, false);
         Image img = go.AddComponent<Image>();
         Texture2D tex = ProceduralArt.GenerateCircleButtonTexture(col, 128);
-        img.sprite = Sprite.Create(tex, new Rect(0, 0, 128, 128), Vector2.one * 0.5f);
+        Sprite authored = null;
+        if (label == "FIRE") authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_Play_Main") ?? BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Panels/HUD_Frame_Main");
+        else if (label == "SWAP" || label == "RELOAD") authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Icon_Weapon_Main");
+        else if (label == "SCOPE" || label == "JUMP" || label == "CROUCH" || label == "PRONE" || label == "NADE" || label == "BUILD" || label == "INTERACT") authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Cyber_Icons_3D");
+        
+        if (authored != null) { img.sprite = authored; img.color = Color.white; }
+        else { img.sprite = Sprite.Create(tex, new Rect(0, 0, 128, 128), Vector2.one * 0.5f); }
         RectTransform r = go.GetComponent<RectTransform>();
         r.anchorMin = new Vector2(1, 0); r.anchorMax = new Vector2(1, 0);
         r.anchoredPosition = pos; r.sizeDelta = sz;
@@ -277,13 +283,19 @@ public class TouchControls : MonoBehaviour
         AddET(t, EventTriggerType.PointerDown, onDown);
     }
 
-    // Factory: left-anchored small button
+    // Factory: left-anchored small button (with Free Fire icon support)
     private void MakeBtnWithTriggerLeft(Transform p, string n, string label, Color col, Vector2 pos, Vector2 sz, UnityEngine.Events.UnityAction<BaseEventData> onDown)
     {
         GameObject go = new GameObject(n); go.transform.SetParent(p, false);
         Image img = go.AddComponent<Image>();
         Texture2D tex = ProceduralArt.GenerateCircleButtonTexture(col, 64);
-        img.sprite = Sprite.Create(tex, new Rect(0, 0, 64, 64), Vector2.one * 0.5f);
+        Sprite authored = null;
+        if (label == "SPRINT") authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Icon_Health_Main");
+        else if (label == "EMOTE" || label == "PING") authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Icon_Profile_Main");
+        else authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Cyber_Icons_3D");
+        
+        if (authored != null) { img.sprite = authored; img.color = Color.white; }
+        else { img.sprite = Sprite.Create(tex, new Rect(0, 0, 64, 64), Vector2.one * 0.5f); }
         RectTransform r = go.GetComponent<RectTransform>();
         r.anchorMin = Vector2.zero; r.anchorMax = Vector2.zero;
         r.anchoredPosition = pos; r.sizeDelta = sz;
@@ -298,8 +310,16 @@ public class TouchControls : MonoBehaviour
         GameObject go = new GameObject(n); go.transform.SetParent(p, false);
         Image img = go.AddComponent<Image>();
         Texture2D tex = ProceduralArt.GenerateButtonTexture(col, new Color(col.r + 0.2f, col.g + 0.2f, col.b + 0.2f, col.a));
-        img.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.one * 0.5f, 100, 0, SpriteMeshType.FullRect, new Vector4(22, 22, 22, 22));
-        img.type = Image.Type.Sliced;
+        Sprite authored = null;
+        if (label.Contains("LOOT")) authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Panels/InventorySlot_Main");
+        else if (label.Contains("POWER")) authored = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_BattlePass_Main");
+        
+        if (authored != null) { img.sprite = authored; img.color = Color.white; }
+        else
+        {
+            img.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.one * 0.5f, 100, 0, SpriteMeshType.FullRect, new Vector4(22, 22, 22, 22));
+            img.type = Image.Type.Sliced;
+        }
         RectTransform r = go.GetComponent<RectTransform>();
         if (center) { r.anchorMin = new Vector2(0.5f, 0); r.anchorMax = new Vector2(0.5f, 0); }
         else { r.anchorMin = new Vector2(1, 0); r.anchorMax = new Vector2(1, 0); }
