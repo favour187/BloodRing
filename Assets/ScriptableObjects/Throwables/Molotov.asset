@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: ba7f4184c4178383591b8330be9a1f4f, type: 3}
   m_Name: Molotov
   throwableName: Molotov
 

@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: d7c8ade405b96535f78ce330c045d843, type: 3}
   m_Name: M4A1
   weaponName: M4A1
   damage: 27

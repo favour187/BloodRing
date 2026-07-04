@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 7004fac1876473f880f80e866de05340, type: 3}
   m_Name: Pulse
   characterName: Pulse
   characterType: Tank
