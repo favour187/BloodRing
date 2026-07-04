@@ -32,13 +32,19 @@ public static class ProceduralArt
         GameObject go = new GameObject("Real3D_Confetti");
         ParticleSystem ps = go.AddComponent<ParticleSystem>();
         var pr = go.GetComponent<ParticleSystemRenderer>();
-        pr.sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Sprites/Default"));
+        Shader s = Shader.Find("Sprites/Default");
+        if (s == null) s = Shader.Find("Standard");
+        if (s != null) pr.sharedMaterial = new Material(s);
         return ps;
     }
 
     public static Shader GetSafeShader(string shaderName)
     {
-        return Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find(shaderName) ?? Shader.Find("Standard");
+        Shader s = Shader.Find(shaderName);
+        if (s != null) return s;
+        s = Shader.Find("Standard");
+        if (s != null) return s;
+        return Shader.Find("Sprites/Default");
     }
 
     public static Material GetMaterial(string matName, Texture2D tex = null)
@@ -46,8 +52,17 @@ public static class ProceduralArt
         Material mat = Resources.Load<Material>("Art/Materials/" + matName);
         if (mat == null)
         {
-            mat = new Material(GetSafeShader("Universal Render Pipeline/Lit"));
-            if (tex != null) mat.mainTexture = tex;
+            Shader shader = Shader.Find("Standard");
+            if (shader == null) shader = Shader.Find("Sprites/Default");
+            if (shader != null)
+            {
+                mat = new Material(shader);
+                if (tex != null) mat.mainTexture = tex;
+            }
+            else
+            {
+                mat = new Material(Shader.Find("Hidden/InternalErrorShader"));
+            }
         }
         return mat;
     }

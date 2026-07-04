@@ -96,7 +96,9 @@ namespace BloodRing.Art
                 GameObject go = new GameObject(relativePath);
                 go.AddComponent<MeshFilter>().sharedMesh = mesh;
                 MeshRenderer renderer = go.AddComponent<MeshRenderer>();
-                renderer.sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard"));
+                Shader s = Shader.Find("Standard");
+                if (s == null) s = Shader.Find("Sprites/Default");
+                if (s != null) renderer.sharedMaterial = new Material(s);
                 return go;
             }
             return new GameObject("Empty_" + relativePath);
