@@ -44,7 +44,11 @@ public static class ProceduralArt
         if (s != null) return s;
         s = Shader.Find("Standard");
         if (s != null) return s;
-        return Shader.Find("Sprites/Default");
+        s = Shader.Find("Sprites/Default");
+        if (s != null) return s;
+        s = Shader.Find("UI/Default");
+        if (s != null) return s;
+        return Shader.Find("Hidden/InternalErrorShader");
     }
 
     public static Material GetMaterial(string matName, Texture2D tex = null)
@@ -71,9 +75,21 @@ public static class ProceduralArt
     public static Texture2D GenerateGroundTexture() => BloodRing.Art.BloodRingArtLibrary.Terrain("Terrain_Grass_Tile") ?? Texture2D.whiteTexture;
     public static Texture2D GenerateHeavyArmorTexture() => BloodRing.Art.BloodRingArtLibrary.Terrain("Terrain_MetalGrate") ?? Texture2D.whiteTexture;
     public static Texture2D GenerateBuildingTexture() => BloodRing.Art.BloodRingArtLibrary.Terrain("Terrain_ConcreteFloor") ?? Texture2D.whiteTexture;
-    public static Texture2D GenerateButtonTexture(Color c1, Color c2) => BloodRing.Art.BloodRingArtLibrary.LoadTexture("UI/Buttons/Btn_Play_Large") ?? Texture2D.whiteTexture;
-    public static Texture2D GenerateCircleButtonTexture(Color col, int size) => BloodRing.Art.BloodRingArtLibrary.LoadTexture("UI/Buttons/Btn_Settings") ?? Texture2D.whiteTexture;
-    public static Texture2D GeneratePowerIcon(string name) => BloodRing.Art.BloodRingArtLibrary.LoadTexture("UI/Icons/" + name) ?? Texture2D.whiteTexture;
+    private static Texture2D safeWhiteTex128 = null;
+    private static Texture2D GetSafeFallback() {
+        if (safeWhiteTex128 == null) {
+            safeWhiteTex128 = new Texture2D(256, 256);
+            Color[] pixels = new Color[256 * 256];
+            for (int i = 0; i < pixels.Length; i++) pixels[i] = Color.white;
+            safeWhiteTex128.SetPixels(pixels);
+            safeWhiteTex128.Apply();
+        }
+        return safeWhiteTex128;
+    }
+
+    public static Texture2D GenerateButtonTexture(Color c1, Color c2) => BloodRing.Art.BloodRingArtLibrary.LoadTexture("UI/Buttons/Btn_Play_Large") ?? GetSafeFallback();
+    public static Texture2D GenerateCircleButtonTexture(Color col, int size) => BloodRing.Art.BloodRingArtLibrary.LoadTexture("UI/Buttons/Btn_Settings") ?? GetSafeFallback();
+    public static Texture2D GeneratePowerIcon(string name) => BloodRing.Art.BloodRingArtLibrary.LoadTexture("UI/Icons/" + name) ?? GetSafeFallback();
     public static void SetupSkybox() {
         Material sky = Resources.Load<Material>("Art/Materials/Skybox");
         if (sky != null) RenderSettings.skybox = sky;

@@ -40,8 +40,10 @@ namespace BloodRing.Art
                 Texture2D tex = LoadTexture(relativePath);
                 if (tex != null)
                 {
-                    sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
-                        new Vector2(0.5f, 0.5f), 100f);
+                    try {
+                        sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
+                            new Vector2(0.5f, 0.5f), 100f);
+                    } catch { sprite = null; }
                 }
             }
             if (sprite != null) _spriteCache[relativePath] = sprite;

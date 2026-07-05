@@ -43,7 +43,13 @@ public class SplashController : MonoBehaviour
         emblemGo.transform.SetParent(publisherGo.transform, false);
         Image emblem = emblemGo.AddComponent<Image>();
         emblem.color = new Color(0.9f, 0.15f, 0.1f);
-        emblem.sprite = Sprite.Create(ProceduralArt.GenerateButtonTexture(new Color(0.9f, 0.15f, 0.1f), new Color(1f, 0.6f, 0f)), new Rect(0, 0, 128, 64), Vector2.one * 0.5f);
+        Texture2D emblemTex = ProceduralArt.GenerateButtonTexture(new Color(0.9f, 0.15f, 0.1f), new Color(1f, 0.6f, 0f));
+        if (emblemTex != null)
+        {
+            float w = Mathf.Min(128, emblemTex.width);
+            float h = Mathf.Min(64, emblemTex.height);
+            try { emblem.sprite = Sprite.Create(emblemTex, new Rect(0, 0, w, h), Vector2.one * 0.5f); } catch {}
+        }
         RectTransform embRect = emblemGo.GetComponent<RectTransform>(); embRect.anchoredPosition = new Vector2(0, 40); embRect.sizeDelta = new Vector2(120, 120);
 
         CreateText(publisherGo.transform, "StudioName", "BLOODRING STUDIO", Vector2.zero, 36, FontStyle.Bold, new Color(0.85f, 0.85f, 0.85f), TextAnchor.MiddleCenter, new Vector2(500, 50));
