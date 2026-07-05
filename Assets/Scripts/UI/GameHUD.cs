@@ -125,8 +125,21 @@ public class GameHUD : MonoBehaviour
 
         // HP bar (red, BloodRing-style)
         healthBarFill = UIBuilder.CreateBar(blGo.transform, "HP", new Vector2(0, 22), new Color(0.85f, 0.15f, 0.1f), out healthText);
+        // HP icon
+        GameObject hpIconGo = new GameObject("HPIcon"); hpIconGo.transform.SetParent(blGo.transform, false);
+        Image hpIcon = hpIconGo.AddComponent<Image>();
+        Sprite hpSp = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Icon_Health_Main");
+        if (hpSp != null) { hpIcon.sprite = hpSp; hpIcon.color = Color.white; } else { hpIcon.color = Color.red; }
+        hpIconGo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-150, 22); hpIconGo.GetComponent<RectTransform>().sizeDelta = new Vector2(28, 28);
+
         // Armor / EP bar (blue)
         armorBarFill = UIBuilder.CreateBar(blGo.transform, "Armor", new Vector2(0, -8), new Color(0.2f, 0.5f, 0.9f), out armorText);
+        // Armor icon
+        GameObject arIconGo = new GameObject("ArmorIcon"); arIconGo.transform.SetParent(blGo.transform, false);
+        Image arIcon = arIconGo.AddComponent<Image>();
+        Sprite arSp = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Icon_Armor_Main");
+        if (arSp != null) { arIcon.sprite = arSp; arIcon.color = Color.white; } else { arIcon.color = Color.blue; }
+        arIconGo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-150, -8); arIconGo.GetComponent<RectTransform>().sizeDelta = new Vector2(28, 28);
 
         // ==================================================================
         //  BOTTOM-RIGHT — weapon info
@@ -245,7 +258,9 @@ public class GameHUD : MonoBehaviour
         powerNameText.text = pName.ToUpper() + "  " + Mathf.CeilToInt(remaining) + "s";
         powerBarFill.color = color;
         powerBarFill.rectTransform.anchorMax = new Vector2(Mathf.Clamp01(remaining / total), 1);
-        powerIconImage.sprite = Sprite.Create(ProceduralArt.GeneratePowerIcon(pName), new Rect(0, 0, 64, 64), Vector2.one * 0.5f);
+        Sprite pSp = BloodRing.Art.BloodRingArtLibrary.Icon(pName) ?? BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Icons/Cyber_Icons_3D");
+        if (pSp != null) { powerIconImage.sprite = pSp; powerIconImage.color = Color.white; }
+        else { powerIconImage.sprite = Sprite.Create(ProceduralArt.GeneratePowerIcon(pName), new Rect(0, 0, 64, 64), Vector2.one * 0.5f); }
     }
 
     public void ShowToast(string message)
@@ -289,6 +304,8 @@ public class GameHUD : MonoBehaviour
     {
         GameObject go = new GameObject(name); go.transform.SetParent(parent, false);
         Image bg = go.AddComponent<Image>(); bg.color = new Color(0.15f, 0.15f, 0.2f, 0.8f);
+        Sprite s = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Panels/InventorySlot_Main");
+        if (s != null) { bg.sprite = s; bg.color = Color.white; }
         RectTransform r = go.GetComponent<RectTransform>(); r.anchoredPosition = pos; r.sizeDelta = new Vector2(110, 48);
 
         GameObject tGo = new GameObject("Label"); tGo.transform.SetParent(go.transform, false);
