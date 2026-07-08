@@ -23,11 +23,11 @@ public class VisualLogin : MonoBehaviour
         statusText.text = "Connecting...";
         statusText.color = Color.yellow;
 
-        // Save it to PlayerPrefs (Mimicking the AuthManager flow)
+        // Save it to PlayerPrefs
         PlayerPrefs.SetString("PlayerNickname", username);
         PlayerPrefs.Save();
         
-        Invoke("OnLoginSuccess", 1.0f); // Fake a 1-second network connection
+        Invoke("OnLoginSuccess", 1.0f);
     }
 
     private void OnLoginSuccess()
@@ -35,10 +35,7 @@ public class VisualLogin : MonoBehaviour
         statusText.text = "Login successful!";
         statusText.color = Color.green;
         
-        if (GameManager.Instance != null) {
-            GameManager.Instance.ChangeState(GameState.MainMenu);
-        } else {
-            SceneManager.LoadScene("MainMenu");
-        }
+        // Use standard Unity scene loading so it never gets stuck!
+        SceneManager.LoadScene("MainMenu");
     }
 }
