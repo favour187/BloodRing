@@ -111,12 +111,18 @@ public class SceneScaffolder : EditorWindow
         CreateText(topBar, "CoinsText", "🪙 5000", 30, new Vector2(600, 0), new Color(1f, 0.8f, 0f));
         CreateText(topBar, "DiamondsText", "💎 250", 30, new Vector2(800, 0), new Color(0f, 0.8f, 1f));
 
+        // Daily Event Notification (Free Fire Style)
+        GameObject eventBubble = CreatePanel(canvasObj, "EventBubble", new Vector2(-600, 200), new Vector2(300, 100), new Color(1f, 0.8f, 0f));
+        TextMeshProUGUI eventText = CreateText(eventBubble, "EventText", "🔥 DAILY REWARD\nClaim Diamonds!", 24, Vector2.zero, Color.black);
+
         // Bottom Right: MASSIVE YELLOW START BUTTON
         Button playBtn = CreateFFButton(canvasObj, "StartMatchBtn", "START", new Vector2(700, -380), new Color(0.96f, 0.76f, 0.11f), Color.black, 50, new Vector2(350, 120));
         
-        // Bottom Left Icons (Store, Weapons)
-        Button storeBtn = CreateFFButton(canvasObj, "StoreBtn", "STORE", new Vector2(-800, -380), new Color(0, 0, 0, 0.6f), Color.white, 24, new Vector2(180, 80));
-        Button weaponsBtn = CreateFFButton(canvasObj, "WeaponsBtn", "WEAPONS", new Vector2(-600, -380), new Color(0, 0, 0, 0.6f), Color.white, 24, new Vector2(180, 80));
+        // Bottom Left Navigation Buttons (Store, Weapons, Vault, Settings)
+        Button storeBtn = CreateFFButton(canvasObj, "StoreBtn", "STORE", new Vector2(-850, -380), new Color(0, 0, 0, 0.6f), new Color(0f, 0.9f, 1f), 24, new Vector2(160, 80));
+        Button weaponsBtn = CreateFFButton(canvasObj, "WeaponsBtn", "ARMORY", new Vector2(-670, -380), new Color(0, 0, 0, 0.6f), new Color(0.1f, 0.9f, 0.3f), 24, new Vector2(160, 80));
+        Button vaultBtn = CreateFFButton(canvasObj, "VaultBtn", "VAULT", new Vector2(-490, -380), new Color(0, 0, 0, 0.6f), new Color(1f, 0.27f, 0f), 24, new Vector2(160, 80));
+        Button settingsBtn = CreateFFButton(canvasObj, "SettingsBtn", "SETTINGS", new Vector2(-310, -380), new Color(0, 0, 0, 0.6f), Color.white, 24, new Vector2(160, 80));
 
         // Settings / Logout (Top Right corner below bar)
         Button logoutBtn = CreateFFButton(canvasObj, "LogoutBtn", "LOGOUT", new Vector2(850, 380), new Color(0, 0, 0, 0.6f), Color.white, 20, new Vector2(120, 50));
@@ -131,6 +137,75 @@ public class SceneScaffolder : EditorWindow
 
         Selection.activeGameObject = canvasObj;
         Debug.Log("FreeFire-Style Main Menu Auto-Generated!");
+    }
+
+    // ===================================================================================
+    // 4. AUTO-BUILD VAULT UI
+    // ===================================================================================
+    [MenuItem("BloodRing/4. Auto-Build Vault UI")]
+    public static void BuildVaultUI()
+    {
+        GameObject canvasObj = CreateCanvas();
+        CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/CharacterHub.png", new Color(0.05f, 0.05f, 0.1f));
+        
+        GameObject panel = CreatePanel(canvasObj, "VaultPanel", Vector2.zero, new Vector2(1200, 800), new Color(0, 0, 0, 0.8f));
+        
+        TextMeshProUGUI title = CreateText(panel, "Title", "CHARACTER VAULT", 60, new Vector2(0, 300), new Color(1f, 0.8f, 0f));
+        title.fontStyle = FontStyles.Bold;
+
+        // Grid of character slots
+        for(int i=0; i<6; i++)
+        {
+            Vector2 pos = new Vector2(-400 + (i % 3) * 400, 0 - ((i / 3) * 300));
+            Button slot = CreateFFButton(panel, "CharSlot_" + i, "SKIN " + (i+1), pos, new Color(0.1f, 0.1f, 0.2f), Color.white, 24, new Vector2(300, 200));
+        }
+
+        Button closeBtn = CreateFFButton(canvasObj, "CloseBtn", "CLOSE", new Vector2(0, -450), new Color(0.8f, 0.1f, 0.1f), Color.white, 30, new Vector2(200, 60));
+
+        Selection.activeGameObject = canvasObj;
+        Debug.Log("Vault Scene Auto-Generated!");
+    }
+
+    // ===================================================================================
+    // 5. AUTO-BUILD SETTINGS UI
+    // ===================================================================================
+    [MenuItem("BloodRing/5. Auto-Build Settings UI")]
+    public static void BuildSettingsUI()
+    {
+        GameObject canvasObj = CreateCanvas();
+        CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/MainLobby.png", new Color(0, 0, 0));
+        
+        GameObject panel = CreatePanel(canvasObj, "SettingsPanel", Vector2.zero, new Vector2(800, 900), new Color(0.05f, 0.05f, 0.1f, 0.95f));
+        
+        TextMeshProUGUI title = CreateText(panel, "Title", "SETTINGS", 60, new Vector2(0, 350), new Color(1f, 0.8f, 0f));
+        title.fontStyle = FontStyles.Bold;
+
+        // Setting Options
+        Button audioBtn = CreateFFButton(panel, "AudioSet", "AUDIO: 80%", new Vector2(0, 150), new Color(0.2f, 0.2f, 0.3f), Color.white, 30, new Vector2(500, 80));
+        Button gfxBtn = CreateFFButton(panel, "GfxSet", "GRAPHICS: ULTRA", new Vector2(0, 50), new Color(0.2f, 0.2f, 0.3f), Color.white, 30, new Vector2(500, 80));
+        Button sensBtn = CreateFFButton(panel, "SensSet", "SENSITIVITY: HIGH", new Vector2(0, -50), new Color(0.2f, 0.2f, 0.3f), Color.white, 30, new Vector2(500, 80));
+
+        Button closeBtn = CreateFFButton(panel, "CloseBtn", "SAVE & CLOSE", new Vector2(0, -300), new Color(0.96f, 0.76f, 0.11f), Color.black, 30, new Vector2(300, 80));
+
+        Selection.activeGameObject = canvasObj;
+        Debug.Log("Settings Scene Auto-Generated!");
+    }
+
+    // ===================================================================================
+    // 6. AUTO-BUILD ALL
+    // ===================================================================================
+    [MenuItem("BloodRing/BUILD ALL UI SYSTEMS")]
+    public static void BuildAll()
+    {
+        FixBuildSettings();
+        BuildSplashUI();
+        BuildLoginUI();
+        BuildMainMenuUI();
+        BuildVaultUI();
+        BuildSettingsUI();
+        Debug.Log("══════════════════════════════════════════════════════");
+        Debug.Log("  ALL FREE FIRE UI SYSTEMS GENERATED SUCCESSFULLY!");
+        Debug.Log("══════════════════════════════════════════════════════");
     }
 
     // ===================================================================================
