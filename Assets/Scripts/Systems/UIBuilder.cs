@@ -41,16 +41,16 @@ public class MinimapBlip : MonoBehaviour
 
 public static class UIBuilder
 {
-    // ── Colour palette (BloodRing inspired) ──────────────────────────────────
-    public static readonly Color COL_ORANGE      = new Color(1f, 0.55f, 0.05f);
-    public static readonly Color COL_ORANGE_DARK = new Color(0.85f, 0.35f, 0f);
-    public static readonly Color COL_RED         = new Color(0.85f, 0.12f, 0.08f);
-    public static readonly Color COL_GOLD        = new Color(1f, 0.82f, 0.15f);
-    public static readonly Color COL_CYAN        = new Color(0.2f, 0.85f, 1f);
-    public static readonly Color COL_GREEN       = new Color(0.15f, 0.85f, 0.25f);
-    public static readonly Color COL_PANEL_BG    = new Color(0.08f, 0.08f, 0.12f, 0.95f);
-    public static readonly Color COL_BAR_BG      = new Color(0.12f, 0.12f, 0.15f);
-    public static readonly Color COL_TEXT_DIM     = new Color(0.55f, 0.55f, 0.6f);
+    // ── Colour palette (Free Fire inspired vibrant palette) ──────────────────────────
+    public static readonly Color COL_ORANGE      = new Color(1f, 0.72f, 0f);      // Saturated Yellow-Orange
+    public static readonly Color COL_ORANGE_DARK = new Color(0.8f, 0.5f, 0f);
+    public static readonly Color COL_RED         = new Color(1f, 0.27f, 0f);      // Vivid Red-Orange
+    public static readonly Color COL_GOLD        = new Color(1f, 0.84f, 0f);      // Brilliant Gold
+    public static readonly Color COL_CYAN        = new Color(0f, 0.9f, 1f);       // Electric Cyan
+    public static readonly Color COL_GREEN       = new Color(0.1f, 0.9f, 0.3f);    // Neon Green
+    public static readonly Color COL_PANEL_BG    = new Color(0.05f, 0.05f, 0.1f, 0.96f); // Deep Purple-Black
+    public static readonly Color COL_BAR_BG      = new Color(0.1f, 0.1f, 0.15f);
+    public static readonly Color COL_TEXT_DIM     = new Color(0.65f, 0.65f, 0.75f);
 
     // ── Premium gradient button with rounded corners, glow, bevel, and drop shadow ──
     public static GameObject CreateButton(Transform parent, string name, string text,
@@ -125,10 +125,11 @@ public static class UIBuilder
         return btnGo;
     }
 
-    /// <summary>Extra-wide premium START button with pulsing glow animation.</summary>
+    /// <summary>Extra-wide premium START button with pulsing glow animation and Free Fire style styling.</summary>
     public static GameObject CreateStartButton(Transform parent, string text, Vector2 pos,
         UnityEngine.Events.UnityAction action)
     {
+        // Use Gold as border and Orange as main for that high-contrast FF look
         GameObject btn = CreateButton(parent, "StartBtn", text, pos, COL_ORANGE, COL_GOLD, action);
         Sprite startSprite = BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_Play_Large") ?? BloodRing.Art.BloodRingArtLibrary.LoadSprite("UI/Buttons/Btn_Play_Main");
         if (startSprite != null)
@@ -137,13 +138,15 @@ public static class UIBuilder
             if (face != null) { Image img = face.GetComponent<Image>(); if (img != null) { img.sprite = startSprite; img.color = Color.white; } }
         }
         RectTransform r = btn.GetComponent<RectTransform>();
-        r.sizeDelta = new Vector2(380, 75);
-        // Make text larger and bolder
+        r.sizeDelta = new Vector2(420, 85); // Slightly larger
+        
+        // Make text significantly larger and more punchy
         foreach (Text t in btn.GetComponentsInChildren<Text>())
         {
-            if (t.gameObject.name == "Text") t.fontSize = 36;
-            else if (t.gameObject.name == "TextShadow") t.fontSize = 36;
+            if (t.gameObject.name == "Text") { t.fontSize = 42; t.fontStyle = FontStyle.Bold; }
+            else if (t.gameObject.name == "TextShadow") { t.fontSize = 42; t.fontStyle = FontStyle.Bold; }
         }
+        
         // Add a subtle pulsing glow script
         btn.AddComponent<ButtonPulseGlow>();
         return btn;
