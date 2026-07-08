@@ -10,26 +10,24 @@ using System.Collections.Generic;
 public class SceneScaffolder : EditorWindow
 {
     // ===================================================================================
-    // 0. FIX BUILD SETTINGS (Crucial for button transitions!)
+    // 0. FIX BUILD SETTINGS
     // ===================================================================================
     [MenuItem("BloodRing/0. FIX: Add Scenes To Build Settings")]
     public static void FixBuildSettings()
     {
         string[] guids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes" });
         List<EditorBuildSettingsScene> buildScenes = new List<EditorBuildSettingsScene>();
-        
         foreach(string g in guids)
         {
             string path = AssetDatabase.GUIDToAssetPath(g);
             buildScenes.Add(new EditorBuildSettingsScene(path, true));
         }
-        
         EditorBuildSettings.scenes = buildScenes.ToArray();
         Debug.Log("Build Settings fixed! All buttons will now transition perfectly.");
     }
 
     // ===================================================================================
-    // 1. AUTO-BUILD SPLASH UI
+    // 1. AUTO-BUILD SPLASH UI (FREE FIRE STYLE)
     // ===================================================================================
     [MenuItem("BloodRing/1. Auto-Build Splash UI")]
     public static void BuildSplashUI()
@@ -38,9 +36,18 @@ public class SceneScaffolder : EditorWindow
         VisualSplash script = CreateManager<VisualSplash>(canvasObj, "[SplashManager]");
         
         CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/Splash_KeyArt.png", new Color(0,0,0));
-        CreateText(canvasObj, "Title", "BLOODRING STUDIO", 60, new Vector2(0, 100), Color.red);
         
-        Button btn = CreateButton(canvasObj, "TapToStartBtn", "TAP TO START", new Vector2(0, -150), new Color(0.8f, 0.2f, 0.1f));
+        // Massive glowing title
+        TextMeshProUGUI title = CreateText(canvasObj, "Title", "BLOODRING", 120, new Vector2(0, 150), new Color(0.9f, 0.1f, 0.1f));
+        title.fontStyle = FontStyles.Bold | FontStyles.Italic;
+        AddShadow(title.gameObject, new Color(0,0,0,0.8f), new Vector2(4, -4));
+
+        TextMeshProUGUI subTitle = CreateText(canvasObj, "SubTitle", "APEX ROYALE", 45, new Vector2(0, 50), new Color(1f, 0.8f, 0f));
+        subTitle.fontStyle = FontStyles.Bold;
+
+        // Glowing "TAP TO START"
+        Button btn = CreateFFButton(canvasObj, "TapToStartBtn", "TAP TO BEGIN", new Vector2(0, -250), new Color(1f, 1f, 1f, 0f), Color.white, 40);
+        
         UnityAction action = new UnityAction(script.GoToLogin);
         UnityEventTools.AddPersistentListener(btn.onClick, action);
         
@@ -49,7 +56,7 @@ public class SceneScaffolder : EditorWindow
     }
 
     // ===================================================================================
-    // 2. AUTO-BUILD LOGIN UI
+    // 2. AUTO-BUILD LOGIN UI (FREE FIRE STYLE)
     // ===================================================================================
     [MenuItem("BloodRing/2. Auto-Build Login UI")]
     public static void BuildLoginUI()
@@ -58,11 +65,19 @@ public class SceneScaffolder : EditorWindow
         VisualLogin script = CreateManager<VisualLogin>(canvasObj, "[LoginManager]");
         
         CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/Splash_KeyArt.png", new Color(0.1f, 0.1f, 0.15f));
-        CreateText(canvasObj, "Title", "LOGIN", 50, new Vector2(0, 200), Color.white);
+        
+        // Dark transparent login panel
+        GameObject panel = CreatePanel(canvasObj, "LoginPanel", new Vector2(0, -50), new Vector2(500, 450), new Color(0, 0, 0, 0.75f));
 
-        TMP_InputField inputField = CreateInputField(canvasObj, new Vector2(0, 50));
-        Button btn = CreateButton(canvasObj, "PlayBtn", "PLAY AS GUEST", new Vector2(0, -60), new Color(0.85f, 0.15f, 0.1f));
-        TextMeshProUGUI statusTmp = CreateText(canvasObj, "StatusText", "", 26, new Vector2(0, 150), Color.yellow);
+        TextMeshProUGUI title = CreateText(panel, "Title", "GUEST LOGIN", 40, new Vector2(0, 150), Color.white);
+        title.fontStyle = FontStyles.Bold;
+
+        TMP_InputField inputField = CreateInputField(panel, new Vector2(0, 30));
+        
+        // Iconic Yellow Action Button
+        Button btn = CreateFFButton(panel, "PlayBtn", "LOGIN", new Vector2(0, -80), new Color(0.96f, 0.76f, 0.11f), Color.black, 32, new Vector2(350, 70));
+        
+        TextMeshProUGUI statusTmp = CreateText(panel, "StatusText", "", 24, new Vector2(0, -170), Color.yellow);
 
         script.usernameInput = inputField;
         script.statusText = statusTmp;
@@ -75,7 +90,7 @@ public class SceneScaffolder : EditorWindow
     }
 
     // ===================================================================================
-    // 3. AUTO-BUILD MAIN MENU UI
+    // 3. AUTO-BUILD MAIN MENU UI (FREE FIRE STYLE)
     // ===================================================================================
     [MenuItem("BloodRing/3. Auto-Build Main Menu UI")]
     public static void BuildMainMenuUI()
@@ -83,15 +98,28 @@ public class SceneScaffolder : EditorWindow
         GameObject canvasObj = CreateCanvas();
         VisualMainMenu script = CreateManager<VisualMainMenu>(canvasObj, "[MainMenuManager]");
         
-        // Use MainLobby background
         CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/MainLobby.png", new Color(0.2f, 0.2f, 0.2f));
         
-        // Welcome Text
-        TextMeshProUGUI nameTmp = CreateText(canvasObj, "PlayerNameText", "Welcome, Player!", 36, new Vector2(-400, 450), Color.yellow);
+        // Top Info Bar (Dark strip)
+        GameObject topBar = CreatePanel(canvasObj, "TopBar", new Vector2(0, 490), new Vector2(1920, 100), new Color(0, 0, 0, 0.5f));
         
-        // Buttons
-        Button playBtn = CreateButton(canvasObj, "FindMatchBtn", "FIND MATCH", new Vector2(400, -300), new Color(0.9f, 0.4f, 0.1f));
-        Button logoutBtn = CreateButton(canvasObj, "LogoutBtn", "LOGOUT", new Vector2(-400, -300), new Color(0.4f, 0.4f, 0.4f));
+        // Player Profile info (Top Left)
+        TextMeshProUGUI nameTmp = CreateText(topBar, "PlayerNameText", "PLAYER NAME", 32, new Vector2(-700, 0), Color.white);
+        nameTmp.alignment = TextAlignmentOptions.Left;
+        
+        // Currencies (Top Right)
+        CreateText(topBar, "CoinsText", "🪙 5000", 30, new Vector2(600, 0), new Color(1f, 0.8f, 0f));
+        CreateText(topBar, "DiamondsText", "💎 250", 30, new Vector2(800, 0), new Color(0f, 0.8f, 1f));
+
+        // Bottom Right: MASSIVE YELLOW START BUTTON
+        Button playBtn = CreateFFButton(canvasObj, "StartMatchBtn", "START", new Vector2(700, -380), new Color(0.96f, 0.76f, 0.11f), Color.black, 50, new Vector2(350, 120));
+        
+        // Bottom Left Icons (Store, Weapons)
+        Button storeBtn = CreateFFButton(canvasObj, "StoreBtn", "STORE", new Vector2(-800, -380), new Color(0, 0, 0, 0.6f), Color.white, 24, new Vector2(180, 80));
+        Button weaponsBtn = CreateFFButton(canvasObj, "WeaponsBtn", "WEAPONS", new Vector2(-600, -380), new Color(0, 0, 0, 0.6f), Color.white, 24, new Vector2(180, 80));
+
+        // Settings / Logout (Top Right corner below bar)
+        Button logoutBtn = CreateFFButton(canvasObj, "LogoutBtn", "LOGOUT", new Vector2(850, 380), new Color(0, 0, 0, 0.6f), Color.white, 20, new Vector2(120, 50));
 
         script.playerNameText = nameTmp;
 
@@ -102,11 +130,11 @@ public class SceneScaffolder : EditorWindow
         UnityEventTools.AddPersistentListener(logoutBtn.onClick, logoutAction);
 
         Selection.activeGameObject = canvasObj;
-        Debug.Log("Main Menu Auto-Generated! DJ Neon will spawn when you press Play.");
+        Debug.Log("FreeFire-Style Main Menu Auto-Generated!");
     }
 
     // ===================================================================================
-    // HELPERS
+    // HELPERS FOR FREE FIRE AESTHETIC
     // ===================================================================================
     private static GameObject CreateCanvas()
     {
@@ -116,6 +144,7 @@ public class SceneScaffolder : EditorWindow
         CanvasScaler scaler = canvasObj.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.matchWidthOrHeight = 0.5f;
         canvasObj.AddComponent<GraphicRaycaster>();
 
         if (Object.FindObjectOfType<EventSystem>() == null)
@@ -146,10 +175,22 @@ public class SceneScaffolder : EditorWindow
         bgRect.offsetMin = Vector2.zero; bgRect.offsetMax = Vector2.zero;
     }
 
-    private static TextMeshProUGUI CreateText(GameObject canvas, string name, string text, int size, Vector2 pos, Color color)
+    private static GameObject CreatePanel(GameObject parent, string name, Vector2 pos, Vector2 size, Color color)
     {
         GameObject obj = new GameObject(name);
-        obj.transform.SetParent(canvas.transform, false);
+        obj.transform.SetParent(parent.transform, false);
+        Image img = obj.AddComponent<Image>();
+        img.color = color;
+        RectTransform rect = obj.GetComponent<RectTransform>();
+        rect.anchoredPosition = pos;
+        rect.sizeDelta = size;
+        return obj;
+    }
+
+    private static TextMeshProUGUI CreateText(GameObject parent, string name, string text, int size, Vector2 pos, Color color)
+    {
+        GameObject obj = new GameObject(name);
+        obj.transform.SetParent(parent.transform, false);
         TextMeshProUGUI tmp = obj.AddComponent<TextMeshProUGUI>();
         tmp.text = text;
         tmp.fontSize = size;
@@ -157,28 +198,36 @@ public class SceneScaffolder : EditorWindow
         tmp.alignment = TextAlignmentOptions.Center;
         RectTransform rect = obj.GetComponent<RectTransform>();
         rect.anchoredPosition = pos;
-        rect.sizeDelta = new Vector2(600, 100);
+        rect.sizeDelta = new Vector2(800, 150);
         return tmp;
     }
 
-    private static Button CreateButton(GameObject canvas, string name, string text, Vector2 pos, Color color)
+    private static Button CreateFFButton(GameObject parent, string name, string text, Vector2 pos, Color bgColor, Color txtColor, int fontSize, Vector2 size = default)
     {
+        if (size == default) size = new Vector2(300, 80);
+
         GameObject btnObj = new GameObject(name);
-        btnObj.transform.SetParent(canvas.transform, false);
+        btnObj.transform.SetParent(parent.transform, false);
         Image img = btnObj.AddComponent<Image>();
-        img.color = color;
+        img.color = bgColor;
+        
+        // Add subtle shadow to button frame
+        Shadow shadow = btnObj.AddComponent<Shadow>();
+        shadow.effectColor = new Color(0,0,0,0.5f);
+        shadow.effectDistance = new Vector2(3, -3);
+
         Button btn = btnObj.AddComponent<Button>();
         RectTransform rect = btnObj.GetComponent<RectTransform>();
         rect.anchoredPosition = pos;
-        rect.sizeDelta = new Vector2(300, 80);
+        rect.sizeDelta = size;
 
         GameObject textObj = new GameObject("Text");
         textObj.transform.SetParent(btnObj.transform, false);
         TextMeshProUGUI tmp = textObj.AddComponent<TextMeshProUGUI>();
         tmp.text = text;
-        tmp.color = Color.white;
-        tmp.fontSize = 28;
-        tmp.fontStyle = FontStyles.Bold;
+        tmp.color = txtColor;
+        tmp.fontSize = fontSize;
+        tmp.fontStyle = FontStyles.Bold | FontStyles.Italic;
         tmp.alignment = TextAlignmentOptions.Center;
         RectTransform txtRect = textObj.GetComponent<RectTransform>();
         txtRect.anchorMin = Vector2.zero; txtRect.anchorMax = Vector2.one;
@@ -187,12 +236,22 @@ public class SceneScaffolder : EditorWindow
         return btn;
     }
 
-    private static TMP_InputField CreateInputField(GameObject canvas, Vector2 pos)
+    private static TMP_InputField CreateInputField(GameObject parent, Vector2 pos)
     {
-        GameObject bgObj = new GameObject("InputField");
-        bgObj.transform.SetParent(canvas.transform, false);
+        GameObject bgObj = new GameObject("InputFieldBase");
+        bgObj.transform.SetParent(parent.transform, false);
         Image bg = bgObj.AddComponent<Image>();
-        bg.color = new Color(0.1f, 0.1f, 0.1f, 0.9f);
+        bg.color = new Color(0f, 0f, 0f, 0.8f);
+        
+        // Yellow underline accent
+        GameObject underline = new GameObject("Underline");
+        underline.transform.SetParent(bgObj.transform, false);
+        Image lineImg = underline.AddComponent<Image>();
+        lineImg.color = new Color(0.96f, 0.76f, 0.11f);
+        RectTransform lineRect = underline.GetComponent<RectTransform>();
+        lineRect.anchorMin = new Vector2(0, 0); lineRect.anchorMax = new Vector2(1, 0);
+        lineRect.offsetMin = new Vector2(0, 0); lineRect.offsetMax = new Vector2(0, 4); // 4px thick line
+
         RectTransform rect = bgObj.GetComponent<RectTransform>();
         rect.anchoredPosition = pos;
         rect.sizeDelta = new Vector2(400, 70);
@@ -212,5 +271,12 @@ public class SceneScaffolder : EditorWindow
         input.textComponent = tmp;
 
         return input;
+    }
+
+    private static void AddShadow(GameObject obj, Color color, Vector2 dist)
+    {
+        Shadow s = obj.AddComponent<Shadow>();
+        s.effectColor = color;
+        s.effectDistance = dist;
     }
 }
