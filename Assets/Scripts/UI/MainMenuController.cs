@@ -41,6 +41,8 @@ public class MainMenuController : MonoBehaviour
     private GameObject missionsPanel; private Transform missionsContainer; private Text bpLevelText;
     private GameObject socialPanel; private Transform friendsContainer; private Transform guildContainer; private Transform chatContainer; private InputField chatInput;
     private GameObject profilePanel; private Text profileDetailText;
+    private GameObject vaultPanel; private Transform vaultContainer; // New Vault Panel
+    private GameObject settingsPanel; private Transform settingsContainer; // New Settings Panel
 
     private GameObject animCharModel; private float breathTimer = 0f;
     private Text coinText; private Text gemText; private Text modeLabel; private Text mapLabel;
@@ -241,15 +243,16 @@ public class MainMenuController : MonoBehaviour
         navR.anchorMin = Vector2.zero; navR.anchorMax = new Vector2(1, 0);
         navR.pivot = new Vector2(0.5f, 0); navR.anchoredPosition = Vector2.zero; navR.sizeDelta = new Vector2(0, 70);
 
-        float navSpacing = 140f; float navStart = -3.5f * navSpacing;
+        float navSpacing = 110f; float navStart = -4.5f * navSpacing;
         UIBuilder.CreateNavIcon(navBar.transform, "Nav_Home",      "Home",      new Vector2(navStart + 0 * navSpacing, 0), UIBuilder.COL_ORANGE, () => { });
         UIBuilder.CreateNavIcon(navBar.transform, "Nav_Store",     "Store",     new Vector2(navStart + 1 * navSpacing, 0), UIBuilder.COL_CYAN,   () => { OpenWindow(storePanel); });
-        UIBuilder.CreateNavIcon(navBar.transform, "Nav_Lucky",     "Luck Spin", new Vector2(navStart + 2 * navSpacing, 0), UIBuilder.COL_GOLD,   () => { });
+        UIBuilder.CreateNavIcon(navBar.transform, "Nav_Luck",     "Luck Spin", new Vector2(navStart + 2 * navSpacing, 0), UIBuilder.COL_GOLD,   () => { });
         UIBuilder.CreateNavIcon(navBar.transform, "Nav_Backpack",  "Backpack",  new Vector2(navStart + 3 * navSpacing, 0), UIBuilder.COL_GREEN,  () => { OpenWindow(weaponsPanel); });
-        UIBuilder.CreateNavIcon(navBar.transform, "Nav_Weapon",    "Armory",    new Vector2(navStart + 4 * navSpacing, 0), UIBuilder.COL_RED,    () => { OpenWindow(weaponsPanel); });
+        UIBuilder.CreateNavIcon(navBar.transform, "Nav_Vault",     "Vault",     new Vector2(navStart + 4 * navSpacing, 0), UIBuilder.COL_RED,    () => { OpenWindow(vaultPanel); });
         UIBuilder.CreateNavIcon(navBar.transform, "Nav_Character", "Character", new Vector2(navStart + 5 * navSpacing, 0), new Color(0.8f, 0.5f, 0.9f), () => { GameManager.Instance.ChangeState(GameState.CharacterSelect); });
         UIBuilder.CreateNavIcon(navBar.transform, "Nav_Ranking",   "Ranking",   new Vector2(navStart + 6 * navSpacing, 0), UIBuilder.COL_GOLD,   () => { OpenWindow(leaderboardPanel); });
         UIBuilder.CreateNavIcon(navBar.transform, "Nav_Social",    "Friends",   new Vector2(navStart + 7 * navSpacing, 0), UIBuilder.COL_CYAN,   () => { OpenWindow(socialPanel); });
+        UIBuilder.CreateNavIcon(navBar.transform, "Nav_Settings",  "Settings",  new Vector2(navStart + 8 * navSpacing, 0), UIBuilder.COL_TEXT_DIM, () => { OpenWindow(settingsPanel); });
 
         // ==================================================================
         //  VERSION WATERMARK
@@ -275,6 +278,8 @@ public class MainMenuController : MonoBehaviour
         CreateMissionsPanel(ct);
         CreateSocialPanel(ct);
         CreateProfilePanel(ct);
+        CreateVaultPanel(ct);
+        CreateSettingsPanel(ct);
 
         // Initial profile fetch
         StartCoroutine(InitialProfileFetch());
@@ -424,6 +429,31 @@ public class MainMenuController : MonoBehaviour
         profilePanel = MakeOverlayPanel(parent, "ProfilePanel", "PLAYER PROFILE");
         profileDetailText = MakeText(profilePanel.transform, "ProfileDetail", "Loading profile...", 24, FontStyle.Normal, Color.white, TextAnchor.MiddleCenter,
             new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(700, 300));
+    }
+
+    private void CreateVaultPanel(Transform parent)
+    {
+        vaultPanel = MakeOverlayPanel(parent, "VaultPanel", "CHARACTER VAULT");
+        vaultContainer = new GameObject("VaultItems").transform; vaultContainer.SetParent(vaultPanel.transform, false);
+        MakeText(vaultPanel.transform, "VaultInfo", "Equip your rarest skins and outfits here.\nUnlocked via Battle Pass and Store.", 20, FontStyle.Normal, Color.white, TextAnchor.MiddleCenter,
+            new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(600, 80));
+    }
+
+    private void CreateSettingsPanel(Transform parent)
+    {
+        settingsPanel = MakeOverlayPanel(parent, "SettingsPanel", "SETTINGS");
+        settingsContainer = new GameObject("SettingsRows").transform; settingsContainer.SetParent(settingsPanel.transform, false);
+        
+        // Simple sample settings
+        UIBuilder.CreateButton(settingsPanel.transform, "Settle_Audio", "Audio: 80%", new Vector2(0, 50),
+            UIBuilder.COL_PANEL_BG, UIBuilder.COL_TEXT_DIM, () => { });
+        RectTransform s1 = settingsPanel.transform.Find("Settle_Audio")?.GetComponent<RectTransform>();
+        if (s1) { s1.anchorMin = new Vector2(0.5f, 0.5f); s1.anchorMax = new Vector2(0.5f, 0.5f); s1.sizeDelta = new Vector2(400, 50); }
+
+        UIBuilder.CreateButton(settingsPanel.transform, "Settle_Graphics", "Graphics: High", new Vector2(0, 0),
+            UIBuilder.COL_PANEL_BG, UIBuilder.COL_TEXT_DIM, () => { });
+        RectTransform s2 = settingsPanel.transform.Find("Settle_Graphics")?.GetComponent<RectTransform>();
+        if (s2) { s2.anchorMin = new Vector2(0.5f, 0.5f); s2.anchorMax = new Vector2(0.5f, 0.5f); s2.sizeDelta = new Vector2(400, 50); }
     }
 }
 
