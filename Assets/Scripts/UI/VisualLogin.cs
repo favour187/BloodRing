@@ -36,6 +36,11 @@ public class VisualLogin : MonoBehaviour
         statusText.color = Color.green;
         
         // Use standard Unity scene loading so it never gets stuck!
-        SceneManager.LoadScene("MainMenu");
+        if (Application.CanStreamedLevelBeLoaded("MainMenu"))
+            SceneManager.LoadScene("MainMenu");
+        else if (Application.CanStreamedLevelBeLoaded("MainLobby"))
+            SceneManager.LoadScene("MainLobby");
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

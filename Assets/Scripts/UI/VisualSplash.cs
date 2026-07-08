@@ -6,6 +6,9 @@ public class VisualSplash : MonoBehaviour
     public void GoToLogin()
     {
         // Safe, direct transition to Login
-        SceneManager.LoadScene("LoginScene");
+        if (Application.CanStreamedLevelBeLoaded("LoginScene"))
+            SceneManager.LoadScene("LoginScene");
+        else
+            SceneManager.LoadScene(1); // fallback to second scene
     }
 }

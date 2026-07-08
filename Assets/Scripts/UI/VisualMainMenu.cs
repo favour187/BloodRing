@@ -33,7 +33,12 @@ public class VisualMainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("MatchmakingScene");
+        if (Application.CanStreamedLevelBeLoaded("MatchmakingScene"))
+            SceneManager.LoadScene("MatchmakingScene");
+        else if (Application.CanStreamedLevelBeLoaded("MainBattleRoyaleMap"))
+            SceneManager.LoadScene("MainBattleRoyaleMap");
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Logout()
