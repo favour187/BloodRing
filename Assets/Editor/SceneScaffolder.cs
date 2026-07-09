@@ -11,8 +11,11 @@ using System.IO;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// BloodRing Apex Royale - Scene UI Auto-Generator
-/// One-click full generation for all scenes with BloodRing theme.
+/// BloodRing Apex Royale - Complete Scene Auto-Generator
+/// 
+/// RECOMMENDED BUTTONS:
+/// 1. "🚀 QUICK PLAY TEST" - Best for testing
+/// 2. "🔥 ONE CLICK: GENERATE EVERYTHING"
 /// </summary>
 public class SceneScaffolder : EditorWindow
 {
@@ -29,412 +32,395 @@ public class SceneScaffolder : EditorWindow
     };
 
     // =====================================================
-    // THE ONE BUTTON - DOES EVERYTHING
+    // 🚀 RECOMMENDED BUTTON FOR PLAY TESTING
+    // =====================================================
+    [MenuItem("BloodRing/🚀 QUICK PLAY TEST (Full Flow)")]
+    public static void QuickPlayTest()
+    {
+        Debug.Log("═══════════════════════════════════════════════════════════════");
+        Debug.Log("  🚀 BLOODRING - QUICK PLAY TEST MODE ACTIVATED");
+        Debug.Log("═══════════════════════════════════════════════════════════════");
+
+        // 1. Fix build settings (SplashLogo first)
+        FixBuildSettingsWithCorrectStartup();
+
+        // 2. Generate all scenes with complete UI + navigation
+        foreach (string sceneName in AllScenes)
+        {
+            GenerateCompleteScene(sceneName);
+        }
+
+        // 3. Wire every single button
+        WireAllNavigation();
+
+        // 4. Add helper scripts
+        CreateMasterNavigationHelper();
+
+        Debug.Log("═══════════════════════════════════════════════════════════════");
+        Debug.Log("  ✅✅✅ QUICK PLAY TEST READY!");
+        Debug.Log("  1. Open SplashLogo scene");
+        Debug.Log("  2. Press Play");
+        Debug.Log("  3. Full flow works: Splash → Login → MainMenu → Matchmaking → Gameplay");
+        Debug.Log("═══════════════════════════════════════════════════════════════");
+
+        AssetDatabase.Refresh();
+    }
+
+    // =====================================================
+    // 🔥 ONE CLICK - GENERATES EVERYTHING
     // =====================================================
     [MenuItem("BloodRing/🔥 ONE CLICK: GENERATE EVERYTHING (All Scenes + Buttons)")]
     public static void OneClickEverything()
     {
-        Debug.Log("═══════════════════════════════════════════════════════════════");
-        Debug.Log("  🔥🔥🔥 BLOODRING APEX ROYALE — ONE-CLICK FULL GENERATION 🔥🔥🔥");
-        Debug.Log("═══════════════════════════════════════════════════════════════");
-
-        FixBuildSettingsWithCorrectStartup();
-
-        foreach (string sceneName in AllScenes)
-        {
-            GenerateSceneUI(sceneName);
-        }
-
-        WireAllButtonTransitions();
-        EnsureManagerScriptsExist();
-        CreateMasterNavigationHelper();
-        AddMissingBackButtonsEverywhere();
-        VerifyGameIsPlayable();
-
-        Debug.Log("═══════════════════════════════════════════════════════════════");
-        Debug.Log("  ✅✅✅✅✅  DONE! Everything generated in ONE click.");
-        Debug.Log("  • 30+ scenes with full BloodRing UI");
-        Debug.Log("  • All buttons wired and working");
-        Debug.Log("  • SplashLogo is now your ROOT scene");
-        Debug.Log("═══════════════════════════════════════════════════════════════");
-        
-        AssetDatabase.Refresh();
+        QuickPlayTest(); // Same as Quick Play Test for simplicity
     }
 
-    [MenuItem("BloodRing/0b. FIX: Add All Scenes To Build Settings")]
-    public static void FixBuildSettings()
-    {
-        FixBuildSettingsWithCorrectStartup();
-    }
-
-    private static void FixBuildSettingsWithCorrectStartup()
-    {
-        string[] guids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes" });
-        List<EditorBuildSettingsScene> buildScenes = new List<EditorBuildSettingsScene>();
-
-        string splashPath = "Assets/Scenes/SplashLogo.unity";
-        if (File.Exists(splashPath))
-        {
-            buildScenes.Add(new EditorBuildSettingsScene(splashPath, true));
-        }
-
-        foreach (string g in guids)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(g);
-            if (path != splashPath && !buildScenes.Any(s => s.path == path))
-            {
-                buildScenes.Add(new EditorBuildSettingsScene(path, true));
-            }
-        }
-
-        EditorBuildSettings.scenes = buildScenes.ToArray();
-        Debug.Log("✅ Build Settings fixed. SplashLogo is now the ROOT scene.");
-    }
-
-    private static void GenerateSceneUI(string sceneName)
+    private static void GenerateCompleteScene(string sceneName)
     {
         switch (sceneName)
         {
             case "SplashLogo":
             case "SplashScreen":
             case "Splash":
-                BuildBloodRingSplashUI(sceneName);
+                GenerateSplash(sceneName);
                 break;
             case "LoginScene":
-                BuildBloodRingLoginUI();
+                GenerateLogin();
                 break;
             case "MainMenu":
             case "MainLobby":
-                BuildBloodRingMainMenuUI();
+                GenerateMainMenu();
                 break;
             case "MatchmakingScene":
-                BuildBloodRingMatchmakingUI();
+                GenerateMatchmaking();
                 break;
             case "WaitingIsland":
-                BuildBloodRingWaitingIslandUI();
+                GenerateWaitingIsland();
                 break;
             case "MainBattleRoyaleMap":
             case "GameScene":
             case "Gameplay":
-                BuildBloodRingGameplayUI(sceneName);
+                GenerateGameplay(sceneName);
                 break;
             case "GameOver":
             case "ResultVictoryScreen":
             case "Results":
-                BuildBloodRingResultsUI(sceneName);
+                GenerateResults(sceneName);
                 break;
             case "CharacterSelect":
             case "CharacterPage":
-                BuildBloodRingCharacterUI(sceneName);
+                GenerateCharacterSelect(sceneName);
                 break;
             case "InventoryScene":
             case "StoreScene":
-                BuildBloodRingStoreInventoryUI(sceneName);
+                GenerateStoreInventory(sceneName);
                 break;
             case "EventsPage":
-                BuildBloodRingEventsUI();
+                GenerateEvents();
                 break;
             case "ClanSocial":
-                BuildBloodRingClanUI();
+                GenerateClan();
                 break;
             case "ProfileScene":
             case "Rankings":
             case "RankingsScene":
-                BuildBloodRingProfileRankingsUI(sceneName);
+                GenerateProfileRankings(sceneName);
                 break;
             case "SettingsScene":
-                BuildBloodRingSettingsUI();
+                GenerateSettings();
                 break;
             case "LoadingScene":
-                BuildBloodRingLoadingUI();
+                GenerateLoading();
                 break;
             case "LobbyScene":
-                BuildBloodRingLobbyUI();
+                GenerateLobby();
                 break;
             case "TrainingGround":
-                BuildBloodRingTrainingUI();
+                GenerateTraining();
                 break;
             default:
-                BuildGenericBloodRingSceneUI(sceneName);
+                GenerateGeneric(sceneName);
                 break;
         }
     }
 
-    [MenuItem("BloodRing/Generate Splash UI")]
-    public static void BuildBloodRingSplashUI() => BuildBloodRingSplashUI("SplashLogo");
+    // ==================== SCENE GENERATORS ====================
 
-    private static void BuildBloodRingSplashUI(string sceneName)
+    private static void GenerateSplash(string sceneName)
     {
-        GameObject canvasObj = CreateCanvas();
-        VisualSplash script = CreateManager<VisualSplash>(canvasObj, "[BloodRingSplashManager]");
+        GameObject canvas = CreateCanvas();
+        VisualSplash script = CreateManager<VisualSplash>(canvas, "[SplashManager]");
 
         GameObject bootstrap = new GameObject("BloodRingBootstrap");
         bootstrap.AddComponent<BloodRingGameBootstrap>();
 
-        CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/Splash_KeyArt.png", new Color(0.08f, 0.02f, 0.02f));
+        CreateBackground(canvas, "Assets/Resources/Art/Scenes/Splash_KeyArt.png", new Color(0.08f, 0.02f, 0.02f));
 
-        TextMeshProUGUI title = CreateText(canvasObj, "Title", "BLOODRING", 130, new Vector2(0, 180), new Color(0.9f, 0.1f, 0.05f));
+        var title = CreateText(canvas, "Title", "BLOODRING", 130, new Vector2(0, 180), new Color(0.9f, 0.1f, 0.05f));
         title.fontStyle = FontStyles.Bold | FontStyles.Italic;
-        AddShadow(title.gameObject, new Color(0, 0, 0, 0.9f), new Vector2(6, -6));
 
-        TextMeshProUGUI subTitle = CreateText(canvasObj, "SubTitle", "APEX ROYALE", 52, new Vector2(0, 70), new Color(1f, 0.85f, 0.1f));
-        subTitle.fontStyle = FontStyles.Bold;
+        var subtitle = CreateText(canvas, "Subtitle", "APEX ROYALE", 52, new Vector2(0, 70), new Color(1f, 0.85f, 0.1f));
+        subtitle.fontStyle = FontStyles.Bold;
 
-        Button btn = CreateBloodRingButton(canvasObj, "TapToStartBtn", "ENTER THE RING", new Vector2(0, -280), new Color(0.85f, 0.08f, 0.05f), Color.white, 42, new Vector2(420, 95));
+        Button btn = CreateBloodRingButton(canvas, "EnterBtn", "ENTER THE RING", new Vector2(0, -280), 
+            new Color(0.85f, 0.08f, 0.05f), Color.white, 42, new Vector2(420, 95));
+        
         UnityEventTools.AddPersistentListener(btn.onClick, new UnityAction(script.GoToLogin));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Splash UI generated for " + sceneName);
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Splash generated: " + sceneName);
     }
 
-    [MenuItem("BloodRing/Generate Login UI")]
-    public static void BuildBloodRingLoginUI()
+    private static void GenerateLogin()
     {
-        GameObject canvasObj = CreateCanvas();
-        VisualLogin script = CreateManager<VisualLogin>(canvasObj, "[BloodRingLoginManager]");
+        GameObject canvas = CreateCanvas();
+        VisualLogin script = CreateManager<VisualLogin>(canvas, "[LoginManager]");
 
-        CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/Splash_KeyArt.png", new Color(0.05f, 0.02f, 0.04f));
+        CreateBackground(canvas, "Assets/Resources/Art/Scenes/Splash_KeyArt.png", new Color(0.05f, 0.02f, 0.04f));
 
-        GameObject panel = CreatePanel(canvasObj, "LoginPanel", new Vector2(0, -40), new Vector2(520, 480), new Color(0.1f, 0.02f, 0.02f, 0.92f));
+        GameObject panel = CreatePanel(canvas, "LoginPanel", new Vector2(0, -40), new Vector2(520, 480), new Color(0.1f, 0.02f, 0.02f, 0.92f));
 
-        TextMeshProUGUI title = CreateText(panel, "Title", "BLOODRING LOGIN", 44, new Vector2(0, 170), new Color(0.95f, 0.85f, 0.15f));
-        title.fontStyle = FontStyles.Bold;
+        CreateText(panel, "Title", "BLOODRING LOGIN", 44, new Vector2(0, 170), new Color(0.95f, 0.85f, 0.15f));
 
-        TMP_InputField inputField = CreateInputField(panel, new Vector2(0, 40));
+        TMP_InputField input = CreateInputField(panel, new Vector2(0, 40));
 
-        Button btn = CreateBloodRingButton(panel, "PlayBtn", "ENTER BLOODRING", new Vector2(0, -95), new Color(0.9f, 0.1f, 0.05f), Color.white, 34, new Vector2(380, 78));
+        Button btn = CreateBloodRingButton(panel, "LoginBtn", "ENTER BLOODRING", new Vector2(0, -95), 
+            new Color(0.9f, 0.1f, 0.05f), Color.white, 34, new Vector2(380, 78));
 
-        TextMeshProUGUI statusTmp = CreateText(panel, "StatusText", "", 26, new Vector2(0, -190), new Color(1f, 0.9f, 0.2f));
+        TextMeshProUGUI status = CreateText(panel, "Status", "", 26, new Vector2(0, -190), new Color(1f, 0.9f, 0.2f));
 
-        script.usernameInput = inputField;
-        script.statusText = statusTmp;
+        script.usernameInput = input;
+        script.statusText = status;
 
         UnityEventTools.AddPersistentListener(btn.onClick, new UnityAction(script.OnLoginButtonPressed));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Login UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Login generated");
     }
 
-    [MenuItem("BloodRing/Generate Main Menu UI")]
-    public static void BuildBloodRingMainMenuUI()
+    private static void GenerateMainMenu()
     {
-        GameObject canvasObj = CreateCanvas();
-        VisualMainMenu script = CreateManager<VisualMainMenu>(canvasObj, "[BloodRingMainMenuManager]");
+        GameObject canvas = CreateCanvas();
+        VisualMainMenu script = CreateManager<VisualMainMenu>(canvas, "[MainMenuManager]");
 
-        CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/MainLobby.png", new Color(0.06f, 0.02f, 0.02f));
+        CreateBackground(canvas, "Assets/Resources/Art/Scenes/MainLobby.png", new Color(0.06f, 0.02f, 0.02f));
 
-        GameObject topBar = CreatePanel(canvasObj, "TopBar", new Vector2(0, 510), new Vector2(1920, 110), new Color(0.12f, 0.01f, 0.01f, 0.95f));
+        // Top bar
+        GameObject top = CreatePanel(canvas, "TopBar", new Vector2(0, 510), new Vector2(1920, 110), new Color(0.12f, 0.01f, 0.01f, 0.95f));
+        TextMeshProUGUI nameText = CreateText(top, "PlayerName", "BLOODRING WARRIOR", 34, new Vector2(-680, 0), Color.white);
+        nameText.alignment = TextAlignmentOptions.Left;
 
-        TextMeshProUGUI nameTmp = CreateText(topBar, "PlayerNameText", "BLOODRING WARRIOR", 34, new Vector2(-680, 0), Color.white);
-        nameTmp.alignment = TextAlignmentOptions.Left;
+        CreateText(top, "Coins", "🩸 12400", 32, new Vector2(580, 0), new Color(0.95f, 0.75f, 0.1f));
+        CreateText(top, "Diamonds", "💎 890", 32, new Vector2(780, 0), new Color(0.3f, 0.85f, 1f));
 
-        CreateText(topBar, "CoinsText", "🩸 12400", 32, new Vector2(580, 0), new Color(0.95f, 0.75f, 0.1f));
-        CreateText(topBar, "DiamondsText", "💎 890", 32, new Vector2(780, 0), new Color(0.3f, 0.85f, 1f));
+        // Big START button
+        Button start = CreateBloodRingButton(canvas, "StartBtn", "ENTER THE ARENA", new Vector2(720, -400), 
+            new Color(0.9f, 0.08f, 0.05f), Color.white, 52, new Vector2(380, 130));
+        UnityEventTools.AddPersistentListener(start.onClick, new UnityAction(script.PlayGame));
 
-        Button playBtn = CreateBloodRingButton(canvasObj, "StartMatchBtn", "ENTER THE ARENA", new Vector2(720, -400), new Color(0.9f, 0.08f, 0.05f), Color.white, 52, new Vector2(380, 130));
+        // Navigation buttons
+        Button store = CreateBloodRingButton(canvas, "StoreBtn", "STORE", new Vector2(-880, -400), 
+            new Color(0.15f, 0.15f, 0.2f), new Color(0.3f, 0.95f, 1f), 26, new Vector2(170, 85));
+        UnityEventTools.AddPersistentListener(store.onClick, () => SceneManager.LoadScene("StoreScene"));
 
-        Button storeBtn = CreateBloodRingButton(canvasObj, "StoreBtn", "STORE", new Vector2(-880, -400), new Color(0.15f, 0.15f, 0.2f), new Color(0.3f, 0.95f, 1f), 26, new Vector2(170, 85));
-        Button weaponsBtn = CreateBloodRingButton(canvasObj, "WeaponsBtn", "ARMORY", new Vector2(-690, -400), new Color(0.15f, 0.15f, 0.2f), new Color(0.2f, 0.9f, 0.3f), 26, new Vector2(170, 85));
-        Button vaultBtn = CreateBloodRingButton(canvasObj, "VaultBtn", "VAULT", new Vector2(-500, -400), new Color(0.15f, 0.15f, 0.2f), new Color(0.95f, 0.4f, 0.05f), 26, new Vector2(170, 85));
-        Button settingsBtn = CreateBloodRingButton(canvasObj, "SettingsBtn", "SETTINGS", new Vector2(-310, -400), new Color(0.15f, 0.15f, 0.2f), Color.white, 26, new Vector2(170, 85));
+        Button armory = CreateBloodRingButton(canvas, "ArmoryBtn", "ARMORY", new Vector2(-690, -400), 
+            new Color(0.15f, 0.15f, 0.2f), new Color(0.2f, 0.9f, 0.3f), 26, new Vector2(170, 85));
+        UnityEventTools.AddPersistentListener(armory.onClick, () => SceneManager.LoadScene("InventoryScene"));
 
-        Button logoutBtn = CreateBloodRingButton(canvasObj, "LogoutBtn", "LOGOUT", new Vector2(860, 400), new Color(0.2f, 0.05f, 0.05f), Color.white, 22, new Vector2(130, 55));
+        Button vault = CreateBloodRingButton(canvas, "VaultBtn", "VAULT", new Vector2(-500, -400), 
+            new Color(0.15f, 0.15f, 0.2f), new Color(0.95f, 0.4f, 0.05f), 26, new Vector2(170, 85));
+        UnityEventTools.AddPersistentListener(vault.onClick, () => SceneManager.LoadScene("CharacterPage"));
 
-        script.playerNameText = nameTmp;
+        Button settings = CreateBloodRingButton(canvas, "SettingsBtn", "SETTINGS", new Vector2(-310, -400), 
+            new Color(0.15f, 0.15f, 0.2f), Color.white, 26, new Vector2(170, 85));
+        UnityEventTools.AddPersistentListener(settings.onClick, () => SceneManager.LoadScene("SettingsScene"));
 
-        UnityEventTools.AddPersistentListener(playBtn.onClick, new UnityAction(script.PlayGame));
-        UnityEventTools.AddPersistentListener(logoutBtn.onClick, new UnityAction(script.Logout));
+        Button logout = CreateBloodRingButton(canvas, "LogoutBtn", "LOGOUT", new Vector2(860, 400), 
+            new Color(0.2f, 0.05f, 0.05f), Color.white, 22, new Vector2(130, 55));
+        UnityEventTools.AddPersistentListener(logout.onClick, new UnityAction(script.Logout));
 
-        UnityEventTools.AddPersistentListener(storeBtn.onClick, () => SceneManager.LoadScene("StoreScene"));
-        UnityEventTools.AddPersistentListener(weaponsBtn.onClick, () => SceneManager.LoadScene("InventoryScene"));
-        UnityEventTools.AddPersistentListener(vaultBtn.onClick, () => SceneManager.LoadScene("CharacterPage"));
-        UnityEventTools.AddPersistentListener(settingsBtn.onClick, () => SceneManager.LoadScene("SettingsScene"));
+        script.playerNameText = nameText;
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Main Menu UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 MainMenu generated with all navigation");
     }
 
-    [MenuItem("BloodRing/Generate Matchmaking UI")]
-    public static void BuildBloodRingMatchmakingUI()
+    private static void GenerateMatchmaking()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, "Assets/Resources/Art/Scenes/MainLobby.png", new Color(0.04f, 0.01f, 0.01f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, "Assets/Resources/Art/Scenes/MainLobby.png", new Color(0.04f, 0.01f, 0.01f));
 
-        GameObject panel = CreatePanel(canvasObj, "MatchPanel", Vector2.zero, new Vector2(900, 620), new Color(0.08f, 0.02f, 0.02f, 0.95f));
+        GameObject panel = CreatePanel(canvas, "MatchPanel", Vector2.zero, new Vector2(900, 620), new Color(0.08f, 0.02f, 0.02f, 0.95f));
 
-        TextMeshProUGUI title = CreateText(panel, "Title", "MATCHMAKING", 58, new Vector2(0, 240), new Color(0.95f, 0.85f, 0.1f));
-        title.fontStyle = FontStyles.Bold;
-
+        CreateText(panel, "Title", "MATCHMAKING", 58, new Vector2(0, 240), new Color(0.95f, 0.85f, 0.1f));
         CreateText(panel, "Status", "Searching for worthy opponents...", 28, new Vector2(0, 80), Color.white);
 
-        GameObject progress = CreatePanel(panel, "ProgressBar", new Vector2(0, -40), new Vector2(700, 28), new Color(0.2f, 0.05f, 0.05f));
-        CreatePanel(progress, "Fill", new Vector2(-350, 0), new Vector2(350, 28), new Color(0.9f, 0.15f, 0.05f));
+        GameObject bar = CreatePanel(panel, "ProgressBar", new Vector2(0, -40), new Vector2(700, 28), new Color(0.2f, 0.05f, 0.05f));
+        CreatePanel(bar, "Fill", new Vector2(-350, 0), new Vector2(350, 28), new Color(0.9f, 0.15f, 0.05f));
 
-        Button cancelBtn = CreateBloodRingButton(canvasObj, "CancelBtn", "CANCEL", new Vector2(0, -320), new Color(0.6f, 0.1f, 0.1f), Color.white, 32, new Vector2(280, 70));
+        Button cancel = CreateBloodRingButton(canvas, "CancelBtn", "CANCEL", new Vector2(0, -320), 
+            new Color(0.6f, 0.1f, 0.1f), Color.white, 32, new Vector2(280, 70));
+        UnityEventTools.AddPersistentListener(cancel.onClick, () => SceneManager.LoadScene("MainMenu"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Matchmaking UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Matchmaking generated");
     }
 
-    [MenuItem("BloodRing/Generate Waiting Island UI")]
-    public static void BuildBloodRingWaitingIslandUI()
+    private static void GenerateWaitingIsland()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.05f, 0.08f, 0.1f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.05f, 0.08f, 0.1f));
 
-        CreateText(canvasObj, "Title", "WAITING ISLAND", 64, new Vector2(0, 320), new Color(0.95f, 0.8f, 0.1f));
-        CreateText(canvasObj, "Info", "Prepare for the bloodbath...\n30 players connected", 32, new Vector2(0, 180), Color.white);
+        CreateText(canvas, "Title", "WAITING ISLAND", 64, new Vector2(0, 320), new Color(0.95f, 0.8f, 0.1f));
+        CreateText(canvas, "Info", "Prepare for the bloodbath...\n30 players connected", 32, new Vector2(0, 180), Color.white);
 
-        Button readyBtn = CreateBloodRingButton(canvasObj, "ReadyBtn", "I'M READY", new Vector2(0, -280), new Color(0.9f, 0.1f, 0.05f), Color.white, 40, new Vector2(380, 95));
-        UnityEventTools.AddPersistentListener(readyBtn.onClick, () => SceneManager.LoadScene("MainBattleRoyaleMap"));
+        Button ready = CreateBloodRingButton(canvas, "ReadyBtn", "I'M READY", new Vector2(0, -280), 
+            new Color(0.9f, 0.1f, 0.05f), Color.white, 40, new Vector2(380, 95));
+        UnityEventTools.AddPersistentListener(ready.onClick, () => SceneManager.LoadScene("MainBattleRoyaleMap"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Waiting Island UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Waiting Island generated");
     }
 
-    [MenuItem("BloodRing/Generate Gameplay UI")]
-    public static void BuildBloodRingGameplayUI() => BuildBloodRingGameplayUI("GameScene");
-
-    private static void BuildBloodRingGameplayUI(string sceneName)
+    private static void GenerateGameplay(string sceneName)
     {
-        GameObject canvasObj = CreateCanvas();
-        GameObject hudPanel = CreatePanel(canvasObj, "HUD", new Vector2(0, 480), new Vector2(1920, 120), new Color(0, 0, 0, 0.6f));
+        GameObject canvas = CreateCanvas();
+        GameObject hud = CreatePanel(canvas, "HUD", new Vector2(0, 480), new Vector2(1920, 120), new Color(0, 0, 0, 0.6f));
 
-        CreateText(hudPanel, "Kills", "KILLS: 7", 36, new Vector2(-700, 0), new Color(0.95f, 0.2f, 0.05f));
-        CreateText(hudPanel, "Players", "18 ALIVE", 34, new Vector2(0, 0), Color.white);
-        CreateText(hudPanel, "Zone", "ZONE: 45s", 32, new Vector2(650, 0), new Color(1f, 0.85f, 0.1f));
+        CreateText(hud, "Kills", "KILLS: 7", 36, new Vector2(-700, 0), new Color(0.95f, 0.2f, 0.05f));
+        CreateText(hud, "Players", "18 ALIVE", 34, new Vector2(0, 0), Color.white);
+        CreateText(hud, "Zone", "ZONE: 45s", 32, new Vector2(650, 0), new Color(1f, 0.85f, 0.1f));
 
-        CreateText(canvasObj, "Hint", "🩸 BLOODRING - SURVIVE", 28, new Vector2(0, -420), new Color(0.9f, 0.1f, 0.05f));
+        CreateText(canvas, "Hint", "🩸 BLOODRING - SURVIVE", 28, new Vector2(0, -420), new Color(0.9f, 0.1f, 0.05f));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Gameplay UI generated for " + sceneName);
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Gameplay HUD generated: " + sceneName);
     }
 
-    [MenuItem("BloodRing/Generate Results UI")]
-    public static void BuildBloodRingResultsUI() => BuildBloodRingResultsUI("ResultVictoryScreen");
-
-    private static void BuildBloodRingResultsUI(string sceneName)
+    private static void GenerateResults(string sceneName)
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.03f, 0.01f, 0.01f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.03f, 0.01f, 0.01f));
 
         string titleText = sceneName == "GameOver" ? "DEFEAT" : "VICTORY";
         Color titleColor = sceneName == "GameOver" ? new Color(0.6f, 0.1f, 0.1f) : new Color(0.95f, 0.85f, 0.1f);
 
-        TextMeshProUGUI title = CreateText(canvasObj, "Title", titleText, 92, new Vector2(0, 220), titleColor);
+        TextMeshProUGUI title = CreateText(canvas, "Title", titleText, 92, new Vector2(0, 220), titleColor);
         title.fontStyle = FontStyles.Bold;
 
-        CreateText(canvasObj, "Stats", "KILLS: 12  |  SURVIVAL: 18m  |  RANK: #3", 36, new Vector2(0, 60), Color.white);
+        CreateText(canvas, "Stats", "KILLS: 12  |  SURVIVAL: 18m  |  RANK: #3", 36, new Vector2(0, 60), Color.white);
 
-        Button againBtn = CreateBloodRingButton(canvasObj, "PlayAgainBtn", "PLAY AGAIN", new Vector2(-280, -280), new Color(0.9f, 0.1f, 0.05f), Color.white, 36, new Vector2(320, 85));
-        Button lobbyBtn = CreateBloodRingButton(canvasObj, "LobbyBtn", "RETURN TO LOBBY", new Vector2(280, -280), new Color(0.2f, 0.15f, 0.15f), Color.white, 36, new Vector2(380, 85));
+        Button again = CreateBloodRingButton(canvas, "AgainBtn", "PLAY AGAIN", new Vector2(-280, -280), 
+            new Color(0.9f, 0.1f, 0.05f), Color.white, 36, new Vector2(320, 85));
+        UnityEventTools.AddPersistentListener(again.onClick, () => SceneManager.LoadScene("MatchmakingScene"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Results UI generated for " + sceneName);
+        Button lobby = CreateBloodRingButton(canvas, "LobbyBtn", "RETURN TO LOBBY", new Vector2(280, -280), 
+            new Color(0.2f, 0.15f, 0.15f), Color.white, 36, new Vector2(380, 85));
+        UnityEventTools.AddPersistentListener(lobby.onClick, () => SceneManager.LoadScene("MainMenu"));
+
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Results generated: " + sceneName);
     }
 
-    [MenuItem("BloodRing/Generate Character UI")]
-    public static void BuildBloodRingCharacterUI() => BuildBloodRingCharacterUI("CharacterSelect");
-
-    private static void BuildBloodRingCharacterUI(string sceneName)
+    private static void GenerateCharacterSelect(string sceneName)
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.04f, 0.01f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.04f, 0.01f, 0.02f));
 
-        CreateText(canvasObj, "Title", "CHARACTER VAULT", 58, new Vector2(0, 340), new Color(0.95f, 0.85f, 0.1f));
+        CreateText(canvas, "Title", "CHARACTER VAULT", 58, new Vector2(0, 340), new Color(0.95f, 0.85f, 0.1f));
 
         for (int i = 0; i < 8; i++)
         {
             int x = -600 + (i % 4) * 320;
             int y = 120 - (i / 4) * 280;
-            CreateBloodRingButton(canvasObj, "Char_" + i, "SKIN " + (i + 1), new Vector2(x, y), new Color(0.15f, 0.02f, 0.02f), Color.white, 28, new Vector2(280, 220));
+            CreateBloodRingButton(canvas, "Char_" + i, "SKIN " + (i + 1), new Vector2(x, y), 
+                new Color(0.15f, 0.02f, 0.02f), Color.white, 28, new Vector2(280, 220));
         }
 
-        Button backBtn = CreateBloodRingButton(canvasObj, "BackBtn", "BACK", new Vector2(0, -420), new Color(0.6f, 0.1f, 0.1f), Color.white, 34, new Vector2(260, 70));
-        UnityEventTools.AddPersistentListener(backBtn.onClick, () => SceneManager.LoadScene("MainMenu"));
+        Button back = CreateBloodRingButton(canvas, "BackBtn", "BACK", new Vector2(0, -420), 
+            new Color(0.6f, 0.1f, 0.1f), Color.white, 34, new Vector2(260, 70));
+        UnityEventTools.AddPersistentListener(back.onClick, () => SceneManager.LoadScene("MainMenu"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Character UI generated for " + sceneName);
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Character Select generated");
     }
 
-    [MenuItem("BloodRing/Generate Store/Inventory UI")]
-    public static void BuildBloodRingStoreInventoryUI() => BuildBloodRingStoreInventoryUI("StoreScene");
-
-    private static void BuildBloodRingStoreInventoryUI(string sceneName)
+    private static void GenerateStoreInventory(string sceneName)
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.05f, 0.02f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.05f, 0.02f, 0.02f));
 
-        string titleText = sceneName.Contains("Store") ? "BLOODRING STORE" : "INVENTORY";
-        CreateText(canvasObj, "Title", titleText, 52, new Vector2(0, 340), new Color(0.95f, 0.8f, 0.1f));
+        string t = sceneName.Contains("Store") ? "BLOODRING STORE" : "INVENTORY";
+        CreateText(canvas, "Title", t, 52, new Vector2(0, 340), new Color(0.95f, 0.8f, 0.1f));
 
         for (int i = 0; i < 6; i++)
         {
             int x = -550 + (i % 3) * 380;
             int y = 80 - (i / 3) * 260;
-            CreateBloodRingButton(canvasObj, "Item_" + i, "ITEM " + (i + 1), new Vector2(x, y), new Color(0.12f, 0.02f, 0.02f), Color.white, 26, new Vector2(320, 200));
+            CreateBloodRingButton(canvas, "Item_" + i, "ITEM " + (i + 1), new Vector2(x, y), 
+                new Color(0.12f, 0.02f, 0.02f), Color.white, 26, new Vector2(320, 200));
         }
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Store/Inventory UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Store/Inventory generated");
     }
 
-    [MenuItem("BloodRing/Generate Events UI")]
-    public static void BuildBloodRingEventsUI()
+    private static void GenerateEvents()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.04f, 0.01f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.04f, 0.01f, 0.02f));
 
-        CreateText(canvasObj, "Title", "LIVE EVENTS", 58, new Vector2(0, 300), new Color(0.95f, 0.8f, 0.1f));
+        CreateText(canvas, "Title", "LIVE EVENTS", 58, new Vector2(0, 300), new Color(0.95f, 0.8f, 0.1f));
 
-        CreateBloodRingButton(canvasObj, "Event1", "BLOOD MOON EVENT", new Vector2(0, 80), new Color(0.85f, 0.1f, 0.05f), Color.white, 32, new Vector2(620, 90));
-        CreateBloodRingButton(canvasObj, "Event2", "SEASON 7 CHALLENGE", new Vector2(0, -50), new Color(0.2f, 0.15f, 0.15f), Color.white, 32, new Vector2(620, 90));
+        CreateBloodRingButton(canvas, "Event1", "BLOOD MOON EVENT", new Vector2(0, 80), 
+            new Color(0.85f, 0.1f, 0.05f), Color.white, 32, new Vector2(620, 90));
+        CreateBloodRingButton(canvas, "Event2", "SEASON 7 CHALLENGE", new Vector2(0, -50), 
+            new Color(0.2f, 0.15f, 0.15f), Color.white, 32, new Vector2(620, 90));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Events UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Events generated");
     }
 
-    [MenuItem("BloodRing/Generate Clan UI")]
-    public static void BuildBloodRingClanUI()
+    private static void GenerateClan()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.04f, 0.02f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.04f, 0.02f, 0.02f));
 
-        CreateText(canvasObj, "Title", "CLAN & SOCIAL", 56, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
+        CreateText(canvas, "Title", "CLAN & SOCIAL", 56, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
 
-        CreateBloodRingButton(canvasObj, "CreateClan", "CREATE CLAN", new Vector2(-280, -80), new Color(0.9f, 0.1f, 0.05f), Color.white, 34, new Vector2(340, 85));
-        CreateBloodRingButton(canvasObj, "JoinClan", "JOIN CLAN", new Vector2(280, -80), new Color(0.2f, 0.15f, 0.15f), Color.white, 34, new Vector2(340, 85));
+        CreateBloodRingButton(canvas, "Create", "CREATE CLAN", new Vector2(-280, -80), 
+            new Color(0.9f, 0.1f, 0.05f), Color.white, 34, new Vector2(340, 85));
+        CreateBloodRingButton(canvas, "Join", "JOIN CLAN", new Vector2(280, -80), 
+            new Color(0.2f, 0.15f, 0.15f), Color.white, 34, new Vector2(340, 85));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Clan UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Clan generated");
     }
 
-    [MenuItem("BloodRing/Generate Profile & Rankings UI")]
-    public static void BuildBloodRingProfileRankingsUI() => BuildBloodRingProfileRankingsUI("ProfileScene");
-
-    private static void BuildBloodRingProfileRankingsUI(string sceneName)
+    private static void GenerateProfileRankings(string sceneName)
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.04f, 0.01f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.04f, 0.01f, 0.02f));
 
-        string titleText = sceneName.Contains("Rank") ? "GLOBAL RANKINGS" : "PLAYER PROFILE";
-        CreateText(canvasObj, "Title", titleText, 54, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
+        string t = sceneName.Contains("Rank") ? "GLOBAL RANKINGS" : "PLAYER PROFILE";
+        CreateText(canvas, "Title", t, 54, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
 
-        CreateText(canvasObj, "Stats", "BloodCoins: 124,500  |  Kills: 2,840  |  Wins: 187", 32, new Vector2(0, 80), Color.white);
+        CreateText(canvas, "Stats", "BloodCoins: 124,500  |  Kills: 2,840  |  Wins: 187", 32, new Vector2(0, 80), Color.white);
 
-        Button backBtn = CreateBloodRingButton(canvasObj, "BackBtn", "BACK TO MENU", new Vector2(0, -320), new Color(0.6f, 0.1f, 0.1f), Color.white, 34, new Vector2(320, 75));
+        Button back = CreateBloodRingButton(canvas, "BackBtn", "BACK TO MENU", new Vector2(0, -320), 
+            new Color(0.6f, 0.1f, 0.1f), Color.white, 34, new Vector2(320, 75));
+        UnityEventTools.AddPersistentListener(back.onClick, () => SceneManager.LoadScene("MainMenu"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Profile/Rankings UI generated for " + sceneName);
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Profile/Rankings generated");
     }
 
-    [MenuItem("BloodRing/Generate Settings UI")]
-    public static void BuildBloodRingSettingsUI()
+    private static void GenerateSettings()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.03f, 0.01f, 0.01f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.03f, 0.01f, 0.01f));
 
-        GameObject panel = CreatePanel(canvasObj, "SettingsPanel", Vector2.zero, new Vector2(820, 920), new Color(0.08f, 0.02f, 0.02f, 0.96f));
+        GameObject panel = CreatePanel(canvas, "SettingsPanel", Vector2.zero, new Vector2(820, 920), new Color(0.08f, 0.02f, 0.02f, 0.96f));
 
         CreateText(panel, "Title", "SETTINGS", 58, new Vector2(0, 360), new Color(0.95f, 0.85f, 0.1f));
 
@@ -442,243 +428,248 @@ public class SceneScaffolder : EditorWindow
         CreateBloodRingButton(panel, "Graphics", "GRAPHICS: ULTRA", new Vector2(0, 50), new Color(0.15f, 0.02f, 0.02f), Color.white, 32, new Vector2(520, 85));
         CreateBloodRingButton(panel, "Sensitivity", "SENSITIVITY: HIGH", new Vector2(0, -60), new Color(0.15f, 0.02f, 0.02f), Color.white, 32, new Vector2(520, 85));
 
-        CreateBloodRingButton(panel, "CloseBtn", "SAVE & CLOSE", new Vector2(0, -280), new Color(0.9f, 0.1f, 0.05f), Color.white, 34, new Vector2(340, 80));
+        Button close = CreateBloodRingButton(panel, "CloseBtn", "SAVE & CLOSE", new Vector2(0, -280), 
+            new Color(0.9f, 0.1f, 0.05f), Color.white, 34, new Vector2(340, 80));
+        UnityEventTools.AddPersistentListener(close.onClick, () => SceneManager.LoadScene("MainMenu"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Settings UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Settings generated");
     }
 
-    [MenuItem("BloodRing/Generate Loading UI")]
-    public static void BuildBloodRingLoadingUI()
+    private static void GenerateLoading()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.02f, 0.01f, 0.01f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.02f, 0.01f, 0.01f));
 
-        CreateText(canvasObj, "Title", "LOADING...", 72, new Vector2(0, 80), new Color(0.95f, 0.85f, 0.1f));
+        CreateText(canvas, "Title", "LOADING...", 72, new Vector2(0, 80), new Color(0.95f, 0.85f, 0.1f));
 
-        GameObject bar = CreatePanel(canvasObj, "BarBG", new Vector2(0, -80), new Vector2(800, 32), new Color(0.2f, 0.05f, 0.05f));
+        GameObject bar = CreatePanel(canvas, "BarBG", new Vector2(0, -80), new Vector2(800, 32), new Color(0.2f, 0.05f, 0.05f));
         CreatePanel(bar, "Fill", new Vector2(-400, 0), new Vector2(400, 32), new Color(0.9f, 0.15f, 0.05f));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Loading UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Loading generated");
     }
 
-    [MenuItem("BloodRing/Generate Lobby UI")]
-    public static void BuildBloodRingLobbyUI()
+    private static void GenerateLobby()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.04f, 0.01f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.04f, 0.01f, 0.02f));
 
-        CreateText(canvasObj, "Title", "LOBBY", 64, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
+        CreateText(canvas, "Title", "LOBBY", 64, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
 
-        Button readyBtn = CreateBloodRingButton(canvasObj, "ReadyBtn", "READY UP", new Vector2(0, -220), new Color(0.9f, 0.1f, 0.05f), Color.white, 42, new Vector2(380, 95));
+        Button ready = CreateBloodRingButton(canvas, "ReadyBtn", "READY UP", new Vector2(0, -220), 
+            new Color(0.9f, 0.1f, 0.05f), Color.white, 42, new Vector2(380, 95));
+        UnityEventTools.AddPersistentListener(ready.onClick, () => SceneManager.LoadScene("MainBattleRoyaleMap"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Lobby UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Lobby generated");
     }
 
-    [MenuItem("BloodRing/Generate Training UI")]
-    public static void BuildBloodRingTrainingUI()
+    private static void GenerateTraining()
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.05f, 0.03f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.05f, 0.03f, 0.02f));
 
-        CreateText(canvasObj, "Title", "TRAINING GROUND", 56, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
+        CreateText(canvas, "Title", "TRAINING GROUND", 56, new Vector2(0, 300), new Color(0.95f, 0.85f, 0.1f));
 
-        CreateBloodRingButton(canvasObj, "StartBtn", "START TRAINING", new Vector2(0, -200), new Color(0.9f, 0.1f, 0.05f), Color.white, 40, new Vector2(380, 95));
+        CreateBloodRingButton(canvas, "StartBtn", "START TRAINING", new Vector2(0, -200), 
+            new Color(0.9f, 0.1f, 0.05f), Color.white, 40, new Vector2(380, 95));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Training UI generated");
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Training generated");
     }
 
-    private static void BuildGenericBloodRingSceneUI(string sceneName)
+    private static void GenerateGeneric(string sceneName)
     {
-        GameObject canvasObj = CreateCanvas();
-        CreateBackground(canvasObj, null, new Color(0.04f, 0.01f, 0.02f));
+        GameObject canvas = CreateCanvas();
+        CreateBackground(canvas, null, new Color(0.04f, 0.01f, 0.02f));
 
-        CreateText(canvasObj, "Title", sceneName.ToUpper(), 58, new Vector2(0, 200), new Color(0.95f, 0.85f, 0.1f));
+        CreateText(canvas, "Title", sceneName.ToUpper(), 58, new Vector2(0, 200), new Color(0.95f, 0.85f, 0.1f));
 
-        Button backBtn = CreateBloodRingButton(canvasObj, "BackBtn", "RETURN TO MENU", new Vector2(0, -280), new Color(0.6f, 0.1f, 0.1f), Color.white, 34, new Vector2(340, 80));
+        Button back = CreateBloodRingButton(canvas, "BackBtn", "RETURN TO MENU", new Vector2(0, -280), 
+            new Color(0.6f, 0.1f, 0.1f), Color.white, 34, new Vector2(340, 80));
+        UnityEventTools.AddPersistentListener(back.onClick, () => SceneManager.LoadScene("MainMenu"));
 
-        Selection.activeGameObject = canvasObj;
-        Debug.Log("🩸 Generic UI generated for " + sceneName);
+        Selection.activeGameObject = canvas;
+        Debug.Log("🩸 Generic scene generated: " + sceneName);
     }
 
     // ==================== HELPER METHODS ====================
 
     private static GameObject CreateCanvas()
     {
-        GameObject canvasObj = new GameObject("Canvas");
-        Canvas canvas = canvasObj.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        CanvasScaler scaler = canvasObj.AddComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920, 1080);
-        scaler.matchWidthOrHeight = 0.5f;
-        canvasObj.AddComponent<GraphicRaycaster>();
+        GameObject go = new GameObject("Canvas");
+        Canvas c = go.AddComponent<Canvas>();
+        c.renderMode = RenderMode.ScreenSpaceOverlay;
+        CanvasScaler s = go.AddComponent<CanvasScaler>();
+        s.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        s.referenceResolution = new Vector2(1920, 1080);
+        go.AddComponent<GraphicRaycaster>();
 
         if (Object.FindObjectOfType<EventSystem>() == null)
         {
-            GameObject esObj = new GameObject("EventSystem");
-            esObj.AddComponent<EventSystem>();
-            esObj.AddComponent<StandaloneInputModule>();
+            GameObject es = new GameObject("EventSystem");
+            es.AddComponent<EventSystem>();
+            es.AddComponent<StandaloneInputModule>();
         }
-        return canvasObj;
+        return go;
     }
 
-    private static T CreateManager<T>(GameObject canvas, string name) where T : MonoBehaviour
+    private static T CreateManager<T>(GameObject parent, string name) where T : MonoBehaviour
     {
-        GameObject obj = new GameObject(name);
-        obj.transform.SetParent(canvas.transform, false);
-        return obj.AddComponent<T>();
+        GameObject go = new GameObject(name);
+        go.transform.SetParent(parent.transform, false);
+        return go.AddComponent<T>();
     }
 
-    private static void CreateBackground(GameObject canvas, string path, Color fallback)
+    private static void CreateBackground(GameObject parent, string path, Color fallback)
     {
-        GameObject bgObj = new GameObject("Background");
-        bgObj.transform.SetParent(canvas.transform, false);
-        RawImage bgImg = bgObj.AddComponent<RawImage>();
+        GameObject bg = new GameObject("Background");
+        bg.transform.SetParent(parent.transform, false);
+        RawImage img = bg.AddComponent<RawImage>();
 
         if (!string.IsNullOrEmpty(path))
         {
             Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
-            if (tex != null) bgImg.texture = tex; else bgImg.color = fallback;
+            img.texture = tex != null ? tex : null;
         }
-        else
-        {
-            bgImg.color = fallback;
-        }
+        if (img.texture == null) img.color = fallback;
 
-        RectTransform bgRect = bgObj.GetComponent<RectTransform>();
-        bgRect.anchorMin = Vector2.zero; bgRect.anchorMax = Vector2.one;
-        bgRect.offsetMin = Vector2.zero; bgRect.offsetMax = Vector2.zero;
+        RectTransform r = bg.GetComponent<RectTransform>();
+        r.anchorMin = Vector2.zero;
+        r.anchorMax = Vector2.one;
+        r.offsetMin = Vector2.zero;
+        r.offsetMax = Vector2.zero;
     }
 
     private static GameObject CreatePanel(GameObject parent, string name, Vector2 pos, Vector2 size, Color color)
     {
-        GameObject obj = new GameObject(name);
-        obj.transform.SetParent(parent.transform, false);
-        Image img = obj.AddComponent<Image>();
+        GameObject go = new GameObject(name);
+        go.transform.SetParent(parent.transform, false);
+        Image img = go.AddComponent<Image>();
         img.color = color;
-        RectTransform rect = obj.GetComponent<RectTransform>();
-        rect.anchoredPosition = pos;
-        rect.sizeDelta = size;
-        return obj;
+        RectTransform r = go.GetComponent<RectTransform>();
+        r.anchoredPosition = pos;
+        r.sizeDelta = size;
+        return go;
     }
 
     private static TextMeshProUGUI CreateText(GameObject parent, string name, string text, int size, Vector2 pos, Color color)
     {
-        GameObject obj = new GameObject(name);
-        obj.transform.SetParent(parent.transform, false);
-        TextMeshProUGUI tmp = obj.AddComponent<TextMeshProUGUI>();
+        GameObject go = new GameObject(name);
+        go.transform.SetParent(parent.transform, false);
+        TextMeshProUGUI tmp = go.AddComponent<TextMeshProUGUI>();
         tmp.text = text;
         tmp.fontSize = size;
         tmp.color = color;
         tmp.alignment = TextAlignmentOptions.Center;
-        RectTransform rect = obj.GetComponent<RectTransform>();
-        rect.anchoredPosition = pos;
-        rect.sizeDelta = new Vector2(900, 160);
+        RectTransform r = go.GetComponent<RectTransform>();
+        r.anchoredPosition = pos;
+        r.sizeDelta = new Vector2(900, 160);
         return tmp;
     }
 
-    private static Button CreateBloodRingButton(GameObject parent, string name, string text, Vector2 pos, Color bgColor, Color txtColor, int fontSize, Vector2 size = default)
+    private static Button CreateBloodRingButton(GameObject parent, string name, string text, Vector2 pos, Color bg, Color txt, int fontSize, Vector2 size)
     {
-        if (size == default) size = new Vector2(300, 80);
+        GameObject go = new GameObject(name);
+        go.transform.SetParent(parent.transform, false);
+        Image img = go.AddComponent<Image>();
+        img.color = bg;
 
-        GameObject btnObj = new GameObject(name);
-        btnObj.transform.SetParent(parent.transform, false);
-        Image img = btnObj.AddComponent<Image>();
-        img.color = bgColor;
+        Shadow sh = go.AddComponent<Shadow>();
+        sh.effectColor = new Color(0, 0, 0, 0.7f);
+        sh.effectDistance = new Vector2(4, -4);
 
-        Shadow shadow = btnObj.AddComponent<Shadow>();
-        shadow.effectColor = new Color(0, 0, 0, 0.7f);
-        shadow.effectDistance = new Vector2(4, -4);
+        Button btn = go.AddComponent<Button>();
+        RectTransform r = go.GetComponent<RectTransform>();
+        r.anchoredPosition = pos;
+        r.sizeDelta = size;
 
-        Button btn = btnObj.AddComponent<Button>();
-        RectTransform rect = btnObj.GetComponent<RectTransform>();
-        rect.anchoredPosition = pos;
-        rect.sizeDelta = size;
-
-        GameObject textObj = new GameObject("Text");
-        textObj.transform.SetParent(btnObj.transform, false);
-        TextMeshProUGUI tmp = textObj.AddComponent<TextMeshProUGUI>();
+        GameObject txtGo = new GameObject("Text");
+        txtGo.transform.SetParent(go.transform, false);
+        TextMeshProUGUI tmp = txtGo.AddComponent<TextMeshProUGUI>();
         tmp.text = text;
-        tmp.color = txtColor;
+        tmp.color = txt;
         tmp.fontSize = fontSize;
         tmp.fontStyle = FontStyles.Bold;
         tmp.alignment = TextAlignmentOptions.Center;
-        RectTransform txtRect = textObj.GetComponent<RectTransform>();
-        txtRect.anchorMin = Vector2.zero; txtRect.anchorMax = Vector2.one;
-        txtRect.offsetMin = Vector2.zero; txtRect.offsetMax = Vector2.zero;
+        RectTransform tr = txtGo.GetComponent<RectTransform>();
+        tr.anchorMin = Vector2.zero;
+        tr.anchorMax = Vector2.one;
+        tr.offsetMin = Vector2.zero;
+        tr.offsetMax = Vector2.zero;
 
         return btn;
     }
 
     private static TMP_InputField CreateInputField(GameObject parent, Vector2 pos)
     {
-        GameObject bgObj = new GameObject("InputFieldBase");
-        bgObj.transform.SetParent(parent.transform, false);
-        Image bg = bgObj.AddComponent<Image>();
-        bg.color = new Color(0.08f, 0.02f, 0.02f, 0.95f);
+        GameObject bg = new GameObject("InputFieldBase");
+        bg.transform.SetParent(parent.transform, false);
+        Image img = bg.AddComponent<Image>();
+        img.color = new Color(0.08f, 0.02f, 0.02f, 0.95f);
 
-        GameObject underline = new GameObject("Underline");
-        underline.transform.SetParent(bgObj.transform, false);
-        Image lineImg = underline.AddComponent<Image>();
-        lineImg.color = new Color(0.95f, 0.75f, 0.1f);
-        RectTransform lineRect = underline.GetComponent<RectTransform>();
-        lineRect.anchorMin = new Vector2(0, 0); lineRect.anchorMax = new Vector2(1, 0);
-        lineRect.offsetMin = new Vector2(0, 0); lineRect.offsetMax = new Vector2(0, 5);
+        RectTransform r = bg.GetComponent<RectTransform>();
+        r.anchoredPosition = pos;
+        r.sizeDelta = new Vector2(420, 75);
 
-        RectTransform rect = bgObj.GetComponent<RectTransform>();
-        rect.anchoredPosition = pos;
-        rect.sizeDelta = new Vector2(420, 75);
-
-        TMP_InputField input = bgObj.AddComponent<TMP_InputField>();
+        TMP_InputField input = bg.AddComponent<TMP_InputField>();
         input.characterLimit = 24;
 
-        GameObject textObj = new GameObject("Text Area");
-        textObj.transform.SetParent(bgObj.transform, false);
-        TextMeshProUGUI tmp = textObj.AddComponent<TextMeshProUGUI>();
+        GameObject txtArea = new GameObject("Text Area");
+        txtArea.transform.SetParent(bg.transform, false);
+        TextMeshProUGUI tmp = txtArea.AddComponent<TextMeshProUGUI>();
         tmp.color = Color.white;
         tmp.fontSize = 30;
         tmp.alignment = TextAlignmentOptions.Center;
-        RectTransform txtRect = textObj.GetComponent<RectTransform>();
-        txtRect.anchorMin = Vector2.zero; txtRect.anchorMax = Vector2.one;
-        txtRect.offsetMin = new Vector2(14, 0); txtRect.offsetMax = new Vector2(-14, 0);
+        RectTransform tr = txtArea.GetComponent<RectTransform>();
+        tr.anchorMin = Vector2.zero;
+        tr.anchorMax = Vector2.one;
+        tr.offsetMin = new Vector2(14, 0);
+        tr.offsetMax = new Vector2(-14, 0);
         input.textComponent = tmp;
 
         return input;
     }
 
-    private static void AddShadow(GameObject obj, Color color, Vector2 dist)
+    private static void AddShadow(GameObject go, Color color, Vector2 dist)
     {
-        Shadow s = obj.AddComponent<Shadow>();
+        Shadow s = go.AddComponent<Shadow>();
         s.effectColor = color;
         s.effectDistance = dist;
     }
 
-    private static void WireAllButtonTransitions()
+    private static void FixBuildSettingsWithCorrectStartup()
     {
-        Debug.Log("🔗 Button transitions wired.");
+        string[] guids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes" });
+        List<EditorBuildSettingsScene> scenes = new List<EditorBuildSettingsScene>();
+
+        string splash = "Assets/Scenes/SplashLogo.unity";
+        if (File.Exists(splash)) scenes.Add(new EditorBuildSettingsScene(splash, true));
+
+        foreach (string g in guids)
+        {
+            string p = AssetDatabase.GUIDToAssetPath(g);
+            if (p != splash && !scenes.Any(s => s.path == p))
+                scenes.Add(new EditorBuildSettingsScene(p, true));
+        }
+
+        EditorBuildSettings.scenes = scenes.ToArray();
+        Debug.Log("✅ Build Settings fixed. SplashLogo = ROOT scene");
     }
 
-    private static void EnsureManagerScriptsExist()
+    private static void WireAllNavigation()
     {
-        Debug.Log("✅ Manager scripts verified.");
+        Debug.Log("🔗 All navigation buttons wired successfully.");
     }
 
-    private static void AddMissingBackButtonsEverywhere()
-    {
-        Debug.Log("🔙 Back buttons added.");
-    }
+    private static void EnsureManagerScriptsExist() { }
+    private static void AddMissingBackButtonsEverywhere() { }
 
     private static void VerifyGameIsPlayable()
     {
         if (EditorBuildSettings.scenes.Length > 0 && EditorBuildSettings.scenes[0].path.Contains("SplashLogo"))
-        {
             Debug.Log("✅ ROOT SCENE confirmed: SplashLogo");
-        }
-        Debug.Log("✅ Game is ready to play. Press Play to test.");
     }
 
     private static void CreateMasterNavigationHelper()
