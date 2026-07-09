@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// BloodRing Apex Royale - Scene UI Auto-Generator
@@ -159,8 +160,6 @@ public class SceneScaffolder : EditorWindow
         }
     }
 
-    // All the builder methods below (kept short for stability)
-
     [MenuItem("BloodRing/Generate Splash UI")]
     public static void BuildBloodRingSplashUI() => BuildBloodRingSplashUI("SplashLogo");
 
@@ -255,8 +254,6 @@ public class SceneScaffolder : EditorWindow
         Debug.Log("🩸 Main Menu UI generated");
     }
 
-    // ... (other builder methods are identical to previous working version - kept minimal for stability)
-
     [MenuItem("BloodRing/Generate Matchmaking UI")]
     public static void BuildBloodRingMatchmakingUI()
     {
@@ -278,8 +275,6 @@ public class SceneScaffolder : EditorWindow
         Selection.activeGameObject = canvasObj;
         Debug.Log("🩸 Matchmaking UI generated");
     }
-
-    // Additional short builder methods (same pattern)
 
     [MenuItem("BloodRing/Generate Waiting Island UI")]
     public static void BuildBloodRingWaitingIslandUI()
@@ -337,8 +332,6 @@ public class SceneScaffolder : EditorWindow
         Selection.activeGameObject = canvasObj;
         Debug.Log("🩸 Results UI generated for " + sceneName);
     }
-
-    // Character, Store, Events, Clan, Profile, Settings, Loading, Lobby, Training, Generic (short versions)
 
     [MenuItem("BloodRing/Generate Character UI")]
     public static void BuildBloodRingCharacterUI() => BuildBloodRingCharacterUI("CharacterSelect");
